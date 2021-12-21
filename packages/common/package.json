@@ -4,5 +4,6 @@
   "private": true,
   "license": "MIT",
   "dependencies": {
+    "@ca/client": "0.1.0"
   }
 }
