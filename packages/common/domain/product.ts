@@ -1,6 +1,12 @@
+import {Ingredient, PriceCents, ProductTitle, UniqueId} from "./shared-kernel";
+
 export interface Product {
-    id: string
-    title: string
-    price: number
-    toppings: string[]
+    id: UniqueId
+    title: ProductTitle
+    price: PriceCents
+    toppings: Ingredient[]
+}
+
+export function totalPrice(products: Product[]): PriceCents {
+    return products.reduce((total, {price}) => total + price, 0)
 }

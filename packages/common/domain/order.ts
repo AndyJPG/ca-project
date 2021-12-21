@@ -1,10 +1,23 @@
 import {Cart} from "./cart";
+import {User} from "./user";
+import {totalPrice} from "./product";
+import {DateTimeString, PriceCents, UniqueId} from "./shared-kernel";
 
 export type OrderStatus = "new" | "delivery" | "completed"
 export interface Order {
-    user: string
+    user: UniqueId
     cart: Cart
-    created: Date
+    created: DateTimeString
     status: OrderStatus
-    total: number
+    total: PriceCents
+}
+
+export function createOrder(user: User, cart: Cart): Order {
+    return {
+        user: user.id,
+        cart,
+        created: new Date().toISOString(),
+        status: 'new',
+        total: totalPrice(cart.products)
+    }
 }

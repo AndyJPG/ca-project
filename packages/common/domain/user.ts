@@ -1,15 +1,17 @@
+import {Email, Ingredient, UniqueId, UserName} from "./shared-kernel";
+
 export interface User {
-    id: string
-    name: string
-    email: string
-    preferences: string[]
-    allergies: string[]
+    id: UniqueId
+    name: UserName
+    email: Email
+    preferences: Ingredient[]
+    allergies: Ingredient[]
 }
 
-export function hasAllergy (user: User, ingredient: string): boolean {
+export function hasAllergy (user: User, ingredient: Ingredient): boolean {
     return user.allergies.includes(ingredient)
 }
 
-export function hasPreference (user: User, ingredient: string): boolean {
-    return user.preferences.inclues(ingredient)
+export function hasPreference (user: User, ingredient: Ingredient): boolean {
+    return user.preferences.includes(ingredient)
 }
