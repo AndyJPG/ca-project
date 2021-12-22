@@ -1,7 +1,7 @@
-import {Product} from "./product";
+import {Product, ProductList} from "./product";
 
 export interface Cart {
-    products: Product[]
+    products: ProductList
 }
 
 export function addProduct(cart: Cart, product: Product): Cart {
