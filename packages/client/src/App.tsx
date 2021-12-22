@@ -1,13 +1,13 @@
 import React from 'react';
 import {AppContextProvider} from "./context/AppContextProvider";
-import Buy from "./components/Buy";
+import {Auth} from "./components/Auth/Auth";
 
 function App() {
-  return (
-    <AppContextProvider>
-      <Buy />
-    </AppContextProvider>
-  );
+    return (
+        <AppContextProvider>
+            <Auth/>
+        </AppContextProvider>
+    );
 }
 
 export default App;
