@@ -7,10 +7,10 @@ import {useNotifier} from "../services/notificationAdapter";
 import {useCartStorage, useOrdersStorage} from "../services/storageAdapter";
 
 type Dependencies = {
-    notifier?: NotificationService
-    payment?: PaymentService
-    orderStorage?: OrdersStorageService
-    cartStorage?: CartStorageService
+    notifier: NotificationService
+    payment: PaymentService
+    orderStorage: OrdersStorageService
+    cartStorage: CartStorageService
 }
 
 export function useOrderProducts() {
@@ -20,7 +20,12 @@ export function useOrderProducts() {
     const cartStorage: CartStorageService = useCartStorage()
 
     return {
-        orderProducts: (user: User, cart: Cart) => orderProducts(user, cart, {notifier, payment, cartStorage, orderStorage})
+        orderProducts: (user: User, cart: Cart) => orderProducts(user, cart, {
+            notifier,
+            payment,
+            cartStorage,
+            orderStorage
+        })
     }
 }
 
