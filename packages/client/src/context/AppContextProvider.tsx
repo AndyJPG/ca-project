@@ -1,7 +1,6 @@
 import React, {useState} from "react";
-import {Order} from "@ca/common/domain/order";
-import {Cart} from "../../../common/domain/cart";
-import {User} from "../../../common/domain/user";
+import {User, Order, Cart} from "@ca/common/domain";
+import {cookies} from "@ca/common/services";
 
 const AppContext = React.createContext<any>({})
 
@@ -15,6 +14,7 @@ export const AppContextProvider: React.FC = (props) => {
     const value = {
         user,
         cart,
+        cookies,
         orders,
         updateUser: setUser,
         updateCart: setCart,

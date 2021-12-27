@@ -1,5 +1,5 @@
 import {AuthenticationService} from "../useCases/ports";
-import {Email, UserName} from "../domain/shared-kernel";
+import {Email, UserName} from "../domain";
 import {fakeApi} from "./fakeApi";
 
 export function useAuth(): AuthenticationService {
