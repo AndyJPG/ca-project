@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import {Email, UserName} from "@ca/common/domain";
 import {useAuthenticate} from "@ca/common/useCases";
 import styles from "./Auth.module.css";
+import {Navigate} from "react-router-dom";
 
 export function Auth() {
     const [name, setName] = useState<UserName>("");
@@ -10,7 +11,7 @@ export function Auth() {
     const [loading, setLoading] = useState(false);
 
     const {user, authenticate} = useAuthenticate();
-    if (!!user) return <div>You have loged in</div>;
+    if (!!user) return <Navigate to="/user"/>;
 
     async function handleSubmit(e: React.FormEvent) {
         setLoading(true);
