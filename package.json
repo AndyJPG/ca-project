@@ -12,6 +12,7 @@
     "lerna": "^3.22.1"
   },
   "scripts": {
-    "start": "lerna run --parallel start"
+    "start": "lerna run --parallel start",
+    "test": "lerna run --parallel test"
   }
 }
