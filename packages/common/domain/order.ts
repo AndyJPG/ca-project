@@ -1,6 +1,6 @@
-import {User} from "./user";
-import {ProductList, totalPrice} from "./product";
-import {DateTimeString, PriceCents, UniqueId} from "./shared-kernel";
+import {User} from "./user"
+import {ProductList, totalPrice} from "./product"
+import {DateTimeString, PriceCents, UniqueId} from "./shared-kernel"
 
 export type OrderStatus = "new" | "delivery" | "completed"
 

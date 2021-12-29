@@ -1,4 +1,4 @@
-import {Email, Ingredient, UniqueId, UserName} from "./shared-kernel";
+import {Email, Ingredient, UniqueId, UserName} from "./shared-kernel"
 
 export interface User {
     id: UniqueId
@@ -8,10 +8,10 @@ export interface User {
     allergies: Ingredient[]
 }
 
-export function hasAllergy (user: User, ingredient: Ingredient): boolean {
+export function hasAllergy(user: User, ingredient: Ingredient): boolean {
     return user.allergies.includes(ingredient)
 }
 
-export function hasPreference (user: User, ingredient: Ingredient): boolean {
+export function hasPreference(user: User, ingredient: Ingredient): boolean {
     return user.preferences.includes(ingredient)
 }

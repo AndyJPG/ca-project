@@ -1,12 +1,11 @@
-import {Email, UserName} from "../domain/shared-kernel";
-import {AuthenticationService, UserStorageService} from "./ports";
-import {useAuth} from "../services/authAdapter";
-import {useUserStorage} from "../services/storageAdapter";
+import {Email, UserName} from "../domain"
+import {AuthenticationService, UserStorageService} from "./ports"
+import {useAuthService, useUserStorageService} from "../services"
 
 export function useAuthenticate() {
 
-    const storage: UserStorageService =  useUserStorage()
-    const auth: AuthenticationService = useAuth()
+    const storage: UserStorageService = useUserStorageService()
+    const auth: AuthenticationService = useAuthService()
 
     return {
         user: storage.user,

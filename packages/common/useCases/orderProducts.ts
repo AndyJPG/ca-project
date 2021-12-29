@@ -1,10 +1,6 @@
-import {CartStorageService, NotificationService, OrdersStorageService, PaymentService} from "./ports";
-import {User} from "../domain/user";
-import {Cart} from "../domain/cart";
-import {createOrder} from "../domain/order";
-import {usePayment} from "../services/paymentAdapter";
-import {useNotifier} from "../services/notificationAdapter";
-import {useCartStorage, useOrdersStorage} from "../services/storageAdapter";
+import {CartStorageService, NotificationService, OrdersStorageService, PaymentService} from "./ports"
+import {User, Cart, createOrder} from "../domain"
+import {useCartStorageService, useOrdersStorageService, useNotifierService, usePaymentService} from "../services"
 
 type Dependencies = {
     notifier: NotificationService
@@ -14,10 +10,10 @@ type Dependencies = {
 }
 
 export function useOrderProducts() {
-    const payment: PaymentService = usePayment()
-    const notifier: NotificationService = useNotifier()
-    const orderStorage: OrdersStorageService = useOrdersStorage()
-    const cartStorage: CartStorageService = useCartStorage()
+    const payment: PaymentService = usePaymentService()
+    const notifier: NotificationService = useNotifierService()
+    const orderStorage: OrdersStorageService = useOrdersStorageService()
+    const cartStorage: CartStorageService = useCartStorageService()
 
     return {
         orderProducts: (user: User, cart: Cart) => orderProducts(user, cart, {

@@ -1,9 +1,6 @@
-import {Product, User} from "../domain";
-import {CartStorageService, NotificationService} from "./ports";
-import {useCartStorage} from "../services/storageAdapter";
-import {useNotifier} from "../services/notificationAdapter";
-import {hasAllergy} from "../domain/user";
-import {addProduct} from "../domain/cart";
+import {CartStorageService, NotificationService} from "./ports"
+import {useCartStorageService, useNotifierService} from "../services"
+import {hasAllergy, addProduct, Product, User} from "../domain"
 
 interface Dependencies {
     storage: CartStorageService
@@ -11,8 +8,8 @@ interface Dependencies {
 }
 
 export function useAddToCart() {
-    const storage: CartStorageService = useCartStorage()
-    const notifier: NotificationService = useNotifier()
+    const storage: CartStorageService = useCartStorageService()
+    const notifier: NotificationService = useNotifierService()
 
     return {
         addToCart: (user: User, product: Product) => addToCart(user, product, {storage, notifier})

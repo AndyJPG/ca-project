@@ -1,14 +1,14 @@
 import {CartStorageService, OrdersStorageService, UserStorageService} from "../useCases/ports";
 import {useAppContext} from "@ca/client/src/context/AppContextProvider";
 
-export function useOrdersStorage(): OrdersStorageService {
+export function useOrdersStorageService(): OrdersStorageService {
     return useAppContext()
 }
 
-export function useCartStorage(): CartStorageService {
+export function useCartStorageService(): CartStorageService {
     return useAppContext()
 }
 
-export function useUserStorage(): UserStorageService {
+export function useUserStorageService(): UserStorageService {
     return useAppContext()
 }

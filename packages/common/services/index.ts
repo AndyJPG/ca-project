@@ -1,1 +1,5 @@
 export {cookies} from './fakeData'
+export * from './authAdapter'
+export * from './notificationAdapter'
+export * from './paymentAdapter'
+export * from './storageAdapter'

@@ -1,11 +1,11 @@
-import {Product, ProductList} from "./product";
+import {Product, ProductList} from "./product"
 
 export interface Cart {
     products: ProductList
 }
 
 export function addProduct(cart: Cart, product: Product): Cart {
-    return { ...cart, products: [...cart.products, product]}
+    return {...cart, products: [...cart.products, product]}
 }
 
 export function contains(cart: Cart, product: Product): boolean {
