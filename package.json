@@ -13,6 +13,6 @@
   },
   "scripts": {
     "start": "lerna run --parallel start",
-    "test": "lerna run --parallel test"
+    "test": "cd packages/common && yarn run test"
   }
 }

@@ -1,4 +1,5 @@
 import {DateISOString, Postcode, State, StreetAddress, Suburb, UniqueID} from "./shared-kernal";
+import {Comment} from "./comment";
 
 export interface Post {
     id: UniqueID
@@ -14,3 +15,6 @@ export interface Address {
     postcode: Postcode
 }
 
+export const addNewCommentToPost = (post: Post, comment: Comment): Post => {
+    return {...post, comments: [...post.comments, comment.id]}
+}
