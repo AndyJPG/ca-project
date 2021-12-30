@@ -1,7 +1,7 @@
 import {Post} from "../domain";
 
 export interface StorageService {
-    createPost(newPost: Post): void
+    createPost(newPost: Post): Promise<void>
 }
 
 export interface NotificationService {

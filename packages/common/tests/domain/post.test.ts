@@ -1,4 +1,4 @@
-import {addNewCommentToPost, Comment, Post, User} from "../../domain";
+import {addCommentToPost, Comment, Post, User} from "../../domain";
 import {getCurrentDateInISOString} from "../../libs/helpers";
 
 describe("Post class test", () => {
@@ -27,7 +27,7 @@ describe("Post class test", () => {
         }
     }
     it("should add one comment to the post", () => {
-        const postWithOneComment: Post = addNewCommentToPost(newPost, newComment)
+        const postWithOneComment: Post = addCommentToPost(newPost, newComment)
         expect(postWithOneComment.comments.length).toEqual(1)
     })
 })
