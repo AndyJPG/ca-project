@@ -1,4 +1,5 @@
 import {addNewCommentToPost, Comment, Post, User} from "../../domain";
+import {getCurrentDateInISOString} from "../../libs/helpers";
 
 describe("Post class test", () => {
     const newUser: User = {
@@ -10,13 +11,14 @@ describe("Post class test", () => {
     const newComment: Comment = {
         id: "uid_123",
         author: newUser,
-        createdDate: new Date().toISOString(),
+        createdDate: getCurrentDateInISOString(),
         content: "Love this place"
     }
     const newPost: Post = {
         id: "uid_566",
+        author: newUser,
         comments: [],
-        createdDate: new Date().toISOString(),
+        createdDate: getCurrentDateInISOString(),
         address: {
             streetAddress: "81 cooyong st",
             postcode: 2612,

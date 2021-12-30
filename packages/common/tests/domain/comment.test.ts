@@ -1,4 +1,5 @@
 import {User, Comment} from "../../domain";
+import {getCurrentDateInISOString} from "../../libs/helpers";
 
 describe("Comment class test", () => {
     it("should create a comment with id: uid_123, author: User instance, created_date: current date in ISO string, content: love this place", () => {
@@ -6,7 +7,7 @@ describe("Comment class test", () => {
         const mockCommentData = {
             id: "uid_123",
             author: newUser,
-            createdDate: new Date().toISOString(),
+            createdDate: getCurrentDateInISOString(),
             content: "Love this place"
         }
         const newComment: Comment = mockCommentData

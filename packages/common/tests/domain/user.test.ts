@@ -1,4 +1,5 @@
 import {addNewCommentToUser, Comment, User} from "../../domain";
+import {getCurrentDateInISOString} from "../../libs/helpers";
 
 describe('User class test', () => {
     const newUser: User = {
@@ -12,7 +13,7 @@ describe('User class test', () => {
         id: "uid_12",
         author: newUser,
         content: "i love this place",
-        createdDate: new Date().toISOString()
+        createdDate: getCurrentDateInISOString()
     }
 
     it('should create a user instance with username: andy, email: jiangpeigeng@gmail.com and comments: []', () => {
