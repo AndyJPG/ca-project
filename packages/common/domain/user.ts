@@ -1,8 +1,8 @@
-import {CommentID, UserEmail, UserId, UserName} from "./shared-kernal";
+import {UniqueID, UserEmail, UserName} from "./shared-kernal";
 
 export interface User {
-    id: UserId
+    id: UniqueID
     userName: UserName
     email: UserEmail
-    comments: Array<CommentID>
+    comments: Array<UniqueID>
 }
