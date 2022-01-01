@@ -2,17 +2,18 @@ import * as React from 'react'
 import {Grid, Typography} from "@mui/material";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Hero from "../../components/Hero/Hero";
+import Footer from "../../components/Footer/Footer";
 
 
 const HomeStyle = () => {
     return (
         <Grid container>
-            Main container
-            <Grid item xs={12}>
+            <Grid item xs={false} sx={{
+                display: {xs: "none", sm: "block"}
+            }}>
                 Header
             </Grid>
             <Grid item xs={12}>
-                Main content
                 <Hero>
                     <SearchBar/>
                     <Typography variant='h5' sx={{
@@ -20,6 +21,9 @@ const HomeStyle = () => {
                         textAlign: 'center'
                     }}>See what others think before move in.</Typography>
                 </Hero>
+            </Grid>
+            <Grid item xs={12}>
+                <Footer/>
             </Grid>
         </Grid>
     )
