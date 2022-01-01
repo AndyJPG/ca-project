@@ -3,7 +3,8 @@ import {InputBase, styled} from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search'
 
 export interface SearchBarStyles {
-    width?: string
+    width?: string,
+    margin?: string
 }
 
 interface SearchBarStyleProps {
@@ -39,7 +40,8 @@ const SearchBarIconWrapper = styled('div')(() => ({
 const SearchBarStyle = (props: SearchBarStyleProps) => {
     return (
         <SearchBar sx={{
-            width: props.styles?.width
+            width: props.styles?.width,
+            margin: props.styles?.margin
         }}>
             <SearchBarIconWrapper>
                 <SearchIcon/>

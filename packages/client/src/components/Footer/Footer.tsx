@@ -4,9 +4,12 @@ import {Container, Typography} from "@mui/material";
 const Footer = () => {
     return (
         <Container sx={{
-            height: "15vh"
+            height: "15vh",
+            paddingY: "10px"
         }}>
-            <Typography>&#169; 2021 HomeReview</Typography>
+            <Typography sx={{
+                fontSize: "14px"
+            }}>&#169; 2021 HomeReview</Typography>
         </Container>
     )
 }

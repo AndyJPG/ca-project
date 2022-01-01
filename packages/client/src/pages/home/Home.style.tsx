@@ -15,7 +15,9 @@ const HomeStyle = () => {
             </Grid>
             <Grid item xs={12}>
                 <Hero>
-                    <SearchBar/>
+                    <SearchBar styles={{
+                        margin: "0 0 24px 0"
+                    }}/>
                     <Typography variant='h5' sx={{
                         fontWeight: 'bold',
                         textAlign: 'center'
