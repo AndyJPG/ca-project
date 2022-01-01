@@ -19,7 +19,7 @@ const SearchBar = styled('div')(() => ({
     minHeight: '48px',
     width: '100%',
     borderRadius: '999px',
-    backgroundColor: 'white'
+    backgroundColor: 'white',
 }))
 
 const StyledInputBase = styled(InputBase)(() => ({
