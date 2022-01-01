@@ -5,10 +5,8 @@ interface SearchBarProps {
 }
 
 
-const SearchBar = (props: SearchBarProps) => {
+export const SearchBar = (props: SearchBarProps) => {
     return (
         <SearchBarStyle styles={props.styles}/>
     )
 }
-
-export default SearchBar

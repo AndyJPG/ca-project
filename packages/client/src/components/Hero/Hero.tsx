@@ -1,9 +1,10 @@
 import * as React from 'react'
-import {Box, Container} from "@mui/material";
+import {Box} from "@mui/material";
+import {CustomContainer} from "../../utils/muiStyleComponents";
 
-const Hero: React.FC = (props) => {
+export const Hero: React.FC = (props) => {
     return (
-        <Container sx={{
+        <CustomContainer sx={{
             minHeight: "85vh",
             display: "flex",
             alignItems: "center",
@@ -12,8 +13,6 @@ const Hero: React.FC = (props) => {
             <Box>
                 {props.children}
             </Box>
-        </Container>
+        </CustomContainer>
     )
 }
-
-export default Hero

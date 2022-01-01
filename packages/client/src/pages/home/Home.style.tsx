@@ -1,17 +1,15 @@
 import * as React from 'react'
 import {Grid, Typography} from "@mui/material";
-import SearchBar from "../../components/SearchBar/SearchBar";
-import Hero from "../../components/Hero/Hero";
-import Footer from "../../components/Footer/Footer";
+import {Footer, Header, SearchBar, Hero} from "../../components"
 
 
 const HomeStyle = () => {
     return (
         <Grid container>
             <Grid item xs={false} sx={{
-                display: {xs: "none", sm: "block"}
+                display: {xs: "none", md: "block"}
             }}>
-                Header
+                <Header/>
             </Grid>
             <Grid item xs={12}>
                 <Hero>
