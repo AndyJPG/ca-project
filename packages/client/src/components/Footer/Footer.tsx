@@ -9,7 +9,8 @@ export const Footer = () => {
             paddingY: "10px"
         }}>
             <Typography sx={{
-                fontSize: "14px"
+                fontSize: "14px",
+                textAlign: {md: "center"}
             }}>&#169; 2021 HomeReview</Typography>
         </CustomContainer>
     )

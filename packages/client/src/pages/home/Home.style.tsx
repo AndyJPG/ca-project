@@ -6,7 +6,7 @@ import {Footer, Header, SearchBar, Hero} from "../../components"
 const HomeStyle = () => {
     return (
         <Grid container>
-            <Grid item xs={false} sx={{
+            <Grid item md={12} sx={{
                 display: {xs: "none", md: "block"}
             }}>
                 <Header/>

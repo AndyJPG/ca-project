@@ -1,5 +1,5 @@
 import * as React from 'react'
-import {AppBar, Toolbar, Typography} from "@mui/material";
+import {AppBar, Box, Toolbar, Typography} from "@mui/material";
 import {CustomContainer} from "../../utils/muiStyleComponents";
 
 export const Header = () => {
