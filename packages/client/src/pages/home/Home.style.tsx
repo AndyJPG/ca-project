@@ -1,31 +1,22 @@
 import * as React from 'react'
-import {Grid, Typography} from "@mui/material";
-import {Footer, Header, SearchBar, Hero} from "../../components"
+import {Typography} from "@mui/material";
+import {SearchBar, Hero} from "../../components"
+import {BaseLayout} from "../../utils/muiStyleComponents";
 
 
 const HomeStyle = () => {
     return (
-        <Grid container>
-            <Grid item md={12} sx={{
-                display: {xs: "none", md: "block"}
-            }}>
-                <Header/>
-            </Grid>
-            <Grid item xs={12}>
-                <Hero>
-                    <SearchBar styles={{
-                        margin: "0 0 24px 0"
-                    }}/>
-                    <Typography variant='h5' sx={{
-                        fontWeight: 'bold',
-                        textAlign: 'center'
-                    }}>See what others think before move in.</Typography>
-                </Hero>
-            </Grid>
-            <Grid item xs={12}>
-                <Footer/>
-            </Grid>
-        </Grid>
+        <BaseLayout>
+            <Hero>
+                <SearchBar styles={{
+                    margin: "0 0 24px 0"
+                }}/>
+                <Typography variant='h5' sx={{
+                    fontWeight: 'bold',
+                    textAlign: 'center'
+                }}>See what others think before move in.</Typography>
+            </Hero>
+        </BaseLayout>
     )
 }
 
