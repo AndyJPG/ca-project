@@ -7,7 +7,6 @@ const PostStyle = () => {
         <CustomContainer>
             <PostHeader/>
             <Divider/>
-            <SearchBar/>
             <Review/>
         </CustomContainer>
     )

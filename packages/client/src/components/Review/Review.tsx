@@ -1,17 +1,14 @@
-import {Avatar, Card, CardContent, CardHeader, Typography} from "@mui/material";
+import {Box} from "@mui/material";
+import {SingleReview} from "../SingleReview/SingleReview";
+import {SearchBar} from "../SearchBar/SearchBar";
 
 export const Review = () => {
     return (
-        <Card>
-            <CardHeader title="Lisa"
-                        subheader="February 2019"
-                        avatar={<Avatar sx={{bgcolor: 'primary.main'}}>A</Avatar>}
-                        sx={{padding: '0'}}/>
-            <CardContent sx={{padding: '0'}}>
-                <Typography variant="body2" sx={{padding: '0'}}>
-                    Good mountain view
-                </Typography>
-            </CardContent>
-        </Card>
+        <Box sx={{
+            padding: "24px 0"
+        }}>
+            <SearchBar/>
+            <SingleReview/>
+        </Box>
     )
 }
