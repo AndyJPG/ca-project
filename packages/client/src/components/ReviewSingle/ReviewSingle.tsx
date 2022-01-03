@@ -1,6 +1,6 @@
 import {Avatar, Card, CardContent, CardHeader, Typography} from "@mui/material";
 
-export const SingleReview = () => {
+export const ReviewSingle = () => {
     return (
         <Card sx={{
             paddingTop: '24px'

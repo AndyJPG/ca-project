@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {AppBar, Toolbar, Typography} from "@mui/material";
-import {CustomContainer} from "../../utils/muiStyleComponents";
+import {CustomContainer} from "../../../utils/muiStyleComponents";
 import {Link} from "react-router-dom";
 
-export const Header = () => {
+export const Navbar = () => {
     return (
         <AppBar position="static" sx={{
             display: {xs: "none", md: "flex"}

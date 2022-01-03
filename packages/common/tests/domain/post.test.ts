@@ -1,7 +1,7 @@
 import {addCommentToPost, Comment, Post, User} from "../../domain";
 import {getCurrentDateInISOString} from "../../libs/helpers";
 
-describe("Post class test", () => {
+describe("PostPage class test", () => {
     const newUser: User = {
         id: "uid_321",
         userName: "andy",

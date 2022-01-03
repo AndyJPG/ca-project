@@ -1,6 +1,6 @@
 import {CustomContainer} from "../../utils/muiStyleComponents";
 
-export const PostList = () => {
+export const PostListPage = () => {
     return (
         <CustomContainer>
             list

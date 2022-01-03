@@ -1,5 +1,5 @@
 import {Box} from "@mui/material";
-import {SingleReview} from "../SingleReview/SingleReview";
+import {ReviewSingle} from "../ReviewSingle/ReviewSingle";
 import {SearchBar} from "../SearchBar/SearchBar";
 
 export const Review = () => {
@@ -8,7 +8,7 @@ export const Review = () => {
             padding: "24px 0"
         }}>
             <SearchBar/>
-            <SingleReview/>
+            <ReviewSingle/>
         </Box>
     )
 }

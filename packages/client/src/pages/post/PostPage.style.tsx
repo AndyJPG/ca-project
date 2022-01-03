@@ -2,7 +2,7 @@ import {CustomContainer} from "../../utils/muiStyleComponents"
 import {Divider, Typography} from "@mui/material"
 import {SearchBar, Review, PostHeader} from "../../components"
 
-const PostStyle = () => {
+const PostPageStyle = () => {
     return (
         <CustomContainer>
             <PostHeader/>
@@ -12,4 +12,4 @@ const PostStyle = () => {
     )
 }
 
-export default PostStyle
+export default PostPageStyle

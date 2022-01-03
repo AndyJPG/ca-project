@@ -2,7 +2,7 @@ import * as React from 'react'
 import {Typography} from "@mui/material";
 import {SearchBar, Hero} from "../../components"
 
-const HomeStyle = () => {
+const HomePageStyle = () => {
     return (
         <Hero>
             <SearchBar styles={{
@@ -16,4 +16,4 @@ const HomeStyle = () => {
     )
 }
 
-export default HomeStyle
+export default HomePageStyle

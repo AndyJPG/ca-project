@@ -1,7 +1,7 @@
 import * as React from "react"
 import {Grid} from "@mui/material";
-import {Footer, Header} from "../../components";
-import {MobileHeader} from "../../components/MobileHeader/MobileHeader";
+import {Footer, Navbar} from "../../components";
+import {NavbarMobile} from "../../components/layout/NavbarMobile/NavbarMobile";
 import {Outlet, useLocation} from "react-router-dom";
 
 export const BaseLayout: React.FC = (props) => {
@@ -14,8 +14,8 @@ export const BaseLayout: React.FC = (props) => {
     return (
         <Grid container>
             <Grid item xs={12}>
-                <Header/>
-                <MobileHeader/>
+                <Navbar/>
+                <NavbarMobile/>
             </Grid>
             <Grid item xs={12}>
                 <Outlet/>

@@ -1,10 +1,10 @@
-import {CustomContainer} from "../../utils/muiStyleComponents";
+import {CustomContainer} from "../../../utils/muiStyleComponents";
 import {AppBar, IconButton, Toolbar} from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import * as React from "react";
-import {SearchBar} from "../SearchBar/SearchBar";
+import {SearchBar} from "../../SearchBar/SearchBar";
 
-export const MobileHeader = () => {
+export const NavbarMobile = () => {
     return (
         <AppBar position="static" sx={{
             display: {sx: "flex", md: "none"}

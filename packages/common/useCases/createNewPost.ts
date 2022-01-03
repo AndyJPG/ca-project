@@ -22,7 +22,7 @@ const createNewPost = async (user: User, address: Address, dependencies: Depende
     const newPost: Post = createPost(user, address)
     try {
         await storage.createPost(newPost)
-        notifier.successNotify("Post created")
+        notifier.successNotify("PostPage created")
     } catch (e) {
         notifier.failNotify("Fail creating post")
         throw e
