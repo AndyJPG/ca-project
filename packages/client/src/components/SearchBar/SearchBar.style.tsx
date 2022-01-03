@@ -67,7 +67,7 @@ const SearchBarStyle = (props: SearchBarStyleProps) => {
             margin: props.styles?.margin
         }}>
             <SearchBarIconWrapper>
-                <SearchIcon/>
+                <SearchIcon sx={{color: 'black'}}/>
             </SearchBarIconWrapper>
             <StyledInputBase placeholder="Where are your next home?"/>
             <SearchBarButton>

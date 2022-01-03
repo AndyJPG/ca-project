@@ -2,6 +2,7 @@ import {CustomContainer} from "../../utils/muiStyleComponents";
 import {AppBar, IconButton, Toolbar} from "@mui/material";
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import * as React from "react";
+import {SearchBar} from "../SearchBar/SearchBar";
 
 export const MobileHeader = () => {
     return (
@@ -13,9 +14,11 @@ export const MobileHeader = () => {
                     <IconButton sx={{
                         backgroundColor: "white",
                         padding: '8px',
+                        mr: '16px'
                     }}>
                         <ArrowBackIosNewIcon fontSize="small"/>
                     </IconButton>
+                    <SearchBar/>
                 </Toolbar>
             </CustomContainer>
         </AppBar>

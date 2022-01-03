@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {BaseLayout} from "./utils/muiStyleComponents"
-import {Post, Home} from "./pages"
+import {Post, Home, PostList} from "./pages"
 import {BrowserRouter, Route, Routes} from "react-router-dom"
 import {Typography} from "@mui/material";
 
@@ -11,7 +11,8 @@ function App() {
             <Routes>
                 <Route path="/" element={<BaseLayout/>}>
                     <Route index element={<Home/>}/>
-                    <Route path="/homes/:postId" element={<Post/>}/>
+                    <Route path="homes" element={<PostList/>}/>
+                    <Route path="homes/:homeId" element={<Post/>}/>
                     <Route path="*" element={
                         <Typography>404 not found</Typography>
                     }/>
