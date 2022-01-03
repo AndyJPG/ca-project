@@ -3,7 +3,10 @@ import {Card, CardContent, Typography} from "@mui/material";
 export const PostListItem = () => {
     return (
         <Card>
-            <CardContent>
+            <CardContent sx={{
+                pr: "0",
+                pl: "0"
+            }}>
                 <Typography variant="h6">
                     51/235 Flemington Road
                 </Typography>

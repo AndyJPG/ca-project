@@ -1,10 +1,10 @@
 import {CustomContainer} from "../../utils/muiStyleComponents";
-import {PostListItem} from "../../components";
+import {PostList} from "../../components";
 
 export const PostListPage = () => {
     return (
         <CustomContainer>
-            <PostListItem/>
+            <PostList/>
         </CustomContainer>
     )
 }
