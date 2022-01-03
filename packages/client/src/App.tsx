@@ -1,12 +1,13 @@
 import * as React from 'react';
-import Home from "./pages/home/Home";
+import {BaseLayout} from "./utils/muiStyleComponents";
+import {Post} from "./pages";
 
 function App() {
 
     return (
-        <div>
-            <Home/>
-        </div>
+        <BaseLayout>
+            <Post/>
+        </BaseLayout>
     );
 }
 
