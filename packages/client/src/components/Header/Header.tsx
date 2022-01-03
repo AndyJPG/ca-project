@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {AppBar, Toolbar, Typography} from "@mui/material";
 import {CustomContainer} from "../../utils/muiStyleComponents";
+import {Link} from "react-router-dom";
 
 export const Header = () => {
     return (
@@ -9,7 +10,9 @@ export const Header = () => {
         }}>
             <CustomContainer>
                 <Toolbar disableGutters>
-                    <Typography variant="h6">Logo</Typography>
+                    <Link to="/">
+                        <Typography variant="h6">Logo</Typography>
+                    </Link>
                 </Toolbar>
             </CustomContainer>
         </AppBar>
