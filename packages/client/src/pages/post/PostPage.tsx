@@ -1,7 +1,13 @@
-import PostPageStyle from "./PostPage.style";
+import {PostHeader, Reviews} from "../../components";
+import {Divider} from "@mui/material";
+import {CustomContainer} from "../../utils/muiStyleComponents";
 
 export const PostPage = () => {
     return (
-        <PostPageStyle/>
+        <CustomContainer>
+            <PostHeader/>
+            <Divider/>
+            <Reviews/>
+        </CustomContainer>
     )
 }

@@ -1,4 +1,4 @@
-import {PostListItem} from "../PostListItem/PostListItem";
+import {PostListItem} from "./PostListItem";
 import {Pagination, Stack} from "@mui/material";
 
 export const PostList = () => {

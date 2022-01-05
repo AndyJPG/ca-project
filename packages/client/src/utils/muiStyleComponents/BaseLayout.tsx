@@ -6,7 +6,7 @@ import {Outlet, useLocation} from "react-router-dom";
 export const BaseLayout: React.FC = (props) => {
     const location = useLocation()
 
-    const showFooter = (): boolean => {
+    const onHomePage = (): boolean => {
         return location.pathname === "/";
     }
 
@@ -14,13 +14,13 @@ export const BaseLayout: React.FC = (props) => {
         <Grid container>
             <Grid item xs={12}>
                 <Navbar/>
-                <NavbarMobile/>
+                {!onHomePage() && <NavbarMobile/>}
             </Grid>
             <Grid item xs={12}>
                 <Outlet/>
             </Grid>
             <Grid item xs={12}>
-                {showFooter() && <Footer/>}
+                {onHomePage() && <Footer/>}
             </Grid>
         </Grid>
     )

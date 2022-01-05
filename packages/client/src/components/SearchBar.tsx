@@ -1,17 +1,17 @@
-import * as React from "react"
 import {Button, InputBase, styled} from "@mui/material"
-import SearchIcon from '@mui/icons-material/Search'
+import SearchIcon from "@mui/icons-material/Search"
+import * as React from "react"
 
-export interface SearchBarStyles {
+interface SearchBarProps {
+    styles?: SearchBarStyles
+}
+
+interface SearchBarStyles {
     width?: string,
     margin?: string
 }
 
-interface SearchBarStyleProps {
-    styles?: SearchBarStyles
-}
-
-const SearchBar = styled('div')(({theme}) => ({
+const StyledSearchBar = styled('div')(({theme}) => ({
     position: 'relative',
     display: 'flex',
     alignItems: 'center',
@@ -60,9 +60,9 @@ const SearchBarButton = styled(Button)(({theme}) => ({
     }
 }))
 
-const SearchBarStyle = (props: SearchBarStyleProps) => {
+export const SearchBar = (props: SearchBarProps) => {
     return (
-        <SearchBar sx={{
+        <StyledSearchBar sx={{
             width: props.styles?.width,
             margin: props.styles?.margin
         }}>
@@ -73,8 +73,6 @@ const SearchBarStyle = (props: SearchBarStyleProps) => {
             <SearchBarButton>
                 <SearchIcon/>
             </SearchBarButton>
-        </SearchBar>
+        </StyledSearchBar>
     )
 }
-
-export default SearchBarStyle

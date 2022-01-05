@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {Typography} from "@mui/material";
-import {CustomContainer} from "../../../utils/muiStyleComponents";
+import {CustomContainer} from "../../utils/muiStyleComponents";
 
 export const Footer = () => {
     return (

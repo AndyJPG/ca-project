@@ -7,6 +7,8 @@ export const useNotificationService = (): NotificationService => {
         },
         failNotify(message: string) {
             window.alert(message)
+        },
+        errorNotify(error: any) {
         }
     }
 }

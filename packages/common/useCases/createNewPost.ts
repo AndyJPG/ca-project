@@ -1,7 +1,6 @@
 import {Address, createPost, Post, User} from "../domain";
 import {NotificationService, StorageService} from "./ports";
-import {useStorageService} from "../services/storage.service";
-import {useNotificationService} from "../services/notification.service";
+import {useStorageService, useNotificationService} from "../services";
 
 interface Dependencies {
     storage: StorageService

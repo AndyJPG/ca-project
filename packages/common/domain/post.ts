@@ -1,4 +1,4 @@
-import {DateISOString, Postcode, State, StreetAddress, Suburb, UniqueID} from "./shared-kernal";
+import {Address, DateISOString, UniqueID} from "./shared-kernal";
 import {Comment} from "./comment";
 import {User} from "./user";
 import {generateUniqueIdPlaceholder, getCurrentDateInISOString} from "../libs/helpers";
@@ -9,13 +9,6 @@ export interface Post {
     createdDate: DateISOString
     comments: Array<UniqueID>
     address: Address
-}
-
-export interface Address {
-    streetAddress: StreetAddress
-    suburb: Suburb
-    state: State
-    postcode: Postcode
 }
 
 export const createPost = (user: User, address: Address): Post => {

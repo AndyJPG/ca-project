@@ -5,7 +5,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom"
 import {Typography} from "@mui/material";
 
 function App() {
-
     return (
         <BrowserRouter>
             <Routes>
