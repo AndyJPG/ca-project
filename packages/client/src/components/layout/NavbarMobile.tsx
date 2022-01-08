@@ -18,7 +18,7 @@ export const NavbarMobile = () => {
                     }}>
                         <ArrowBackIosNewIcon fontSize="small"/>
                     </IconButton>
-                    <SearchBar/>
+                    {/*<SearchBar/>*/}
                 </Toolbar>
             </CustomContainer>
         </AppBar>

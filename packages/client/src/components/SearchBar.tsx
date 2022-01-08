@@ -3,6 +3,9 @@ import SearchIcon from "@mui/icons-material/Search"
 import * as React from "react"
 
 interface SearchBarProps {
+    value: string
+    onChangeHandler: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
+    onClickHandler: () => void
     styles?: SearchBarStyles
 }
 
@@ -69,8 +72,10 @@ export const SearchBar = (props: SearchBarProps) => {
             <SearchBarIconWrapper>
                 <SearchIcon sx={{color: 'black'}}/>
             </SearchBarIconWrapper>
-            <StyledInputBase placeholder="Where are your next home?"/>
-            <SearchBarButton>
+            <StyledInputBase value={props.value}
+                             onChange={props.onChangeHandler}
+                             placeholder="Where are your next home?"/>
+            <SearchBarButton onClick={props.onClickHandler}>
                 <SearchIcon/>
             </SearchBarButton>
         </StyledSearchBar>

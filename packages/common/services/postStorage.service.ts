@@ -5,7 +5,8 @@ import {samplePostsData} from "../data/samplePostsData";
 export const usePostStorageService = (): PostStorageService => {
     return {
         postsMapper(rawPostsData: any): Array<Post> {
-            return rawPostsData.data.map((post: any) => ({
+            const postsData = JSON.parse(rawPostsData)
+            return postsData.data.map((post: any) => ({
                 id: post.id,
                 author: post.author,
                 createdDate: post.createdDate,
@@ -13,8 +14,13 @@ export const usePostStorageService = (): PostStorageService => {
                 address: post.address
             }))
         },
-        getPostsByAddressKeywords(keywords: string): Promise<Array<Post>> {
-            return samplePostsData()
+        async getPostsByAddressKeywords(keywords: string): Promise<any> {
+            let postsData = await samplePostsData()
+            postsData = JSON.parse(postsData)
+            const filteredData = postsData.data.filter((data: any) => data.address.toLowerCase().includes(keywords.toLowerCase()))
+            return JSON.stringify({
+                data: filteredData
+            })
         }
     }
 }

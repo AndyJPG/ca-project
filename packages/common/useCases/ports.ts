@@ -13,7 +13,7 @@ export interface NotificationService {
 }
 
 export interface PostStorageService {
-    getPostsByAddressKeywords(keywords: string): Promise<Array<Post>>
+    getPostsByAddressKeywords(keywords: string): Promise<any>
 
     postsMapper(rawPostsData: any): Array<Post>
 }

@@ -1,2 +1,2 @@
 export * from './CustomContainer'
-export * from './BaseLayout'
+export * from '../../components/layout/BaseLayout'

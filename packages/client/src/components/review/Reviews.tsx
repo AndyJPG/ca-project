@@ -7,7 +7,7 @@ export const Reviews = () => {
         <Box sx={{
             padding: "24px 0"
         }}>
-            <SearchBar/>
+            {/*<SearchBar/>*/}
             <ReviewSingle/>
         </Box>
     )

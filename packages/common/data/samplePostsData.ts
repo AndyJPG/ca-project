@@ -27,7 +27,7 @@ const data = {
 export const samplePostsData = (): Promise<any> => {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve(data)
+            resolve(JSON.stringify(data))
         }, 1000)
     })
 }

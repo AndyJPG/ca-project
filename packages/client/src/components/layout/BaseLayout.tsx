@@ -1,6 +1,6 @@
 import * as React from "react"
 import {Grid} from "@mui/material";
-import {Footer, Navbar, NavbarMobile} from "../../components";
+import {Footer, Navbar, NavbarMobile} from "../index";
 import {Outlet, useLocation} from "react-router-dom";
 
 export const BaseLayout: React.FC = (props) => {
