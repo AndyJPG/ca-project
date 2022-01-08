@@ -1,20 +1,20 @@
 import {Home} from "../domain";
-import {LocalStorageService, NotificationService, HomeStorageService} from "./ports";
+import {HomeLocalStorageService, NotificationService, HomeStorageService} from "./ports";
 import {
     useHomeStorageService,
-    useLocalStorageService,
+    useHomeLocalStorageService,
     useNotificationService
 } from "../services";
 
 interface Dependencies {
     postStorage: HomeStorageService
-    localStorage: LocalStorageService
+    localStorage: HomeLocalStorageService
     notification: NotificationService
 }
 
 export const useSearchHomes = () => {
     const postStorage: HomeStorageService = useHomeStorageService()
-    const localStorage: LocalStorageService = useLocalStorageService()
+    const localStorage: HomeLocalStorageService = useHomeLocalStorageService()
     const notification: NotificationService = useNotificationService()
 
     return {

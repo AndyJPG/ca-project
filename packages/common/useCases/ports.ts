@@ -18,6 +18,6 @@ export interface HomeStorageService {
     homesMapper(rawHomesData: any): Array<Home>
 }
 
-export interface LocalStorageService {
+export interface HomeLocalStorageService {
     updateHomes(homes: Array<Home>): void
 }

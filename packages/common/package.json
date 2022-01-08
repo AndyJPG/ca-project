@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@ca/client": "0.1.0"
+  },
   "devDependencies": {
     "@babel/core": "7.16.5",
     "@babel/preset-env": "7.16.5",
