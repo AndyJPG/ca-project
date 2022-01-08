@@ -3,7 +3,7 @@ import {Comment} from "./comment";
 import {User} from "./user";
 import {generateUniqueIdPlaceholder, getCurrentDateInISOString} from "../libs/helpers";
 
-export interface Post {
+export interface Home {
     id: UniqueID
     author: User
     createdDate: DateISOString
@@ -11,7 +11,7 @@ export interface Post {
     address: Address
 }
 
-export const createPost = (user: User, address: Address): Post => {
+export const createHome = (user: User, address: Address): Home => {
     return {
         id: generateUniqueIdPlaceholder(),
         author: user,
@@ -21,6 +21,6 @@ export const createPost = (user: User, address: Address): Post => {
     }
 }
 
-export const addCommentToPost = (post: Post, comment: Comment): Post => {
-    return {...post, comments: [...post.comments, comment.id]}
+export const addCommentToAHome = (home: Home, comment: Comment): Home => {
+    return {...home, comments: [...home.comments, comment.id]}
 }

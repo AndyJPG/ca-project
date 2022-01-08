@@ -1,2 +1,2 @@
-export * from './createNewPost'
-export * from './searchPosts'
+export * from './createNewHome'
+export * from './searchHomes'

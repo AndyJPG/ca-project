@@ -1,11 +1,11 @@
 import * as React from "react"
 import {Hero, SearchBar} from "../../components";
 import {Typography} from "@mui/material";
-import {useSearchPosts} from "@ca/common/useCases";
+import {useSearchHomes} from "@ca/common/useCases";
 import {useState} from "react";
 
 export const HomePage = () => {
-    const {searchPosts} = useSearchPosts()
+    const {searchPosts} = useSearchHomes()
     const [keywords, setKeywords] = useState("")
     const searchOnClickHandler = () => {
         searchPosts(keywords)

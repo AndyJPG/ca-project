@@ -1,7 +1,7 @@
-import {Post} from "../domain";
+import {Home} from "../domain";
 
 export interface StorageService {
-    createPost(newPost: Post): Promise<void>
+    createHome(newHome: Home): Promise<void>
 }
 
 export interface NotificationService {
@@ -12,12 +12,12 @@ export interface NotificationService {
     errorNotify(error: any): void
 }
 
-export interface PostStorageService {
-    getPostsByAddressKeywords(keywords: string): Promise<any>
+export interface HomeStorageService {
+    getHomesByAddressKeywords(keywords: string): Promise<any>
 
-    postsMapper(rawPostsData: any): Array<Post>
+    homesMapper(rawHomesData: any): Array<Home>
 }
 
 export interface LocalStorageService {
-    updatePosts(posts: Array<Post>): void
+    updateHomes(homes: Array<Home>): void
 }

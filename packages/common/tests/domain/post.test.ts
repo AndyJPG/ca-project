@@ -1,4 +1,4 @@
-import {addCommentToPost, Comment, Post, User} from "../../domain";
+import {addCommentToPost, Comment, Home, User} from "../../domain";
 import {getCurrentDateInISOString} from "../../libs/helpers";
 
 describe("PostPage class test", () => {
@@ -14,7 +14,7 @@ describe("PostPage class test", () => {
         createdDate: getCurrentDateInISOString(),
         content: "Love this place"
     }
-    const newPost: Post = {
+    const newPost: Home = {
         id: "uid_566",
         author: newUser,
         comments: [],
@@ -27,7 +27,7 @@ describe("PostPage class test", () => {
         }
     }
     it("should add one comment to the post", () => {
-        const postWithOneComment: Post = addCommentToPost(newPost, newComment)
+        const postWithOneComment: Home = addCommentToPost(newPost, newComment)
         expect(postWithOneComment.comments.length).toEqual(1)
     })
 })

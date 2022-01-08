@@ -1,9 +1,9 @@
 import {StorageService} from "../useCases/ports";
-import {Post} from "../domain";
+import {Home} from "../domain";
 
 export const useStorageService = (): StorageService => {
     return {
-        async createPost(newPost: Post) {
+        async createPost(newPost: Home) {
             return new Promise((res) => setTimeout(() => res(), 2000))
         }
     }

@@ -1,4 +1,4 @@
-const data = {
+const homeData = {
     "data": [
         {
             "id": "pid_001",
@@ -24,10 +24,10 @@ const data = {
     ]
 }
 
-export const samplePostsData = (): Promise<any> => {
+export const sampleHomesData = (): Promise<any> => {
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve(JSON.stringify(data))
+            resolve(JSON.stringify(homeData))
         }, 1000)
     })
 }
