@@ -1,26 +1,46 @@
-import {HomeStorageService} from "../useCases/ports";
+import {HomeStorageService} from "../useCases";
 import {Home} from "../domain";
 import {sampleHomesData} from "../data/sampleHomesData";
 
 export const useHomeStorageService = (): HomeStorageService => {
     return {
-        homesMapper(rawPostsData: any): Array<Home> {
-            const postsData = JSON.parse(rawPostsData)
-            return postsData.data.map((post: any) => ({
-                id: post.id,
-                author: post.author,
-                createdDate: post.createdDate,
-                comments: post.comments,
-                address: post.address
-            }))
-        },
         async getHomesByAddressKeywords(keywords: string): Promise<any> {
-            let postsData = await sampleHomesData()
-            postsData = JSON.parse(postsData)
-            const filteredData = postsData.data.filter((data: any) => data.address.toLowerCase().includes(keywords.toLowerCase()))
+            const keywordsList = keywords.split(" ")
+            let homesData = await sampleHomesData()
+            homesData = JSON.parse(homesData)
+
+            const filteredData = homesData.data.filter((data: any) => keywordsList.some(keyword => data.address.toLowerCase().includes(keyword.toLowerCase())))
+
             return JSON.stringify({
                 data: filteredData
             })
-        }
+        },
+        async getHomeById(homeId: string): Promise<any> {
+            let homesData = await sampleHomesData()
+            homesData = JSON.parse(homesData)
+            return JSON.stringify({
+                data: homesData.data.find((data: any) => data.id === homeId)
+            })
+        },
+        homeMapper(rawHomeData: any): Home {
+            const homeData = JSON.parse(rawHomeData).data
+            return {
+                id: homeData.id,
+                author: homeData.author,
+                createdDate: homeData.createdDate,
+                comments: homeData.comments,
+                address: homeData.address
+            }
+        },
+        homesMapper(rawHomesData: any): Array<Home> {
+            const homesData = JSON.parse(rawHomesData)
+            return homesData.data.map((home: any) => ({
+                id: home.id,
+                author: home.author,
+                createdDate: home.createdDate,
+                comments: home.comments,
+                address: home.address
+            }))
+        },
     }
 }

@@ -1,14 +1,21 @@
 import {Card, CardContent, Typography} from "@mui/material";
+import {Home} from "@ca/common/domain";
+import {Link} from "react-router-dom";
 
-export const PostListItem = () => {
+interface HomeListItemProps {
+    home: Home
+}
+
+export const HomeListItem = (props: HomeListItemProps) => {
     return (
         <Card>
+            <Link to={`/homes/${props.home.id}`}>To home</Link>
             <CardContent sx={{
                 pr: "0",
                 pl: "0"
             }}>
                 <Typography variant="h6">
-                    51/235 Flemington Road
+                    {props.home.address}
                 </Typography>
                 <Typography color="text.secondary">Franklin, Canberra, Australia</Typography>
                 <Typography variant="body2">4.8 • (321)</Typography>

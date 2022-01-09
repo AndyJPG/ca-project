@@ -1,4 +1,4 @@
-import {NotificationService} from "../useCases/ports";
+import {NotificationService} from "../useCases";
 
 export const useNotificationService = (): NotificationService => {
     return {

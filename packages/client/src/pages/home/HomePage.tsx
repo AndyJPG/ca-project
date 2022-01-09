@@ -1,15 +1,15 @@
 import * as React from "react"
 import {Hero, SearchBar} from "../../components";
 import {Typography} from "@mui/material";
-import {useSearchHomes} from "@ca/common/useCases";
 import {useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export const HomePage = () => {
-    const {searchPosts} = useSearchHomes()
     const [keywords, setKeywords] = useState("")
+    const navigate = useNavigate()
+
     const searchOnClickHandler = () => {
-        searchPosts(keywords)
-            .catch(e => console.log(e))
+        navigate(`/s/homes/${keywords}`)
     }
     return (
         <Hero>

@@ -1,5 +1,4 @@
-import {HomeLocalStorageService} from "../useCases/ports";
-import {Home} from "../domain";
+import {HomeLocalStorageService} from "../useCases";
 import {useHomeContext} from "@ca/client/src/store/HomeContext";
 
 export const useHomeLocalStorageService = (): HomeLocalStorageService => {

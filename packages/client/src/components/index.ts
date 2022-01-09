@@ -1,10 +1,8 @@
-export * from './layout/Navbar'
-export * from './layout/NavbarMobile'
-export * from './layout/Footer'
 export * from './Hero'
 export * from './SearchBar'
+
 export * from './review/Reviews'
 export * from './review/ReviewSingle'
-export * from './post/PostHeader'
-export * from './post/PostList'
-export * from './post/PostListItem'
+
+export * from './home'
+export * from './layout'

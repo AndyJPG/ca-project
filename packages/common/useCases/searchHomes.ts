@@ -7,27 +7,27 @@ import {
 } from "../services";
 
 interface Dependencies {
-    postStorage: HomeStorageService
+    homeStorage: HomeStorageService
     localStorage: HomeLocalStorageService
     notification: NotificationService
 }
 
 export const useSearchHomes = () => {
-    const postStorage: HomeStorageService = useHomeStorageService()
+    const homeStorage: HomeStorageService = useHomeStorageService()
     const localStorage: HomeLocalStorageService = useHomeLocalStorageService()
     const notification: NotificationService = useNotificationService()
 
     return {
-        searchPosts: (keywords: string) => searchHomes(keywords, {postStorage, localStorage, notification})
+        searchHomes: (keywords: string) => searchHomes(keywords, {homeStorage, localStorage, notification})
     }
 }
 
 const searchHomes = async (keywords: string, dependencies: Dependencies): Promise<void> => {
-    const {postStorage, localStorage, notification} = dependencies
+    const {homeStorage, localStorage, notification} = dependencies
     try {
-        const rawPostsData: any = await postStorage.getHomesByAddressKeywords(keywords)
-        const posts: Array<Home> = postStorage.homesMapper(rawPostsData)
-        localStorage.updateHomes(posts)
+        const rawHomesData: any = await homeStorage.getHomesByAddressKeywords(keywords)
+        const homes: Array<Home> = homeStorage.homesMapper(rawHomesData)
+        localStorage.updateHomes(homes)
     } catch (e) {
         notification.errorNotify(e)
     }

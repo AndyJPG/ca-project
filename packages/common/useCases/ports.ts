@@ -13,7 +13,11 @@ export interface NotificationService {
 }
 
 export interface HomeStorageService {
+    getHomeById(homeId: string): Promise<any>
+
     getHomesByAddressKeywords(keywords: string): Promise<any>
+
+    homeMapper(rawHomeData: any): Home
 
     homesMapper(rawHomesData: any): Array<Home>
 }

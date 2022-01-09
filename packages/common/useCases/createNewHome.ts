@@ -21,9 +21,9 @@ const createNewHome = async (user: User, address: Address, dependencies: Depende
     const newHome: Home = createHome(user, address)
     try {
         await storage.createHome(newHome)
-        notifier.successNotify("PostPage created")
+        notifier.successNotify("HomeDetailPage created")
     } catch (e) {
-        notifier.failNotify("Fail creating post")
+        notifier.failNotify("Fail creating home")
         throw e
     }
 }
