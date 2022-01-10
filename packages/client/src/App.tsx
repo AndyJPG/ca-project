@@ -1,26 +1,18 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
-import {testing} from "@ca/common";
+import {useAddNewHome} from "@ca/common/adapters";
 
 function App() {
-  testing()
+  const [address, setAddress] = useState("")
+  const [review, setReview] = useState("")
+
+  const {addNewHome} = useAddNewHome()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input value={address} onChange={(e) => setAddress(e.target.value)}/>
+      <input value={review} onChange={(e) => setReview(e.target.value)}/>
+      <button onClick={() => addNewHome(address, review)}>add new home</button>
     </div>
   );
 }
