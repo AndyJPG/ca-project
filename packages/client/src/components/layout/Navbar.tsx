@@ -1,7 +1,7 @@
 import * as React from 'react'
-import {AppBar, Toolbar, Typography} from "@mui/material";
+import {AppBar, Link, Toolbar} from "@mui/material";
 import {CustomContainer} from "../../utils/muiStyleComponents";
-import {Link} from "react-router-dom";
+import logo from '../../assets/logo/logo_primary.svg'
 
 export const Navbar = () => {
     return (
@@ -10,8 +10,10 @@ export const Navbar = () => {
         }}>
             <CustomContainer>
                 <Toolbar disableGutters>
-                    <Link to="/">
-                        <Typography variant="h6">Logo</Typography>
+                    <Link href="/" sx={{
+                        height: '32px'
+                    }}>
+                        <img src={logo} alt="logo" style={{height: "100%"}}/>
                     </Link>
                 </Toolbar>
             </CustomContainer>

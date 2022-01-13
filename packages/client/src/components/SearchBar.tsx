@@ -64,6 +64,10 @@ const SearchBarButton = styled(Button)(({theme}) => ({
 }))
 
 export const SearchBar = (props: SearchBarProps) => {
+    const onEnterKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        console.log(e.key)
+    }
     return (
         <StyledSearchBar sx={{
             width: props.styles?.width,
@@ -74,6 +78,7 @@ export const SearchBar = (props: SearchBarProps) => {
             </SearchBarIconWrapper>
             <StyledInputBase value={props.value}
                              onChange={props.onChangeHandler}
+                             onKeyPress={onEnterKeyDown}
                              placeholder="Where are your next home?"/>
             <SearchBarButton onClick={props.onClickHandler}>
                 <SearchIcon/>

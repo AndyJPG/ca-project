@@ -2,13 +2,22 @@ import * as React from 'react'
 import {Box} from "@mui/material";
 import {CustomContainer} from "../utils/muiStyleComponents";
 
-export const Hero: React.FC = (props) => {
+interface HeroProps {
+    children: React.ReactNode
+    heroImageUrl?: string
+}
+
+export const Hero = (props: HeroProps) => {
     return (
         <CustomContainer sx={{
             minHeight: "85vh",
             display: "flex",
             alignItems: "center",
-            justifyContent: "center"
+            justifyContent: "center",
+            backgroundImage: `url(${props.heroImageUrl})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center'
         }}>
             <Box>
                 {props.children}
