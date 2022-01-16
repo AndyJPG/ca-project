@@ -4,9 +4,9 @@ import * as http from 'http'
 import * as winston from "winston";
 import * as expressWinston from 'express-winston'
 import cors from 'cors'
-import {CommonRoutesConfig} from "./common/common.routes.config";
+import {CommonRoutesConfig} from "./src/common/common.routes.config";
 import debug from "debug";
-import {UsersRoutes} from "./users/users.routes.config";
+import {UsersRoutes} from "./src/users/users.routes.config";
 
 const app: express.Application = express()
 const server: http.Server = http.createServer(app)
