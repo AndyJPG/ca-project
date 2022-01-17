@@ -9,6 +9,7 @@ import debug from "debug";
 import {UsersRoutes} from "./src/users/users.routes.config";
 
 const app: express.Application = express()
+const api: express.Application = express()
 const server: http.Server = http.createServer(app)
 const port = 3300
 const routes: Array<CommonRoutesConfig> = []
@@ -39,8 +40,11 @@ if (!process.env.DEBUG) {
 // Initialize the logger with the above configuration
 app.use(expressWinston.logger(loggerOptions))
 
+// app mounted path
+app.use('/api', api)
+
 // Add routes to routes array
-routes.push(new UsersRoutes(app))
+routes.push(new UsersRoutes(api))
 
 // Simple testing routes
 const runningMessage = `Server running at http://localhost:${port}`
