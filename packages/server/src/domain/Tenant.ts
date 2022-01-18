@@ -29,4 +29,12 @@ export default class Tenant {
     set categories(value: Category[]) {
         this._categories = value
     }
+
+    toJSON(): Object {
+        return {
+            id: this.id,
+            companyName: this.companyName,
+            categories: this.categories
+        }
+    }
 }

@@ -17,4 +17,11 @@ export default class Category {
     get title(): string {
         return this._title
     }
+
+    toJSON(): Object {
+        return {
+            id: this.id,
+            title: this.title
+        }
+    }
 }
