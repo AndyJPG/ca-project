@@ -1,10 +1,11 @@
 import Product from "./Product";
+import {ProductDaoInterface} from "./ProductDao.interface";
 
 export default class ProductRepository {
-    private _productDao: any
+    private _productDao: ProductDaoInterface
 
     constructor(
-        productDao: any
+        productDao: ProductDaoInterface
     ) {
         this._productDao = productDao
     }

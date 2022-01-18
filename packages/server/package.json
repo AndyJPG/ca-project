@@ -5,9 +5,10 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "dev": "nodemon app.ts",
-    "start": "tsc && node --unhandled-rejections=strict ./dist/app.js",
-    "debug": "cross-env DEBUG=* && yarn run start",
+    "dev": "cross-env NODE_ENV=development && nodemon app.ts",
+    "start": "yarn run build && node --unhandled-rejections=strict ./dist/app.js",
+    "build": "cross-env NODE_ENV=production tsc",
+    "debug": "cross-env NODE_ENV=development && yarn run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {

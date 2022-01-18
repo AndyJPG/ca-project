@@ -1,8 +1,5 @@
 import {CommonRoutesConfig} from "../common/common.routes.config"
 import express from "express"
-import debug from "debug"
-
-const debugLog: debug.IDebugger = debug("User route")
 
 export class UsersRoutes extends CommonRoutesConfig {
     constructor(app: express.Application) {
@@ -23,7 +20,6 @@ export class UsersRoutes extends CommonRoutesConfig {
                 next()
             })
             .get((req: express.Request, res: express.Response) => {
-                debugLog("Getting user")
                 res.status(200).send(`GET requested for id ${req.params.userId}`)
             })
             .put((req: express.Request, res: express.Response) => {
