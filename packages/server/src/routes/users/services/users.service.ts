@@ -22,7 +22,7 @@ class UsersService implements CRUD {
         return UsersDao.putUserById(id, resource)
     }
 
-    readyById(id: string): Promise<any> {
+    readById(id: string): Promise<any> {
         return UsersDao.getUserById(id)
     }
 
