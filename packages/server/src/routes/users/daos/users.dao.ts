@@ -51,6 +51,26 @@ class UsersDao {
         this.users.splice(objIndex, 1, currentUser)
         return `${user.id} patched`
     }
+
+    async removeUserById(userId: string) {
+        const objIndex = this.users.findIndex(
+            (obj: { id: string }) => obj.id === userId
+        )
+        this.users.splice(objIndex, 1)
+        return `${userId} removed`
+    }
+
+    async getUserByEmail(email: string) {
+        const objIndex = this.users.findIndex(
+            (obj: { email: string }) => obj.email === email
+        )
+        let currentUser = this.users[objIndex]
+        if (currentUser) {
+            return currentUser
+        } else {
+            return null
+        }
+    }
 }
 
 export default new UsersDao()
