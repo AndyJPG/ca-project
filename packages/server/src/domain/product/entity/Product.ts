@@ -2,9 +2,6 @@ import Category from "../../Category"
 
 export default class Product {
     private readonly _id: string
-    private readonly _name: string
-    private readonly _description: string
-    private readonly _price: number
     private readonly _tenantId: string
 
     constructor(
@@ -21,6 +18,36 @@ export default class Product {
         this._tenantId = tenantId
         this._images = []
         this._categories = []
+    }
+
+    private _name: string
+
+    get name(): string {
+        return this._name
+    }
+
+    set name(value: string) {
+        this._name = value
+    }
+
+    private _description: string
+
+    get description(): string {
+        return this._description
+    }
+
+    set description(value: string) {
+        this._description = value
+    }
+
+    private _price: number
+
+    get price(): number {
+        return this._price
+    }
+
+    set price(value: number) {
+        this._price = value
     }
 
     private _images: string[]
@@ -45,18 +72,6 @@ export default class Product {
 
     get id(): string {
         return this._id
-    }
-
-    get name(): string {
-        return this._name
-    }
-
-    get description(): string {
-        return this._description
-    }
-
-    get price(): number {
-        return this._price
     }
 
     get tenantId(): string {

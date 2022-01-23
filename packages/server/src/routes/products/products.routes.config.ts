@@ -19,6 +19,7 @@ export default class ProductsRoutes extends CommonRoutesConfig {
                 productsMiddleware.extractProductId)
             .get(productsController.getProductById)
             .delete(productsController.deleteProduct)
+            .patch(productsController.updateProduct)
 
         return this.app
     }

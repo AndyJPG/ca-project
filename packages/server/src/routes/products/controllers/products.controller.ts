@@ -22,6 +22,12 @@ class ProductsController {
         res.status(201).send({id: product?.id})
     }
 
+    async updateProduct(req: express.Request, res: express.Response) {
+        const product = await productsService.patchById(req.body.id, req.body)
+        log(product)
+        res.status(204).send()
+    }
+
     async deleteProduct(req: express.Request, res: express.Response) {
         const product = await productsService.deleteById(req.body.id)
         log(product)

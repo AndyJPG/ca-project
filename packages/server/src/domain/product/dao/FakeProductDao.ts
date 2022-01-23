@@ -53,7 +53,7 @@ export default class FakeProductDao implements ProductDaoInterface {
         for (let field of allowedUpdateField) {
             if (field in product) {
                 // @ts-ignore
-                updatedProduct[field] = user[field]
+                updatedProduct[field] = product[field]
             }
         }
         this.products.splice(index, 1, updatedProduct)
