@@ -1,6 +1,6 @@
 import Product from '../entity/Product'
 import {ProductDaoInterface} from "./ProductDao.interface"
-import {ProductDto} from "../dto/Product.dto"
+import {ProductDto} from "../dto/ProductDto"
 import shortid from "shortid"
 
 export default class FakeProductDao implements ProductDaoInterface {
@@ -57,6 +57,4 @@ export default class FakeProductDao implements ProductDaoInterface {
 
         return updatedProduct
     }
-
-
 }

@@ -1,5 +1,5 @@
 import Product from "../entity/Product"
-import {ProductDto} from "../dto/Product.dto"
+import {ProductDto} from "../dto/ProductDto"
 
 export interface ProductDaoInterface {
     getProducts(): Promise<Product[]>
