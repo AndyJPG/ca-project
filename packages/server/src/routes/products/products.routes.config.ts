@@ -16,6 +16,7 @@ export default class ProductsRoutes extends CommonRoutesConfig {
 
         this.app.route('/products/:productId')
             .get(productsMiddleware.validateProductExists,
+                productsMiddleware.extractProductId,
                 productsController.getProductById)
 
         return this.app
