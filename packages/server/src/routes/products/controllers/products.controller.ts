@@ -21,6 +21,12 @@ class ProductsController {
         log(product)
         res.status(201).send({id: product?.id})
     }
+
+    async deleteProduct(req: express.Request, res: express.Response) {
+        const product = await productsService.deleteById(req.body.id)
+        log(product)
+        res.status(204).send()
+    }
 }
 
 const productsController = new ProductsController()

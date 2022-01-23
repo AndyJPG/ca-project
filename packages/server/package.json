@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_ENV=development && cross-env DEBUG=* nodemon app.ts",
     "start": "yarn run build && node --unhandled-rejections=strict ./dist/app.js",
     "build": "cross-env NODE_ENV=production tsc",
-    "debug": "cross-env NODE_ENV=development && yarn run start",
+    "debug": "cross-env DEBUG=* yarn run start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
