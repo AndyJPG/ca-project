@@ -11,10 +11,12 @@ export default class ProductsRoutes extends CommonRoutesConfig {
     configureRoutes(): express.Application {
         this.app.route('/products')
             .get(productsController.getProducts)
+            .post(productsMiddleware.validateCreateProductRequiredBodyFields,
+                productsController.createProduct)
 
         this.app.route('/products/:productId')
             .get(productsMiddleware.validateProductExists,
-                productsController.getProductsByTenantId)
+                productsController.getProductById)
 
         return this.app
     }

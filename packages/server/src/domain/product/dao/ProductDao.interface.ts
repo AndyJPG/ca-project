@@ -1,7 +1,7 @@
 import Product from "../entity/Product"
-import {ProductDto} from "../dto/ProductDto"
+import ProductDto from "../dto/ProductDto"
 
-export interface ProductDaoInterface {
+export default interface ProductDaoInterface {
     getProducts(): Promise<Product[]>
 
     getProductById(tenantId: string): Promise<Product | null>

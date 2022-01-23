@@ -7,7 +7,7 @@ class ProductsMiddleware {
         res: express.Response,
         next: express.NextFunction
     ) {
-        const product = await productsService.getProductsById(req.params.productId)
+        const product = await productsService.readById(req.params.productId)
         if (product) {
             next()
         } else {
@@ -15,6 +15,30 @@ class ProductsMiddleware {
                 error: `Product ${req.params.productId} not found`
             })
         }
+    }
+
+    async validateCreateProductRequiredBodyFields(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        const {name, description, price, tenantId} = req.body
+        if (name && description && price && tenantId) {
+            next()
+        } else {
+            res.status(400).send({
+                error: 'Missing required fields to create product'
+            })
+        }
+    }
+
+    async extractProductId(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        req.body.id = req.params.productId
+        next()
     }
 }
 

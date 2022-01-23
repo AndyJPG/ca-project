@@ -1,6 +1,6 @@
 import Product from "../entity/Product"
-import {ProductDaoInterface} from "../dao/ProductDao.interface"
-import {ProductDto} from "../dto/ProductDto"
+import ProductDaoInterface from "../dao/ProductDao.interface"
+import ProductDto from "../dto/ProductDto"
 
 export default class ProductRepository {
     private _productDao: ProductDaoInterface

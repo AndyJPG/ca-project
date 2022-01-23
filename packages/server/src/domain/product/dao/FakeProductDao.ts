@@ -1,6 +1,6 @@
 import Product from '../entity/Product'
-import {ProductDaoInterface} from "./ProductDao.interface"
-import {ProductDto} from "../dto/ProductDto"
+import ProductDaoInterface from "./ProductDao.interface"
+import ProductDto from "../dto/ProductDto"
 import shortid from "shortid"
 
 export default class FakeProductDao implements ProductDaoInterface {
@@ -9,9 +9,12 @@ export default class FakeProductDao implements ProductDaoInterface {
     async addProduct(product: ProductDto): Promise<Product | null> {
         product.id = shortid.generate()
         const {id, name, description, price, tenantId} = product
-        const newProduct = new Product(id, name, description, price, tenantId)
-        this.products.push(newProduct)
-        return newProduct
+        if (name && description && price && tenantId) {
+            const newProduct = new Product(id, name, description, price, tenantId)
+            this.products.push(newProduct)
+            return newProduct
+        }
+        return null
     }
 
     async deleteProductById(productId: string): Promise<Product | null> {

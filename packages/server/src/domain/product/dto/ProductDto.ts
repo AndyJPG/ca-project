@@ -1,6 +1,6 @@
 import Category from "../../Category"
 
-export interface ProductDto {
+export default interface ProductDto {
     id: string
     name: string
     description: string

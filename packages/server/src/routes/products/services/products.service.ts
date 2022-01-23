@@ -1,26 +1,32 @@
 import {productRepository} from "../../../config/database.service"
 import Product from "../../../domain/product/entity/Product"
-import {ProductDto} from "../../../domain/product/dto/ProductDto"
+import ProductDto from "../../../domain/product/dto/ProductDto"
+import {CRUD} from "../../common/interfaces/crud.interface"
 
-class ProductsService {
-    async getProducts(): Promise<Product[]> {
-        return productRepository.getProducts()
-    }
+class ProductsService implements CRUD {
 
-    async getProductsById(productId: string): Promise<Product | null> {
-        return productRepository.getProductById(productId)
-    }
-
-    async addProduct(product: ProductDto): Promise<Product | null> {
+    create(product: ProductDto): Promise<Product | null> {
         return productRepository.addProduct(product)
     }
 
-    async updateProductById(productId: string, product: ProductDto): Promise<Product | null> {
-        return productRepository.updateProductById(productId, product)
+    deleteById(id: string): Promise<Product | null> {
+        return productRepository.deleteProductById(id)
     }
 
-    async deleteProductById(productId: string): Promise<Product | null> {
-        return productRepository.deleteProductById(productId)
+    list(limit: number, page: number): Promise<Product[]> {
+        return productRepository.getProducts()
+    }
+
+    patchById(id: string, product: ProductDto): Promise<Product | null> {
+        return productRepository.updateProductById(id, product)
+    }
+
+    putById(id: string, resource: any): Promise<string> {
+        return Promise.resolve("")
+    }
+
+    readById(id: string): Promise<Product | null> {
+        return productRepository.getProductById(id)
     }
 }
 

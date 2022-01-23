@@ -6,13 +6,18 @@ const log: debug.IDebugger = debug('app:products-controller')
 
 class ProductsController {
     async getProducts(req: express.Request, res: express.Response) {
-        const products = await productsService.getProducts()
-        res.status(200).send(products)
+        const products = await productsService.list(0, 0)
+        res.status(200).send(products.map(product => product.toJSON()))
     }
 
-    async getProductsByTenantId(req: express.Request, res: express.Response) {
-        const product = await productsService.getProductsById(req.body.id)
-        res.status(200).send(product)
+    async getProductById(req: express.Request, res: express.Response) {
+        const product = await productsService.readById(req.params.productId)
+        res.status(200).send(product?.toJSON())
+    }
+
+    async createProduct(req: express.Request, res: express.Response) {
+        const product = await productsService.create(req.body)
+        res.status(201).send({id: product?.id})
     }
 }
 
