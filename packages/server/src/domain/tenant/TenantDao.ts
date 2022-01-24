@@ -1,11 +1,13 @@
 import TenantDaoInterface from "./TenantDao.interface"
 import TenantDto from "./TenantDto"
 import Tenant from "./Tenant"
+import shortid from "shortid"
 
 export default class TenantDao implements TenantDaoInterface {
     tenants: Tenant[] = []
 
     async addTenant(tenant: TenantDto): Promise<Tenant | null> {
+        tenant.id = shortid.generate()
         const newTenant = new Tenant(tenant.id, tenant.companyName)
         this.tenants.push(newTenant)
         return newTenant
@@ -16,7 +18,7 @@ export default class TenantDao implements TenantDaoInterface {
         return this.tenants[tenantIndex]
     }
 
-    async getTenants(): Promise<Tenant[] | null> {
+    async getTenants(): Promise<Tenant[]> {
         return this.tenants
     }
 }

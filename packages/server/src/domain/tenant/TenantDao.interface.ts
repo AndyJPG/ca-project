@@ -2,7 +2,7 @@ import Tenant from "./Tenant"
 import TenantDto from "./TenantDto"
 
 export default interface TenantDaoInterface {
-    getTenants(): Promise<Tenant[] | null>
+    getTenants(): Promise<Tenant[]>
 
     getTenantById(tenantId: string): Promise<Tenant | null>
 

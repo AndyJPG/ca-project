@@ -44,7 +44,8 @@ export default class Tenant {
         return {
             id: this.id,
             companyName: this.companyName,
-            categories: this.categories
+            categories: this.categories,
+            products: this.products
         }
     }
 }

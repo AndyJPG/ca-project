@@ -11,7 +11,7 @@ export default class TenantRepository {
         this._tenantDao = tenantDao
     }
 
-    async getTenants(): Promise<Tenant[] | null> {
+    async getTenants(): Promise<Tenant[]> {
         return this._tenantDao.getTenants()
     }
 

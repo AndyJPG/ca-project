@@ -8,6 +8,7 @@ import {CommonRoutesConfig} from "./src/routes/common/common.routes.config"
 import debug from "debug"
 import {UsersRoutes} from "./src/routes/users/users.routes.config"
 import ProductsRoutes from "./src/routes/products/products.routes.config"
+import TenantsRoutes from "./src/routes/tenants/tenants.routes.config"
 
 const app: express.Application = express()
 const api: express.Application = express()
@@ -47,6 +48,7 @@ app.use('/api', api)
 // Add routes to routes array
 routes.push(new UsersRoutes(api))
 routes.push(new ProductsRoutes(api))
+routes.push(new TenantsRoutes(api))
 
 // Simple testing routes
 const runningMessage = `Server running at http://localhost:${port}`
