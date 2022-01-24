@@ -12,13 +12,11 @@ class ProductsController {
 
     async getProductById(req: express.Request, res: express.Response) {
         const product = await productsService.readById(req.body.id)
-        log(product)
         res.status(200).send(product?.toJSON())
     }
 
     async createProduct(req: express.Request, res: express.Response) {
         const product = await productsService.create(req.body)
-        log(product)
         res.status(201).send({id: product?.id})
     }
 
