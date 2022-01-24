@@ -15,6 +15,7 @@
     "strict": true,
     "esModuleInterop": true,
     "inlineSourceMap": true,
-    "noImplicitReturns": true
+    "noImplicitReturns": true,
+    "noImplicitThis": true
   }
 }
