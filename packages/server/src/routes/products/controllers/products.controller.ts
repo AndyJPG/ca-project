@@ -16,8 +16,12 @@ class ProductsController {
     }
 
     async createProduct(req: express.Request, res: express.Response) {
-        const product = await productsService.create(req.body)
-        res.status(201).send({id: product?.id})
+        try {
+            const product = await productsService.create(req.body)
+            res.status(201).send({id: product?.id})
+        } catch (e) {
+            res.status(500).send({error: 'Internal error'})
+        }
     }
 
     async updateProduct(req: express.Request, res: express.Response) {

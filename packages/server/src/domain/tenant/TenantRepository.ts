@@ -22,4 +22,8 @@ export default class TenantRepository {
     async addTenant(tenant: TenantDto): Promise<Tenant | null> {
         return this._tenantDao.addTenant(tenant)
     }
+
+    async updateTenant(tenantId: string, tenant: TenantDto): Promise<Tenant | null> {
+        return this._tenantDao.updateTenant(tenantId, tenant)
+    }
 }

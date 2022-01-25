@@ -78,9 +78,10 @@ export default class Product {
         return this._tenantId
     }
 
-    toJSON(): Object {
+    toJSON() {
         return {
             id: this.id,
+            tenantId: this.tenantId,
             name: this.name,
             description: this.description,
             price: this.price,

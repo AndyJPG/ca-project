@@ -18,6 +18,7 @@ export default class TenantsRoutes extends CommonRoutesConfig {
             .all(tenantsMiddleware.validateTenantExists,
                 tenantsMiddleware.extractTenantId)
             .get(tenantsController.getTenantById)
+            .patch(tenantsController.updateTenant)
 
         return this.app
     }

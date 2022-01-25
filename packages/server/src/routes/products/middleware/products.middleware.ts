@@ -1,5 +1,6 @@
 import express from "express"
 import productsService from "../services/products.service"
+import tenantsService from "../../tenants/services/tenants.service"
 
 class ProductsMiddleware {
     async validateProductExists(
@@ -28,6 +29,22 @@ class ProductsMiddleware {
         } else {
             res.status(400).send({
                 error: 'Missing required fields to create product'
+            })
+        }
+    }
+
+    async validateCreateProductTenantIdExists(
+        req: express.Request,
+        res: express.Response,
+        next: express.NextFunction
+    ) {
+        const {tenantId} = req.body
+        const tenant = await tenantsService.readById(tenantId)
+        if (tenant) {
+            next()
+        } else {
+            res.status(400).send({
+                error: `Tenant ${tenantId} not found`
             })
         }
     }

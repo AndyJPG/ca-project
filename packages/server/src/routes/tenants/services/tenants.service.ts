@@ -16,8 +16,8 @@ class TenantsService implements CRUD {
         return tenantRepository.getTenants()
     }
 
-    patchById(id: string, resource: any): Promise<any> {
-        return Promise.resolve(undefined)
+    patchById(tenantId: string, tenant: TenantDto): Promise<any> {
+        return tenantRepository.updateTenant(tenantId, tenant)
     }
 
     putById(id: string, resource: any): Promise<any> {

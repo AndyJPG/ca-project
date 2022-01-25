@@ -21,4 +21,26 @@ export default class TenantDao implements TenantDaoInterface {
     async getTenants(): Promise<Tenant[]> {
         return this.tenants
     }
+
+    async updateTenant(tenantId: string, tenant: TenantDto): Promise<Tenant | null> {
+        const index = this.tenants.findIndex(tenant => tenant.id === tenantId)
+        if (index < 0) return null
+
+        const updatedTenant = this.tenants[index]
+        const allowedUpdateField = [
+            "companyName",
+            "categories",
+            "products"
+        ]
+
+        for (const field of allowedUpdateField) {
+            if (field in tenant) {
+                // @ts-ignore
+                updatedTenant[field] = tenant[field]
+            }
+        }
+        this.tenants.splice(index, 1, updatedTenant)
+
+        return updatedTenant
+    }
 }

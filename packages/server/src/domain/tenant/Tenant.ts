@@ -1,6 +1,5 @@
 export default class Tenant {
     private readonly _id: string
-    private readonly _companyName: string
 
     constructor(
         id: string,
@@ -10,6 +9,16 @@ export default class Tenant {
         this._companyName = companyName
         this._categories = []
         this._products = []
+    }
+
+    private _companyName: string
+
+    get companyName(): string {
+        return this._companyName
+    }
+
+    set companyName(value: string) {
+        this._companyName = value
     }
 
     private _products: string[]
@@ -36,11 +45,7 @@ export default class Tenant {
         return this._id
     }
 
-    get companyName(): string {
-        return this._companyName
-    }
-
-    toJSON(): Object {
+    toJSON() {
         return {
             id: this.id,
             companyName: this.companyName,

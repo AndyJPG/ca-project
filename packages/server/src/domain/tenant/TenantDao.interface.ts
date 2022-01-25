@@ -7,4 +7,6 @@ export default interface TenantDaoInterface {
     getTenantById(tenantId: string): Promise<Tenant | null>
 
     addTenant(tenant: TenantDto): Promise<Tenant | null>
+
+    updateTenant(tenantId: string, tenant: TenantDto): Promise<Tenant | null>
 }

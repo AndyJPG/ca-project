@@ -2,11 +2,12 @@ import {productRepository} from "../../../config/database.service"
 import Product from "../../../domain/product/entity/Product"
 import ProductDto from "../../../domain/product/dto/ProductDto"
 import {CRUD} from "../../common/interfaces/crud.interface"
+import {createNewProduct} from "../../../config/useCase.services"
 
 class ProductsService implements CRUD {
 
     create(product: ProductDto): Promise<Product | null> {
-        return productRepository.addProduct(product)
+        return createNewProduct.creatNewProduct(product)
     }
 
     deleteById(id: string): Promise<Product | null> {

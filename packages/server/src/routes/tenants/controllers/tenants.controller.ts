@@ -19,6 +19,11 @@ class TenantsController {
         const tenant = await tenantsService.create(req.body)
         res.status(200).send({id: tenant?.id})
     }
+
+    async updateTenant(req: express.Request, res: express.Response) {
+        await tenantsService.patchById(req.body.id, req.body)
+        res.status(204).send()
+    }
 }
 
 const tenantsController = new TenantsController()
