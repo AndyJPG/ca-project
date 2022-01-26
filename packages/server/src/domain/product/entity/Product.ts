@@ -1,13 +1,8 @@
-import Category from "./Category";
+import Category from "../../Category"
 
 export default class Product {
     private readonly _id: string
-    private readonly _name: string
-    private readonly _description: string
-    private readonly _price: number
     private readonly _tenantId: string
-    private _images: string[]
-    private _categories: Category[]
 
     constructor(
         id: string,
@@ -25,25 +20,37 @@ export default class Product {
         this._categories = []
     }
 
-    get id(): string {
-        return this._id
-    }
+    private _name: string
 
     get name(): string {
         return this._name
     }
 
+    set name(value: string) {
+        this._name = value
+    }
+
+    private _description: string
+
     get description(): string {
         return this._description
     }
+
+    set description(value: string) {
+        this._description = value
+    }
+
+    private _price: number
 
     get price(): number {
         return this._price
     }
 
-    get tenantId(): string {
-        return this._tenantId
+    set price(value: number) {
+        this._price = value
     }
+
+    private _images: string[]
 
     get images(): string[] {
         return this._images
@@ -53,6 +60,8 @@ export default class Product {
         this._images = value
     }
 
+    private _categories: Category[]
+
     get categories(): Category[] {
         return this._categories
     }
@@ -61,9 +70,18 @@ export default class Product {
         this._categories = value
     }
 
-    toJSON(): Object {
+    get id(): string {
+        return this._id
+    }
+
+    get tenantId(): string {
+        return this._tenantId
+    }
+
+    toJSON() {
         return {
             id: this.id,
+            tenantId: this.tenantId,
             name: this.name,
             description: this.description,
             price: this.price,

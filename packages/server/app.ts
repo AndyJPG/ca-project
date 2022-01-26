@@ -1,12 +1,14 @@
-import express from "express";
+import express from "express"
 import * as http from 'http'
 
-import * as winston from "winston";
+import * as winston from "winston"
 import * as expressWinston from 'express-winston'
 import cors from 'cors'
-import {CommonRoutesConfig} from "./src/common/common.routes.config";
-import debug from "debug";
-import {UsersRoutes} from "./src/users/users.routes.config";
+import {CommonRoutesConfig} from "./src/routes/common/common.routes.config"
+import debug from "debug"
+import {UsersRoutes} from "./src/routes/users/users.routes.config"
+import ProductsRoutes from "./src/routes/products/products.routes.config"
+import TenantsRoutes from "./src/routes/tenants/tenants.routes.config"
 
 const app: express.Application = express()
 const api: express.Application = express()
@@ -33,7 +35,7 @@ const loggerOptions: expressWinston.LoggerOptions = {
 }
 
 // Check if debugging
-if (!process.env.DEBUG) {
+if (process.env.NODE_ENV !== "production") {
     loggerOptions.meta = false
 }
 
@@ -45,6 +47,8 @@ app.use('/api', api)
 
 // Add routes to routes array
 routes.push(new UsersRoutes(api))
+routes.push(new ProductsRoutes(api))
+routes.push(new TenantsRoutes(api))
 
 // Simple testing routes
 const runningMessage = `Server running at http://localhost:${port}`
