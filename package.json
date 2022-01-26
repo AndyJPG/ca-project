@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "lerna run --parallel start",
-    "start-dev": "lerna run --parallel dev",
+    "start-server-dev": "yarn --cwd packages/server dev",
     "test": "cd packages/common && yarn run test"
   }
 }
