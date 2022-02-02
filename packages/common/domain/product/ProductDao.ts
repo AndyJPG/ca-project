@@ -8,7 +8,8 @@ const data: Product[] = [
         name: "apple",
         description: "this is apple",
         price: "12",
-        categories: []
+        categories: [],
+        productOptions: []
     }
 ]
 
