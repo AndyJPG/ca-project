@@ -1,27 +1,14 @@
-import * as React from 'react';
-import {useCreateNewPost} from "@ca/common/useCases";
-import {User} from "@ca/common/domain";
+import * as React from 'react'
+import {useProductRepository} from "@ca/common/domain/product/ProductRepository"
 
 function App() {
-    const {createNewPost} = useCreateNewPost()
-    const newUser: User = {
-        id: "uid_321",
-        userName: "andy",
-        email: "jiangpeigeng@gmail.com",
-        comments: []
-    }
-
+    const {getProducts} = useProductRepository()
+    getProducts().then(data => console.log(data))
     return (
         <div>
             App
-            <button onClick={() => createNewPost(newUser, {
-                streetAddress: "81 cooyong st",
-                postcode: 2612,
-                state: "ACT",
-                suburb: "reid"
-            })}>Create new post</button>
         </div>
-    );
+    )
 }
 
-export default App;
+export default App
