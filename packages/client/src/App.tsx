@@ -1,13 +1,12 @@
 import * as React from 'react'
-import {useProductRepository} from "@ca/common/domain/product/ProductRepository"
+import {ThemeContextProvider} from "./Context/ThemeContextProvider"
+import {Layout} from "./containers/Layout"
 
 function App() {
-    const {getProducts} = useProductRepository()
-    getProducts().then(data => console.log(data))
     return (
-        <div>
-            App
-        </div>
+        <ThemeContextProvider>
+            <Layout/>
+        </ThemeContextProvider>
     )
 }
 
