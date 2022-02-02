@@ -7,12 +7,16 @@ const data: Product[] = [
         tenantId: "2",
         name: "apple",
         description: "this is apple",
-        price: "12"
+        price: "12",
+        categories: []
     }
 ]
 
 export const ProductDao = (): ProductDaoInterface => {
     return {
+        getProductsByTenantId(tenantId: string): Promise<Product[]> {
+            return Promise.resolve(data)
+        },
         getProducts(): Promise<Product[]> {
             return Promise.resolve(data)
         }

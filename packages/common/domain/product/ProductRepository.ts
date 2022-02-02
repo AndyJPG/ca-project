@@ -12,6 +12,9 @@ const productRepository = (dependencies: Dependencies) => {
     return {
         getProducts(): Promise<Product[]> {
             return productDao.getProducts()
+        },
+        getProductsByTenantId(tenantId: string): Promise<Product[]> {
+            return productDao.getProductsByTenantId(tenantId)
         }
     }
 }
