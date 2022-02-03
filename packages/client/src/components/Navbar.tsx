@@ -5,7 +5,7 @@ export const Navbar = () => {
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6">
-                    Menu
+                    CBD Dumpling House
                 </Typography>
             </Toolbar>
         </AppBar>

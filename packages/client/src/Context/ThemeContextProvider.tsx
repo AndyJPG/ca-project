@@ -9,6 +9,13 @@ const theme = createTheme({
                     border: '1px solid black'
                 }
             }
+        },
+        MuiTypography: {
+            styleOverrides: {
+                root: {
+                    marginBottom: '0.2rem'
+                }
+            }
         }
     }
 })

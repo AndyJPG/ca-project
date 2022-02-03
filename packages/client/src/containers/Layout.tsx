@@ -1,6 +1,7 @@
 import {Box, Grid, Slide, Tab, Tabs, Typography} from "@mui/material"
 import {Navbar} from "../components/Navbar"
 import * as React from "react"
+import {BaseContainer} from "./BaseContainer"
 
 const ShowOnScroll = (props: { children: React.ReactElement }) => {
     return (
@@ -23,35 +24,79 @@ export const Layout = () => {
             </Tabs>
             <Navbar/>
             <Grid container item xs={12}>
-                <Grid item xs={12}>
-                    <Box sx={{width: '100%', height: 200, backgroundColor: 'primary.dark'}}/>
-                </Grid>
-                <Grid item xs={12}>CBD Dumpling House</Grid>
-            </Grid>
-            <Grid container item xs={12}>
-                <Grid container item xs={false} md={3.5} sx={{
-                    display: {xs: "none", md: "flex"}
+                <Box sx={{
+                    maxHeight: '10rem',
+                    height: '10rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    overflow: 'hidden'
                 }}>
-                    sidebar
-                </Grid>
-                <Grid container item xs={12} md={8.5}>
-                    <Grid item xs={12}>Entrees</Grid>
-                    <Grid item xs={12}>
-                        <Grid item>
-                            <Typography>Seafood Spring Roll</Typography>
-                            <Typography>$9.80</Typography>
-                            <Typography>Four per serves</Typography>
+                    <img src="https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg"
+                         style={{width: '100%'}}/>
+                </Box>
+            </Grid>
+            <Grid item xs={12}>
+                <BaseContainer>
+                    <Grid container spacing={1.5}>
+                        <Grid item xs={12}>
+                            <Typography variant="h5" fontWeight="bold"> Picked for you</Typography>
+                        </Grid>
+                        <Grid item xs={12} sx={{display: 'flex'}}>
+                            <Box sx={{flexGrow: 1}}>
+                                <Typography>Seafood Spring Roll</Typography>
+                                <Typography>$9.80</Typography>
+                                <Typography>Four per serves</Typography>
+                            </Box>
+                            <Box sx={{
+                                height: '6rem',
+                                width: '6rem',
+                                backgroundImage: `url(https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg)`,
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center'
+                            }}/>
+                        </Grid>
+                        <Grid item xs={12} sx={{display: 'flex'}}>
+                            <Box sx={{flexGrow: 1}}>
+                                <Typography>Seafood Spring Roll</Typography>
+                                <Typography>$9.80</Typography>
+                                <Typography>Four per serves</Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={6} sx={{display: 'flex', flexWrap: 'wrap'}}>
+                            <Box sx={{
+                                height: '8.25rem',
+                                width: '100%',
+                                backgroundImage: `url(https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg)`,
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                marginBottom: '0.4rem'
+                            }}/>
+                            <Box sx={{flexGrow: 1}}>
+                                <Typography variant="subtitle1" fontWeight="medium">Seafood Spring Roll</Typography>
+                                <Typography fontWeight="thin">$9.80</Typography>
+                                <Typography>Four per serves</Typography>
+                            </Box>
+                        </Grid>
+                        <Grid item xs={6} sx={{display: 'flex', flexWrap: 'wrap'}}>
+                            <Box sx={{
+                                height: '8.25rem',
+                                width: '100%',
+                                backgroundImage: `url(https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg)`,
+                                backgroundRepeat: 'no-repeat',
+                                backgroundSize: 'cover',
+                                backgroundPosition: 'center',
+                                marginBottom: '0.4rem'
+                            }}/>
+                            <Box sx={{flexGrow: 1}}>
+                                <Typography variant="subtitle1" fontWeight="medium">Seafood Spring Roll</Typography>
+                                <Typography fontWeight="thin">$9.80</Typography>
+                                <Typography>Four per serves</Typography>
+                            </Box>
                         </Grid>
                     </Grid>
-                    <Grid container item xs={12}>
-                        <Box sx={{flexGrow: 1}}>
-                            <Typography>Seafood Spring Roll</Typography>
-                            <Typography>$9.80</Typography>
-                            <Typography>Four per serves</Typography>
-                        </Box>
-                        <Box sx={{height: '6rem', width: '6rem', backgroundColor: 'primary.dark'}}/>
-                    </Grid>
-                </Grid>
+                </BaseContainer>
             </Grid>
             <Grid item sx={{height: '100vh'}}/>
         </Grid>
