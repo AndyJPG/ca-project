@@ -6,7 +6,8 @@ export default interface Product {
     tenantId: string
     name: string
     description: string
-    price: string
+    price: number
+    imageUrl: string | null
     categories: Category[]
     productOptions: ProductOption[]
 }

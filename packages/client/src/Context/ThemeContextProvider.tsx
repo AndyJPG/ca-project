@@ -3,6 +3,14 @@ import {createTheme, ThemeProvider} from "@mui/material"
 
 const theme = createTheme({
     components: {
+        MuiAppBar: {
+            styleOverrides: {
+                root: {
+                    backgroundColor: "white",
+                    color: 'black'
+                }
+            }
+        },
         MuiGrid: {
             styleOverrides: {
                 root: {
