@@ -1,4 +1,4 @@
-import {Box, Grid} from "@mui/material"
+import {Box, Grid, Typography} from "@mui/material"
 import {Navbar} from "../components/Navbar"
 import * as React from "react"
 import {useEffect, useState} from "react"
@@ -28,13 +28,16 @@ export const Layout = () => {
           alignItems: 'center',
           overflow: 'hidden'
         }}>
-          <img src="https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg"
+          <img alt="Dumpling" src="https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg"
                style={{width: '100%'}}/>
         </Box>
       </Grid>
       <Grid item xs={12}>
         <BaseContainer>
           <Grid container spacing={1.5}>
+            <Grid item xs={12}>
+              <Typography variant="h5" fontWeight="medium">Dumpling</Typography>
+            </Grid>
             {products && products.map(product => (
               <Grid item xs={12}>
                 <ProductListItem subtitle={product.name}
