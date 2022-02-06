@@ -39,7 +39,7 @@ export const Layout = () => {
               <Typography variant="h5" fontWeight="medium">Dumpling</Typography>
             </Grid>
             {products && products.map(product => (
-              <Grid item xs={12}>
+              <Grid item key={product.id} xs={12}>
                 <ProductListItem subtitle={product.name}
                                  price={product.price}
                                  description={product.description}
