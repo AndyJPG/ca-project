@@ -12,6 +12,9 @@ const categoryRepository = (dependencies: Dependencies) => {
   return {
     getCategoriesWithProductsByTenantId(tenantId: string): Promise<Category[]> {
       return categoryDao.getCategoriesWithProductsByTenantId(tenantId)
+    },
+    getCategoriesByTenantId(tenantId: string): Promise<Category[]> {
+      return categoryDao.getCategoriesByTenantId(tenantId)
     }
   }
 }

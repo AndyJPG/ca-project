@@ -13,6 +13,10 @@ function App() {
       .catch(e => console.log(e))
   }, [])
 
+  if (tenant) {
+    console.log(tenant)
+  }
+
   return (
     <>
       {tenant ? tenant.companyName : "loading"}
