@@ -16,7 +16,7 @@ export const initializeTenant = (dependencies: Dependencies) => {
     async initializeTenant(tenantId: string): Promise<void> {
       try {
         const tenant = await tenantDao.getTenantById(tenantId)
-        localTenantState.setTenant(tenant)
+        localTenantState.updateTenant(tenant)
       } catch (e) {
         console.log(e)
       }

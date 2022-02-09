@@ -11,6 +11,7 @@ export const Layout = () => {
   const {getProductsByTenantId} = useProductRepository()
   const [products, setProducts] = useState<Product[] | null>(null)
 
+
   useEffect(() => {
     getProductsByTenantId("1")
       .then(products => setProducts(products))

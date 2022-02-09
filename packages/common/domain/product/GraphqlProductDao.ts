@@ -9,7 +9,7 @@ const data: Product[] = [
     description: "Ten pieces",
     price: 15.8,
     imageUrl: 'https://d1ralsognjng37.cloudfront.net/83346e61-d930-4ccf-b2a8-439a5e0319da.jpeg',
-    categories: [{id: 'c_2', name: 'dumpling'}],
+    categories: [{id: 'c_2', name: 'dumpling', tenantId: 't_1', products: []}],
     productOptions: []
   },
   {
@@ -19,7 +19,7 @@ const data: Product[] = [
     description: "Six pieces",
     price: 15.2,
     imageUrl: 'https://d1ralsognjng37.cloudfront.net/b0319908-9784-4f35-8228-890edc14bf7e.jpeg',
-    categories: [{id: 'c_2', name: 'dumpling'}],
+    categories: [{id: 'c_2', name: 'dumpling', tenantId: 't_1', products: []}],
     productOptions: []
   },
   {
@@ -29,7 +29,7 @@ const data: Product[] = [
     description: "Twelve pieces",
     price: 15.2,
     imageUrl: 'https://d1ralsognjng37.cloudfront.net/c001a013-9427-4815-a1ad-78a7d87bc0a7.jpeg',
-    categories: [{id: 'c_2', name: 'dumpling'}],
+    categories: [{id: 'c_2', name: 'dumpling', tenantId: 't_1', products: []}],
     productOptions: []
   },
   {
@@ -39,7 +39,7 @@ const data: Product[] = [
     description: "Three pieces. Steamed",
     price: 14.2,
     imageUrl: null,
-    categories: [{id: 'c_2', name: 'dumpling'}],
+    categories: [{id: 'c_2', name: 'dumpling', tenantId: 't_1', products: []}],
     productOptions: []
   }
 ]

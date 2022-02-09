@@ -1,10 +1,6 @@
 import {LocalTenantStateService} from "../useCases/ServicesAdapter.interfaces"
-import Tenant from "../domain/tenant/Tenant"
+import {useAppContext} from "@ca/client/src/Context/AppContextProvider"
 
 export const useLocalTenantStateService = (): LocalTenantStateService => {
-  return {
-    setTenant(tenant: Tenant): void {
-      console.log(tenant)
-    }
-  }
+  return useAppContext()
 }

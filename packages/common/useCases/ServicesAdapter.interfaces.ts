@@ -1,5 +1,7 @@
 import Tenant from "../domain/tenant/Tenant"
 
 export interface LocalTenantStateService {
-  setTenant(tenant: Tenant): void
+  tenant: Tenant | null
+
+  updateTenant(tenant: Tenant): void
 }
