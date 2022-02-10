@@ -1,7 +1,8 @@
 import Category from "./Category"
+import {CategoryWithProductDto} from "./CategoryDto"
 
 export interface CategoryDaoInterface {
-  getCategoriesWithProductsByTenantId(tenantId: string): Promise<Category[]>
-
   getCategoriesByTenantId(tenantId: string): Promise<Category[]>
+
+  getCategoriesWithProductsByTenantId(tenantId: string): Promise<CategoryWithProductDto[]>
 }

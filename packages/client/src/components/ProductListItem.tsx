@@ -28,7 +28,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         <Box sx={{
           height: imageTop ? '8.25rem' : '7rem',
           width: imageTop ? '100%' : '7rem',
-          backgroundImage: `url(${imageUrl})`,
+          backgroundImage: `url(${process.env.REACT_APP_DEV_ENDPOINT}${imageUrl})`,
           backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
