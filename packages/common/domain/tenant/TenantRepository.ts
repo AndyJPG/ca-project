@@ -1,22 +1,22 @@
 import TenantDaoInterface from "./TenantDao.Interface"
 import Tenant from "./Tenant"
-import {TenantDao} from "./TenantDao"
+import {GraphqlTenantDao} from "./GraphqlTenantDao"
 
 interface Dependencies {
-    tenantDao: TenantDaoInterface
+  tenantDao: TenantDaoInterface
 }
 
 const tenantRepository = (dependencies: Dependencies) => {
-    const tenantDao: TenantDaoInterface = dependencies.tenantDao
+  const tenantDao: TenantDaoInterface = dependencies.tenantDao
 
-    return {
-        getTenantById(tenantId: string): Promise<Tenant> {
-            return tenantDao.getTenantById(tenantId)
-        }
+  return {
+    getTenantById(tenantId: string): Promise<Tenant> {
+      return tenantDao.getTenantById(tenantId)
     }
+  }
 }
 
 export const useTenantRepository = () => {
-    const tenantDao: TenantDaoInterface = TenantDao()
-    return tenantRepository({tenantDao})
+  const tenantDao: TenantDaoInterface = GraphqlTenantDao()
+  return tenantRepository({tenantDao})
 }

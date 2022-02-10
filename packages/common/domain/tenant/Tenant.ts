@@ -1,4 +1,4 @@
 export default interface Tenant {
-    id: string
-    companyName: string
+  id: string
+  companyName: string
 }

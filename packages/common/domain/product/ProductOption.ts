@@ -1,4 +1,9 @@
-export default interface ProductOption {
-    name: string,
-    price: number
+export interface ProductOptions {
+  name: string
+  options: ProductOption[]
+}
+
+export interface ProductOption {
+  name: string
+  price: number
 }

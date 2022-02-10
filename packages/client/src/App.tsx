@@ -1,13 +1,24 @@
 import * as React from 'react'
-import {ThemeContextProvider} from "./Context/ThemeContextProvider"
+import {useEffect} from 'react'
 import {Layout} from "./containers/Layout"
+import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
+import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 
 function App() {
-    return (
-        <ThemeContextProvider>
-            <Layout/>
-        </ThemeContextProvider>
-    )
+  const {tenant} = useLocalTenantStateService()
+  const {initializeTenant} = useInitializeTenant()
+
+  useEffect(() => {
+    initializeTenant('1')
+      .catch(e => console.log(e))
+  }, [])
+
+  return (
+    <>
+      {tenant ? tenant.companyName : "loading"}
+      <Layout/>
+    </>
+  )
 }
 
 export default App

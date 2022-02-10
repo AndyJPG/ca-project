@@ -1,4 +1,5 @@
 export default interface Category {
-    id: string
-    name: string
+  id: string
+  tenantId: string
+  name: string
 }

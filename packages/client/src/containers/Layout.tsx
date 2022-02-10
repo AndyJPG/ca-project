@@ -1,21 +1,14 @@
 import {Box, Grid, Typography} from "@mui/material"
 import {Navbar} from "../components/Navbar"
 import * as React from "react"
-import {useEffect, useState} from "react"
 import {BaseContainer} from "./BaseContainer"
-import {ProductListItem} from "../components/ProductListItem"
-import {useProductRepository} from "@ca/common/domain/product/ProductRepository"
 import Product from "@ca/common/domain/product/Product"
+import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
+import {ProductListItem} from "../components/ProductListItem"
+import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 
 export const Layout = () => {
-  const {getProductsByTenantId} = useProductRepository()
-  const [products, setProducts] = useState<Product[] | null>(null)
-
-  useEffect(() => {
-    getProductsByTenantId("1")
-      .then(products => setProducts(products))
-      .catch(e => console.log(e))
-  }, [])
+  const {categoriesWithProduct} = useLocalCategoryStateService()
 
   return (
     <Grid container>
@@ -35,16 +28,20 @@ export const Layout = () => {
       <Grid item xs={12}>
         <BaseContainer>
           <Grid container spacing={1.5}>
-            <Grid item xs={12}>
-              <Typography variant="h5" fontWeight="medium">Dumpling</Typography>
-            </Grid>
-            {products && products.map(product => (
-              <Grid item xs={12}>
-                <ProductListItem subtitle={product.name}
-                                 price={product.price}
-                                 description={product.description}
-                                 imageUrl={product.imageUrl || undefined}/>
-              </Grid>
+            {categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
+                <React.Fragment key={category.id}>
+                    <Grid item xs={12}>
+                        <Typography variant="h5" fontWeight="medium">{category.name}</Typography>
+                    </Grid>
+                  {category.products.map((product: Product) => (
+                    <Grid item key={product.id} xs={12}>
+                      <ProductListItem subtitle={product.name}
+                                       price={product.price}
+                                       description={product.description}
+                                       imageUrl={product.imageUrl || undefined}/>
+                    </Grid>
+                  ))}
+                </React.Fragment>
             ))}
           </Grid>
         </BaseContainer>

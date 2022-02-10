@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "license": "MIT",
-  "dependencies": {},
+  "dependencies": {
+    "@apollo/client": "^3.5.8",
+    "graphql": "^16.3.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.16.5",
     "@babel/preset-env": "^7.16.5",
