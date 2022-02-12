@@ -24,7 +24,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
       boxShadow: theme => theme.themeShadows[1],
       borderRadius: theme => theme.shape.borderRadius
     }}>
-      <Box sx={{flexGrow: 1, padding: '0 1rem'}}>
+      <Box sx={{flexGrow: 1, padding: imageTop ? '0 1rem' : '1rem'}}>
         <Typography variant="h6">{subtitle}</Typography>
         <Typography fontWeight="body2" sx={{marginY: '0.4rem'}}>${price}</Typography>
         {description && !imageTop && <Typography variant="caption">{description}</Typography>}
@@ -36,6 +36,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
           marginBottom: imageTop ? '0.4rem' : '0',
           display: 'flex',
           justifyContent: 'center',
+          alignItems: 'center',
           overflow: 'hidden'
         }}>
           <img src={`${process.env.REACT_APP_DEV_ENDPOINT}${imageUrl}`}
