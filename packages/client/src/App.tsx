@@ -2,10 +2,8 @@ import * as React from 'react'
 import {useEffect} from 'react'
 import {Layout} from "./containers/Layout"
 import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
-import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 
 function App() {
-  const {tenant} = useLocalTenantStateService()
   const {initializeTenant} = useInitializeTenant()
 
   useEffect(() => {
@@ -15,7 +13,6 @@ function App() {
 
   return (
     <>
-      {tenant ? tenant.companyName : "loading"}
       <Layout/>
     </>
   )

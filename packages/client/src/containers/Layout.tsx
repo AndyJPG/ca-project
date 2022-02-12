@@ -33,13 +33,20 @@ export const Layout = () => {
                     <Grid item xs={12}>
                         <Typography variant="h5" fontWeight="medium">{category.name}</Typography>
                     </Grid>
-                  {category.products.map((product: Product) => (
-                    <Grid item key={product.id} xs={12}>
-                      <ProductListItem subtitle={product.name}
-                                       price={product.price}
-                                       description={product.description}
-                                       imageUrl={product.imageUrl || undefined}/>
-                    </Grid>
+                  {category.products.map((product: Product, index) => (
+                    category.name === 'dumpling' && index < 2 ?
+                      <Grid item key={product.id} xs={6}>
+                        <ProductListItem subtitle={product.name}
+                                         price={product.price}
+                                         description={product.description}
+                                         imageTop
+                                         imageUrl={product.imageUrl || undefined}/>
+                      </Grid> : <Grid item key={product.id} xs={12}>
+                        <ProductListItem subtitle={product.name}
+                                         price={product.price}
+                                         description={product.description}
+                                         imageUrl={product.imageUrl || undefined}/>
+                      </Grid>
                   ))}
                 </React.Fragment>
             ))}
