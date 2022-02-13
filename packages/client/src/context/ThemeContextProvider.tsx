@@ -44,6 +44,9 @@ const baseTheme = createTheme({
 
 const theme = createTheme(baseTheme, {
   typography: {
+    h4: {
+      fontWeight: 700
+    },
     h5: {
       fontSize: '1.75rem',
       fontWeight: 600,
@@ -74,6 +77,49 @@ const theme = createTheme(baseTheme, {
           props: {color: 'primary'},
           style: {
             backgroundColor: 'white'
+          }
+        }
+      ]
+    },
+    MuiTextField: {
+      variants: [
+        {
+          props: {variant: 'filled'},
+          style: {
+            width: '100%',
+            '& .MuiFilledInput-root': {
+              borderRadius: baseTheme.shape.borderRadiusFull,
+              padding: '0 1.8rem',
+              backgroundColor: '#EFEEEE',
+              '& .MuiFilledInput-input': {
+                paddingRight: 0
+              },
+              '&.Mui-focused': {
+                backgroundColor: 'white'
+              },
+              '&:before, &:hover:before': {
+                borderBottom: 'none'
+              },
+              '&:after': {
+                borderBottom: 'none'
+              }
+            }
+          }
+        },
+        {
+          props: {variant: 'outlined'},
+          style: {
+            width: '100%',
+            '& .MuiOutlinedInput-root': {
+              borderRadius: baseTheme.shape.borderRadiusFull,
+              padding: '0 1.8rem',
+              '&:before': {
+                border: 'none'
+              },
+              '& .MuiFilledInput-input': {
+                paddingRight: 0
+              }
+            }
           }
         }
       ]
