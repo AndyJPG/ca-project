@@ -92,12 +92,18 @@ const theme = createTheme(baseTheme, {
               padding: '0 1.8rem',
               backgroundColor: '#EFEEEE',
               '& .MuiFilledInput-input': {
-                paddingRight: 0
+                paddingRight: 0,
+                '::placeholder': {
+                  fontWeight: 600
+                }
               },
               '&.Mui-focused': {
                 backgroundColor: 'white'
               },
-              '&:before, &:hover:before': {
+              '&:hover:before': {
+                borderBottom: 'none'
+              },
+              '&:before': {
                 borderBottom: 'none'
               },
               '&:after': {
@@ -120,6 +126,16 @@ const theme = createTheme(baseTheme, {
                 paddingRight: 0
               }
             }
+          }
+        }
+      ]
+    },
+    MuiInputAdornment: {
+      variants: [
+        {
+          props: {position: 'start'},
+          style: {
+            color: baseTheme.palette.text.primary
           }
         }
       ]
