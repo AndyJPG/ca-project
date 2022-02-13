@@ -6,10 +6,11 @@ import Product from "@ca/common/domain/product/Product"
 import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
 import {ProductListItem} from "../components/ProductListItem"
 import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
+import {ProductDetailPage} from "../pages/ProductDetailPage"
 
 export const Layout = () => {
   const {categoriesWithProduct} = useLocalCategoryStateService()
-
+  
   return (
     <Grid container>
       <Navbar/>
@@ -53,6 +54,8 @@ export const Layout = () => {
           </Grid>
         </BaseContainer>
       </Grid>
+      {categoriesWithProduct && categoriesWithProduct.length > 0 &&
+      <ProductDetailPage product={categoriesWithProduct[1].products[0]}/>}
     </Grid>
   )
 }

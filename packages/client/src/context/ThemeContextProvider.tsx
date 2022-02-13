@@ -1,5 +1,5 @@
 import * as React from "react"
-import {createTheme, ThemeOptions, ThemeProvider} from "@mui/material"
+import {createTheme, ThemeProvider} from "@mui/material"
 
 declare module '@mui/material/styles' {
   interface Theme {
@@ -25,7 +25,7 @@ declare module '@mui/material/styles' {
   }
 }
 
-const theme: ThemeOptions = createTheme({
+const baseTheme = createTheme({
   palette: {
     mode: "light",
     background: {
@@ -39,22 +39,46 @@ const theme: ThemeOptions = createTheme({
   themeShadows: {
     0: 'none',
     1: '0px 10px 40px rgba(0, 0, 0, 0.03)'
-  },
+  }
+})
+
+const theme = createTheme(baseTheme, {
   typography: {
+    h5: {
+      fontSize: '1.75rem',
+      fontWeight: 600,
+      lineHeight: '2rem'
+    },
     h6: {
-      fontSize: '1rem',
+      fontSize: '1.375rem',
       fontWeight: 600,
       textTransform: "capitalize",
       lineHeight: 1.2
+    },
+    subtitle1: {
+      fontWeight: 600,
+      lineHeight: '1.25rem'
     },
     body1: {
       margin: '0.2rem 0'
     },
     body2: {
-      margin: '0.2rem 0'
+      margin: '0.2rem 0',
+      color: baseTheme.palette.text.secondary
     }
   },
-  components: {}
+  components: {
+    MuiIconButton: {
+      variants: [
+        {
+          props: {color: 'primary'},
+          style: {
+            backgroundColor: 'white'
+          }
+        }
+      ]
+    }
+  }
 })
 
 export const ThemeContextProvider: React.FC = (props) => {
