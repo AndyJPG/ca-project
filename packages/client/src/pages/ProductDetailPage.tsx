@@ -1,4 +1,4 @@
-import {Box, IconButton, Typography} from "@mui/material"
+import {Box, IconButton, List, ListItem, ListItemText, ListSubheader, Typography} from "@mui/material"
 import Product from "@ca/common/domain/product/Product"
 import {BaseContainer} from "../containers/BaseContainer"
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore'
@@ -14,10 +14,10 @@ export const ProductDetailPage = (props: ProductDetailPageProps) => {
       <BaseContainer sx={{position: 'absolute', top: 0}}>
         <IconButton color="primary"><NavigateBeforeIcon/></IconButton>
       </BaseContainer>
-      <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        {imageUrl && <img src={`${process.env.REACT_APP_DEV_ENDPOINT}${imageUrl}`} alt={name}
-                          style={{width: '100%', height: 'auto'}}/>}
-      </Box>
+      {imageUrl && <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <img src={`${process.env.REACT_APP_DEV_ENDPOINT}${imageUrl}`} alt={name}
+               style={{width: '100%', height: 'auto'}}/>
+      </Box>}
       <BaseContainer>
         <Typography variant="h5" sx={{
           width: '100%',
@@ -25,8 +25,23 @@ export const ProductDetailPage = (props: ProductDetailPageProps) => {
           paddingX: '2rem'
         }}>{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
         <Typography variant="h6" sx={{width: '100%', textAlign: 'center', marginTop: '1.125rem'}}>${price}</Typography>
-        <Typography variant="subtitle1">Info</Typography>
-        <Typography variant="body2">{description}</Typography>
+        <Box sx={{paddingY: '1rem'}}>
+          <Typography variant="subtitle1">Info</Typography>
+          <Typography variant="body2">{description}</Typography>
+        </Box>
+        {productOptions.map(optionList => (
+          <List key={optionList.name} subheader={
+            <ListSubheader>
+              {optionList.name.slice(0, 1).toUpperCase()}{optionList.name.slice(1)}
+            </ListSubheader>
+          }>
+            {optionList.options.map(option => (
+              <ListItem key={option.name}>
+                <ListItemText primary={option.name}/>
+              </ListItem>
+            ))}
+          </List>
+        ))}
       </BaseContainer>
     </BaseContainer>
   )

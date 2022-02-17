@@ -4,8 +4,8 @@ import {createTheme, ThemeProvider} from "@mui/material"
 declare module '@mui/material/styles' {
   interface Theme {
     shape: {
-      borderRadius: number
-      borderRadiusFull: number
+      borderRadius: string
+      borderRadiusFull: string
     },
     themeShadows: {
       0: string
@@ -15,8 +15,8 @@ declare module '@mui/material/styles' {
 
   interface ThemeOptions {
     shape: {
-      borderRadius: number
-      borderRadiusFull: number
+      borderRadius: string
+      borderRadiusFull: string
     },
     themeShadows: {
       0: string
@@ -33,8 +33,8 @@ const baseTheme = createTheme({
     }
   },
   shape: {
-    borderRadius: 4.4,
-    borderRadiusFull: 999
+    borderRadius: '1.25rem',
+    borderRadiusFull: '999px'
   },
   themeShadows: {
     0: 'none',
@@ -139,6 +139,22 @@ const theme = createTheme(baseTheme, {
           }
         }
       ]
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'white',
+          boxShadow: baseTheme.themeShadows[1],
+          borderRadius: baseTheme.shape.borderRadius
+        }
+      }
+    },
+    MuiListSubheader: {
+      styleOverrides: {
+        root: {
+          backgroundColor: 'transparent'
+        }
+      }
     }
   }
 })

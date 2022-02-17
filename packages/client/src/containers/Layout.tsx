@@ -1,4 +1,4 @@
-import {Box, Grid, InputAdornment, TextField, Typography} from "@mui/material"
+import {Box, Grid, Typography} from "@mui/material"
 import * as React from "react"
 import {BaseContainer} from "./BaseContainer"
 import Product from "@ca/common/domain/product/Product"
@@ -6,30 +6,13 @@ import {useLocalCategoryStateService} from "@ca/common/services/LocalCategorySta
 import {ProductListItem} from "../components/ProductListItem"
 import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import {ProductDetailPage} from "../pages/ProductDetailPage"
-import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
-import SearchIcon from '@mui/icons-material/Search'
 
 export const Layout = () => {
   const {categoriesWithProduct} = useLocalCategoryStateService()
-  const {tenant} = useLocalTenantStateService()
 
   return (
     <>
-      <BaseContainer sx={{marginTop: '2.6rem'}}>
-        <Typography variant="h4" sx={{width: {xs: '80%', md: '100%'}}}>{tenant?.companyName}</Typography>
-      </BaseContainer>
-      <BaseContainer>
-        <TextField hiddenLabel
-                   variant="filled"
-                   placeholder="Search"
-                   InputProps={{
-                     startAdornment: (
-                       <InputAdornment position="start">
-                         <SearchIcon/>
-                       </InputAdornment>
-                     )
-                   }}/>
-      </BaseContainer>
+
       <Grid container>
         <Grid container item xs={12}>
           <Box sx={{
@@ -72,7 +55,7 @@ export const Layout = () => {
           </BaseContainer>
         </Grid>
         {categoriesWithProduct && categoriesWithProduct.length > 0 &&
-        <ProductDetailPage product={categoriesWithProduct[1].products[0]}/>}
+        <ProductDetailPage product={categoriesWithProduct[0].products[7]}/>}
       </Grid>
     </>
   )
