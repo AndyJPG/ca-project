@@ -1,7 +1,9 @@
 import * as React from 'react'
 import {useEffect} from 'react'
-import {Layout} from "./containers/Layout"
 import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
+import {BrowserRouter} from "react-router-dom"
+import {ThemeContextProvider} from "./context"
+import {PageRoutes} from "./pages/PageRoutes"
 
 function App() {
   const {initializeTenant} = useInitializeTenant()
@@ -12,9 +14,12 @@ function App() {
   }, [])
 
   return (
-    <>
-      <Layout/>
-    </>
+    <ThemeContextProvider>
+      <BrowserRouter>
+        {/*<Layout/>*/}
+        <PageRoutes/>
+      </BrowserRouter>
+    </ThemeContextProvider>
   )
 }
 

@@ -4,7 +4,7 @@ import {createTheme, ThemeProvider} from "@mui/material"
 declare module '@mui/material/styles' {
   interface Theme {
     shape: {
-      borderRadius: string
+      borderRadius: number
       borderRadiusFull: string
     },
     themeShadows: {
@@ -15,7 +15,7 @@ declare module '@mui/material/styles' {
 
   interface ThemeOptions {
     shape: {
-      borderRadius: string
+      borderRadius: number
       borderRadiusFull: string
     },
     themeShadows: {
@@ -33,7 +33,7 @@ const baseTheme = createTheme({
     }
   },
   shape: {
-    borderRadius: '1.25rem',
+    borderRadius: 4.4,
     borderRadiusFull: '999px'
   },
   themeShadows: {
@@ -59,7 +59,7 @@ const theme = createTheme(baseTheme, {
       lineHeight: 1.2
     },
     subtitle1: {
-      fontWeight: 600,
+      fontWeight: 500,
       lineHeight: '1.25rem'
     },
     body1: {
@@ -67,6 +67,10 @@ const theme = createTheme(baseTheme, {
     },
     body2: {
       margin: '0.2rem 0',
+      color: baseTheme.palette.text.secondary
+    },
+    caption: {
+      fontSize: '0.875rem',
       color: baseTheme.palette.text.secondary
     }
   },
@@ -100,14 +104,11 @@ const theme = createTheme(baseTheme, {
               '&.Mui-focused': {
                 backgroundColor: 'white'
               },
-              '&:hover:before': {
-                borderBottom: 'none'
-              },
               '&:before': {
-                borderBottom: 'none'
+                content: 'none'
               },
               '&:after': {
-                borderBottom: 'none'
+                content: 'none'
               }
             }
           }
