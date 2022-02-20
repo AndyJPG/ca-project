@@ -1,5 +1,5 @@
 import {BaseContainer} from "../containers/BaseContainer"
-import {InputAdornment, Slide, Tab, Tabs, TextField, Typography} from "@mui/material"
+import {AppBar, InputAdornment, Tab, Tabs, TextField, Typography} from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import * as React from "react"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
@@ -7,6 +7,7 @@ import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
 import {Hero} from "../components/Hero"
 import {ProductList} from "../components/ProductList"
+import {ShowOnScroll} from "../components/ShowOnScroll"
 
 
 export const HomePage = () => {
@@ -22,9 +23,13 @@ export const HomePage = () => {
   return (
     <>
       <Hero heroImageUrl="https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg"/>
-      <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
-        {categoriesWithProduct.map(category => <Tab key={category.name} label={category.name}/>)}
-      </Tabs>
+      <ShowOnScroll threshold={395}>
+        <AppBar color="default">
+          <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
+            {categoriesWithProduct.map(category => <Tab key={category.name} label={category.name}/>)}
+          </Tabs>
+        </AppBar>
+      </ShowOnScroll>
       <BaseContainer sx={{marginTop: '2.6rem'}}>
         <Typography variant="h4" sx={{width: {xs: '80%', md: '100%'}}}>{tenant?.companyName}</Typography>
       </BaseContainer>
@@ -47,11 +52,4 @@ export const HomePage = () => {
   )
 }
 
-export const HideOnScroll = (props: { children: React.ReactElement }) => {
-  return (
-    <Slide direction="down" in={true}>
-      {props.children}
-    </Slide>
-  )
-}
 

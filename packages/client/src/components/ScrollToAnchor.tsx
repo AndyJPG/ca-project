@@ -8,7 +8,7 @@ export const ScrollToAnchor = () => {
     if (location.hash) {
       const anchor = document.querySelector(location.hash)
       if (anchor) {
-        anchor.scrollIntoView({
+        anchor?.scrollIntoView({
           behavior: 'smooth',
           block: 'start'
         })
