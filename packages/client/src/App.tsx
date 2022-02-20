@@ -4,6 +4,7 @@ import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
 import {BrowserRouter} from "react-router-dom"
 import {ThemeContextProvider} from "./context"
 import {PageRoutes} from "./pages/PageRoutes"
+import {ScrollToAnchor} from "./components/ScrollToAnchor"
 
 function App() {
   const {initializeTenant} = useInitializeTenant()
@@ -16,6 +17,7 @@ function App() {
   return (
     <ThemeContextProvider>
       <BrowserRouter>
+        <ScrollToAnchor/>
         {/*<Layout/>*/}
         <PageRoutes/>
       </BrowserRouter>

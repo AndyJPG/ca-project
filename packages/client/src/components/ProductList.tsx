@@ -13,7 +13,7 @@ export const ProductList = (props: ProductListProps) => {
   const {title, products} = props
 
   return (
-    <BaseContainer sx={{marginTop: '2rem'}}>
+    <BaseContainer id={title} sx={{marginTop: '2rem'}}>
       {title &&
       <Typography variant="h5" sx={{paddingY: '0.5rem'}}>{title.slice(0, 1).toUpperCase()}{title.slice(1)}</Typography>}
       {products.map(product =>
