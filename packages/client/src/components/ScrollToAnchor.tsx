@@ -6,11 +6,11 @@ export const ScrollToAnchor = () => {
 
   useEffect(() => {
     if (location.hash) {
-      const anchor = document.querySelector(location.hash)
+      const anchor = document.querySelector(location.hash) as HTMLElement
       if (anchor) {
-        anchor?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        window.scrollTo({
+          top: anchor.offsetTop - 60,
+          behavior: "smooth"
         })
       }
     }

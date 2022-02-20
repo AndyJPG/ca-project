@@ -5,7 +5,7 @@ import {ProductListItem} from "./ProductListItem"
 import {BaseContainer} from "../containers/BaseContainer"
 
 interface ProductListProps {
-  title?: string,
+  title?: string
   products: Product[]
 }
 

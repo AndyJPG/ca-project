@@ -1,5 +1,5 @@
 import {BaseContainer} from "../containers/BaseContainer"
-import {AppBar, InputAdornment, Tab, Tabs, TextField, Typography} from "@mui/material"
+import {AppBar, InputAdornment, TextField, Typography} from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import * as React from "react"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
@@ -8,26 +8,19 @@ import {useLocalCategoryStateService} from "@ca/common/services/LocalCategorySta
 import {Hero} from "../components/Hero"
 import {ProductList} from "../components/ProductList"
 import {ShowOnScroll} from "../components/ShowOnScroll"
+import {CategoriesTabs} from "../components/CategoriesTabs"
 
 
 export const HomePage = () => {
   const {categoriesWithProduct} = useLocalCategoryStateService()
   const {tenant} = useLocalTenantStateService()
 
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (e: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
-
   return (
     <>
       <Hero heroImageUrl="https://d1ralsognjng37.cloudfront.net/f48c9c30-e4ef-40d9-9a90-aaab936a77bd.jpeg"/>
       <ShowOnScroll threshold={395}>
         <AppBar color="default">
-          <Tabs value={value} onChange={handleChange} variant="scrollable" scrollButtons="auto">
-            {categoriesWithProduct.map(category => <Tab key={category.name} label={category.name}/>)}
-          </Tabs>
+          <CategoriesTabs categoriesWithProduct={categoriesWithProduct}/>
         </AppBar>
       </ShowOnScroll>
       <BaseContainer sx={{marginTop: '2.6rem'}}>
