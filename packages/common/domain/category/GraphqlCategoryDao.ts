@@ -16,6 +16,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "seafood spring roll",
         "description": "four per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 9.8,
         "imageUrl": null,
         "categories": [
@@ -32,6 +33,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "duck spring roll",
         "description": "two per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 9.8,
         "imageUrl": null,
         "categories": [
@@ -48,6 +50,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "sesame prawn toasts",
         "description": "two per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 9.8,
         "imageUrl": null,
         "categories": [
@@ -64,6 +67,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "marinated cucumber",
         "description": "",
+        "ingredients": ['seafood', 'veg'],
         "price": 99,
         "imageUrl": null,
         "categories": [
@@ -80,6 +84,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "vegetable spring roll",
         "description": "two per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 7.8,
         "imageUrl": null,
         "categories": [
@@ -96,6 +101,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "mixed entree",
         "description": "spring roll, prawn toast & fried dim sim",
+        "ingredients": ['seafood', 'veg'],
         "price": 9.8,
         "imageUrl": null,
         "categories": [
@@ -112,6 +118,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "duck pancakes",
         "description": "two per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 12,
         "imageUrl": null,
         "categories": [
@@ -128,6 +135,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "dim sim",
         "description": "two per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 7.8,
         "imageUrl": null,
         "categories": [
@@ -158,6 +166,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "san choy bao",
         "description": "four per serves.",
+        "ingredients": ['seafood', 'veg'],
         "price": 17.4,
         "imageUrl": null,
         "categories": [
@@ -181,6 +190,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "pan fired pork dumpling",
         "description": "Twelve pieces",
+        "ingredients": ['seafood', 'veg'],
         "price": 15.2,
         "imageUrl": "/uploads/c001a013_9427_4815_a1ad_78a7d87bc0a7_4119614133.jpeg",
         "categories": [
@@ -197,6 +207,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "special dumpling",
         "description": "ten pieces.",
+        "ingredients": ['seafood', 'veg'],
         "price": 15.8,
         "imageUrl": "/uploads/83346e61_d930_4ccf_b2a8_439a5e0319da_a7029ce0da.jpeg",
         "categories": [
@@ -213,6 +224,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "shanghai pork dumpling",
         "description": "six pieces. steam",
+        "ingredients": ['seafood', 'veg'],
         "price": 15.2,
         "imageUrl": "/uploads/b0319908_9784_4f35_8228_890edc14bf7e_b762b2dbba.jpeg",
         "categories": [
@@ -229,6 +241,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "vegetable bun",
         "description": "three pieces. Steamed",
+        "ingredients": ['seafood', 'veg'],
         "price": 14.2,
         "imageUrl": null,
         "categories": [
@@ -245,6 +258,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "fried leek dumpling",
         "description": "two pieces.",
+        "ingredients": ['seafood', 'veg'],
         "price": 11.8,
         "imageUrl": null,
         "categories": [
@@ -261,6 +275,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "BBQ pork bun",
         "description": "Three pieces. Steamed",
+        "ingredients": ['seafood', 'veg'],
         "price": 14.2,
         "imageUrl": null,
         "categories": [
@@ -277,6 +292,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "boiled pork dumpling",
         "description": "fourteen pieces",
+        "ingredients": ['seafood', 'veg'],
         "price": 14.2,
         "imageUrl": null,
         "categories": [
@@ -293,6 +309,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "boild prawn and pumpkin dumpling",
         "description": "fourteen pieces",
+        "ingredients": ['seafood', 'veg'],
         "price": 16.6,
         "imageUrl": null,
         "categories": [
@@ -309,6 +326,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "boild mixture dumpling",
         "description": "fourteen pieces.",
+        "ingredients": ['seafood', 'veg'],
         "price": 16.6,
         "imageUrl": null,
         "categories": [
@@ -325,6 +343,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "boiled beef dumpling",
         "description": "fourteen pieces",
+        "ingredients": ['seafood', 'veg'],
         "price": 14.2,
         "imageUrl": null,
         "categories": [
@@ -402,6 +421,7 @@ const categoriesWithProductsSampleData: CategoryWithProductDto[] = [
         "tenantId": "1",
         "name": "shredded dry chilli beef",
         "description": '',
+        "ingredients": ['seafood', 'veg'],
         "price": 19.6,
         "imageUrl": "/uploads/b7f6e999_8e87_44ce_9f17_28e69fe5b83a_385b7fbaf9.jpeg",
         "categories": [

@@ -4,8 +4,29 @@ import {apolloClient} from "../../services/ApolloClient"
 import {gql} from "@apollo/client"
 import {graphqlProductMapper} from "./GraphqlProductMapper"
 
+const sampleProductData = {
+  "id": "2",
+  "tenantId": "1",
+  "name": "shredded dry chilli beef",
+  "description": "",
+  "ingredients": ["seafood", "veg"],
+  "price": 19.6,
+  "imageUrl": "/uploads/b7f6e999_8e87_44ce_9f17_28e69fe5b83a_385b7fbaf9.jpeg",
+  "categories": [
+    {
+      "id": "13",
+      "name": "beef",
+      "tenantId": "1"
+    }
+  ],
+  "productOptions": []
+}
+
 export const GraphqlProductDao = (): ProductDaoInterface => {
   return {
+    getProductById(productId: string): Promise<Product> {
+      return Promise.resolve(sampleProductData)
+    },
     getProducts(): Promise<Product[]> {
       return Promise.resolve([])
     },
