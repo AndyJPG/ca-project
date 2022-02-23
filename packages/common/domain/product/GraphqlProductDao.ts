@@ -8,10 +8,10 @@ const sampleProductData = {
   "id": "2",
   "tenantId": "1",
   "name": "shredded dry chilli beef",
-  "description": "",
+  "description": "Shredded dry chilli beef",
   "ingredients": ["seafood", "veg"],
   "price": 19.6,
-  "imageUrl": "/uploads/b7f6e999_8e87_44ce_9f17_28e69fe5b83a_385b7fbaf9.jpeg",
+  "imageUrl": "https://d1ralsognjng37.cloudfront.net/b7f6e999-8e87-44ce-9f17-28e69fe5b83a.jpeg",
   "categories": [
     {
       "id": "13",
@@ -19,7 +19,21 @@ const sampleProductData = {
       "tenantId": "1"
     }
   ],
-  "productOptions": []
+  "productOptions": [
+    {
+      "name": "choice of dim sim",
+      "options": [
+        {
+          "name": "fried",
+          "price": 0
+        },
+        {
+          "name": "steamed",
+          "price": 0
+        }
+      ]
+    }
+  ]
 }
 
 export const GraphqlProductDao = (): ProductDaoInterface => {

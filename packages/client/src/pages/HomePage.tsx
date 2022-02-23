@@ -23,8 +23,8 @@ export const HomePage = () => {
           <CategoriesTabs categoriesWithProduct={categoriesWithProduct}/>
         </AppBar>
       </ShowOnScroll>
-      <BaseContainer sx={{marginTop: '2.6rem'}}>
-        <Typography variant="h4" sx={{width: {xs: '80%', md: '100%'}}}>{tenant?.companyName}</Typography>
+      <BaseContainer sx={{marginTop: "2.6rem"}}>
+        <Typography variant="h4" sx={{width: {xs: "80%", md: "100%"}}}>{tenant?.companyName}</Typography>
       </BaseContainer>
       <BaseContainer>
         <TextField hiddenLabel

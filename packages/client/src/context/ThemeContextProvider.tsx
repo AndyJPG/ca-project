@@ -1,7 +1,7 @@
 import * as React from "react"
 import {createTheme, ThemeProvider} from "@mui/material"
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Theme {
     shape: {
       borderRadius: number
@@ -28,17 +28,24 @@ declare module '@mui/material/styles' {
 const baseTheme = createTheme({
   palette: {
     mode: "light",
+    primary: {
+      main: "#E84C4F"
+    },
+    text: {
+      primary: "#3E4462",
+      secondary: "#7E7E7E"
+    },
     background: {
-      default: '#F5F5F8'
+      default: "#F5F5F8"
     }
   },
   shape: {
     borderRadius: 4.4,
-    borderRadiusFull: '999px'
+    borderRadiusFull: "999px"
   },
   themeShadows: {
-    0: 'none',
-    1: '0px 10px 40px rgba(0, 0, 0, 0.03)'
+    0: "none",
+    1: "0px 10px 40px rgba(0, 0, 0, 0.03)"
   }
 })
 
@@ -48,29 +55,29 @@ const theme = createTheme(baseTheme, {
       fontWeight: 700
     },
     h5: {
-      fontSize: '1.75rem',
+      fontSize: "1.75rem",
       fontWeight: 600,
-      lineHeight: '2rem'
+      lineHeight: "2rem"
     },
     h6: {
-      fontSize: '1.375rem',
+      fontSize: "1.375rem",
       fontWeight: 600,
       textTransform: "capitalize",
       lineHeight: 1.2
     },
     subtitle1: {
       fontWeight: 500,
-      lineHeight: '1.25rem'
+      lineHeight: "1.25rem"
     },
     body1: {
-      margin: '0.2rem 0'
+      margin: "0.2rem 0"
     },
     body2: {
-      margin: '0.2rem 0',
+      margin: "0.2rem 0",
       color: baseTheme.palette.text.secondary
     },
     caption: {
-      fontSize: '0.875rem',
+      fontSize: "0.875rem",
       color: baseTheme.palette.text.secondary
     }
   },
@@ -78,9 +85,9 @@ const theme = createTheme(baseTheme, {
     MuiIconButton: {
       variants: [
         {
-          props: {color: 'primary'},
+          props: {color: "primary"},
           style: {
-            backgroundColor: 'white'
+            backgroundColor: "white"
           }
         }
       ]
@@ -88,42 +95,42 @@ const theme = createTheme(baseTheme, {
     MuiTextField: {
       variants: [
         {
-          props: {variant: 'filled'},
+          props: {variant: "filled"},
           style: {
-            width: '100%',
-            '& .MuiFilledInput-root': {
+            width: "100%",
+            "& .MuiFilledInput-root": {
               borderRadius: baseTheme.shape.borderRadiusFull,
-              padding: '0 1.8rem',
-              backgroundColor: '#EFEEEE',
-              '& .MuiFilledInput-input': {
+              padding: "0 1.8rem",
+              backgroundColor: "#EFEEEE",
+              "& .MuiFilledInput-input": {
                 paddingRight: 0,
-                '::placeholder': {
+                "::placeholder": {
                   fontWeight: 600
                 }
               },
-              '&.Mui-focused': {
-                backgroundColor: 'white'
+              "&.Mui-focused": {
+                backgroundColor: "white"
               },
-              '&:before': {
-                content: 'none'
+              "&:before": {
+                content: "none"
               },
-              '&:after': {
-                content: 'none'
+              "&:after": {
+                content: "none"
               }
             }
           }
         },
         {
-          props: {variant: 'outlined'},
+          props: {variant: "outlined"},
           style: {
-            width: '100%',
-            '& .MuiOutlinedInput-root': {
+            width: "100%",
+            "& .MuiOutlinedInput-root": {
               borderRadius: baseTheme.shape.borderRadiusFull,
-              padding: '0 1.8rem',
-              '&:before': {
-                border: 'none'
+              padding: "0 1.8rem",
+              "&:before": {
+                border: "none"
               },
-              '& .MuiFilledInput-input': {
+              "& .MuiFilledInput-input": {
                 paddingRight: 0
               }
             }
@@ -134,7 +141,7 @@ const theme = createTheme(baseTheme, {
     MuiInputAdornment: {
       variants: [
         {
-          props: {position: 'start'},
+          props: {position: "start"},
           style: {
             color: baseTheme.palette.text.primary
           }
@@ -144,7 +151,7 @@ const theme = createTheme(baseTheme, {
     MuiList: {
       styleOverrides: {
         root: {
-          backgroundColor: 'white',
+          backgroundColor: "white",
           boxShadow: baseTheme.themeShadows[1],
           borderRadius: baseTheme.shape.borderRadius
         }
@@ -153,9 +160,22 @@ const theme = createTheme(baseTheme, {
     MuiListSubheader: {
       styleOverrides: {
         root: {
-          backgroundColor: 'transparent'
+          backgroundColor: "transparent"
         }
       }
+    },
+    MuiButton: {
+      variants: [
+        {
+          props: {variant: "contained"},
+          style: {
+            borderRadius: baseTheme.shape.borderRadiusFull,
+            boxShadow: "none",
+            textTransform: "none",
+            fontWeight: 600
+          }
+        }
+      ]
     }
   }
 })

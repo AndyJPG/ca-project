@@ -1,23 +1,8 @@
-import * as React from 'react'
-import {Container, SxProps, Theme} from "@mui/material"
+import * as React from "react"
+import {Container, ContainerProps, styled} from "@mui/material"
 
-interface BaseContainerProps {
-  id?: string
-  children?: React.ReactNode
-  sx?: SxProps<Theme>
-}
-
-export const BaseContainer = ({sx = [], ...props}: BaseContainerProps) => {
-  const {id, children} = props
-  
-  return (
-    <Container id={id} sx={[{
-      margin: '1rem 0',
-      padding: '0 2rem',
-      width: '100%',
-      background: 'transparent'
-    }, ...(Array.isArray(sx) ? sx : [sx])]}>
-      {children}
-    </Container>
-  )
-}
+export const BaseContainer = styled(Container)<ContainerProps>(({theme}) => ({
+  padding: "1rem 2rem",
+  width: "100%",
+  background: "transparent"
+}))
