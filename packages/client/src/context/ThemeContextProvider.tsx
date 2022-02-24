@@ -31,8 +31,11 @@ const baseTheme = createTheme({
     primary: {
       main: "#E84C4F"
     },
+    secondary: {
+      main: "#1D1D1D"
+    },
     text: {
-      primary: "#3E4462",
+      primary: "#1D1D1D",
       secondary: "#7E7E7E"
     },
     background: {
@@ -60,10 +63,11 @@ const theme = createTheme(baseTheme, {
       lineHeight: "2rem"
     },
     h6: {
-      fontSize: "1.375rem",
+      fontSize: "1.125rem",
       fontWeight: 600,
       textTransform: "capitalize",
-      lineHeight: 1.2
+      overflow: "hidden",
+      textOverflow: "ellipsis"
     },
     subtitle1: {
       fontWeight: 500,
@@ -173,6 +177,16 @@ const theme = createTheme(baseTheme, {
             boxShadow: "none",
             textTransform: "none",
             fontWeight: 600
+          }
+        }
+      ]
+    },
+    MuiAppBar: {
+      variants: [
+        {
+          props: {color: "secondary"},
+          style: {
+            boxShadow: "none"
           }
         }
       ]

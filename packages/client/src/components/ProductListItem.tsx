@@ -32,7 +32,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         <Typography variant="subtitle1">{subtitle.slice(0, 1).toUpperCase()}{subtitle.slice(1)}</Typography>
         <Typography fontWeight="body2" sx={{marginY: "0.2rem", fontSize: "0.875rem"}}>${price}</Typography>
         {description && !imageTop &&
-        <Typography variant="caption">{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
+        <Typography variant="body1">{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
       </Box>
       {imageUrl && (
         <Box sx={{
