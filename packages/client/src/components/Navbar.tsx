@@ -3,21 +3,27 @@ import MenuIcon from "@mui/icons-material/Menu"
 import * as React from "react"
 import {useNavigate} from "react-router-dom"
 import {useRxjsContext} from "../context/RxjsContextProvider"
+import {Menu} from "./Menu"
+import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 
-interface NavbarProps {
-  companyName: string
-  companyUrl: string
-}
-
-export const Navbar = (props: NavbarProps) => {
+export const Navbar = () => {
   const navigate = useNavigate()
   const {openSidePanel} = useRxjsContext()
-  const {companyName, companyUrl} = props
+  const {tenant} = useLocalTenantStateService()
+
+  if (!tenant) {
+    return null
+  }
+
+  const {companyName, companyDomain} = tenant
 
   return (
     <AppBar color="secondary">
       <Toolbar>
-        <IconButton edge="start" color="inherit" onClick={() => openSidePanel(<p>test side panel</p>)}>
+        <IconButton edge="start" color="inherit"
+                    onClick={() => openSidePanel(
+                      <Menu/>
+                    )}>
           <MenuIcon/>
         </IconButton>
         <Typography variant="h6" sx={{
@@ -25,7 +31,7 @@ export const Navbar = (props: NavbarProps) => {
           textAlign: "center",
           whiteSpace: "nowrap",
           cursor: "pointer"
-        }} onClick={() => navigate(companyUrl)}>{companyName}</Typography>
+        }} onClick={() => navigate(companyDomain)}>{companyName}</Typography>
       </Toolbar>
     </AppBar>
   )
