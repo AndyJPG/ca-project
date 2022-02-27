@@ -186,7 +186,7 @@ const theme = createTheme(baseTheme, {
             borderRadius: baseTheme.shape.borderRadiusFull,
             boxShadow: "none",
             textTransform: "none",
-            fontWeight: 600
+            fontWeight: 400
           }
         }
       ]

@@ -24,8 +24,10 @@ export const initializeTenant = (dependencies: Dependencies) => {
       try {
         const tenant = await tenantDao.getTenantByDomain(tenantDomain)
         if (tenant) {
+          const categories = await categoryDao.getCategoriesByTenantId(tenant.id)
           const categoriesWithProduct = await categoryDao.getCategoriesWithProductsByTenantId(tenant.id)
           localTenantState.updateTenant(tenant)
+          localCategoryState.updateCategories(categories)
           localCategoryState.updateCategoriesWithProduct(categoriesWithProduct)
         } else {
           localTenantState.updateTenant(tenant)

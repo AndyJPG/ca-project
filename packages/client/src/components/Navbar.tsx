@@ -1,10 +1,12 @@
-import {AppBar, IconButton, Toolbar, Typography} from "@mui/material"
+import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
 import * as React from "react"
 import {useNavigate} from "react-router-dom"
 import {useRxjsContext} from "../context/RxjsContextProvider"
 import {Menu} from "./Menu"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
+import {BaseContainer} from "../containers/BaseContainer"
+import SearchIcon from "@mui/icons-material/Search"
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -33,6 +35,16 @@ export const Navbar = () => {
           cursor: "pointer"
         }} onClick={() => navigate(`/${companyDomain}`)}>{companyName}</Typography>
       </Toolbar>
+      <BaseContainer
+        sx={{backgroundColor: "white", color: theme => theme.palette.text.primary, py: "0.6rem", display: "flex"}}>
+        <IconButton color="secondary" size="small">
+          <SearchIcon fontSize="small"/>
+        </IconButton>
+        <Box flexGrow={1}/>
+        <Button variant="contained" color="secondary">
+          menu
+        </Button>
+      </BaseContainer>
     </AppBar>
   )
 }
