@@ -31,7 +31,7 @@ export const Navbar = () => {
           textAlign: "center",
           whiteSpace: "nowrap",
           cursor: "pointer"
-        }} onClick={() => navigate(companyDomain)}>{companyName}</Typography>
+        }} onClick={() => navigate(`/${companyDomain}`)}>{companyName}</Typography>
       </Toolbar>
     </AppBar>
   )

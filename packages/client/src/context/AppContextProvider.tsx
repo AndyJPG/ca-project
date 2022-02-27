@@ -4,7 +4,7 @@ import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 
 interface IAppContext {
   tenant: Tenant | null
-  updateTenant: (tenant: Tenant) => void
+  updateTenant: (tenant: Tenant | null) => void
   categoriesWithProduct: CategoryWithProductDto[]
   updateCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
 }

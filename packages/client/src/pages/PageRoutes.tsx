@@ -1,33 +1,37 @@
-import {Navigate, Outlet, RouteObject, useRoutes} from "react-router-dom"
+import {RouteObject, useRoutes} from "react-router-dom"
 import * as React from "react"
 import {HomePage} from "./HomePage"
 import {ProductDetailPage} from "./ProductDetailPage"
+import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 
 export const PageRoutes = () => {
+  const {tenant} = useLocalTenantStateService()
+
   const routes: RouteObject[] = [
     {
-      element: <Outlet/>,
       path: "/",
-      children: [
-        {
-          index: true,
-          element: <Navigate to="cbd-dumpling-house"/>
-        },
-        {
-          path: "cbd-dumpling-house",
-          element: <HomePage/>
-        },
-        {
-          path: "cbd-dumpling-house/:productId",
-          element: <ProductDetailPage/>
-        }
-      ]
+      element: <p>Your menu</p>
     },
     {
-      element: <>404 not found</>,
-      path: "*"
+      path: "*",
+      element: <>404 not found</>
     }
   ]
+
+  if (tenant) {
+    const {companyDomain} = tenant
+
+    routes.push(
+      {
+        path: `/${companyDomain}`,
+        element: <HomePage/>
+      },
+      {
+        path: `/${companyDomain}/:productId`,
+        element: <ProductDetailPage/>
+      }
+    )
+  }
 
   return useRoutes(routes)
 }

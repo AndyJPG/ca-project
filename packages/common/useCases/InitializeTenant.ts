@@ -20,12 +20,16 @@ export const initializeTenant = (dependencies: Dependencies) => {
   const localCategoryState: LocalCategoryStateService = dependencies.localCategoryState
 
   return {
-    async initializeTenant(tenantId: string): Promise<void> {
+    async initializeTenant(tenantDomain: string): Promise<void> {
       try {
-        const tenant = await tenantDao.getTenantById(tenantId)
-        const categoriesWithProduct = await categoryDao.getCategoriesWithProductsByTenantId(tenant.id)
-        localTenantState.updateTenant(tenant)
-        localCategoryState.updateCategoriesWithProduct(categoriesWithProduct)
+        const tenant = await tenantDao.getTenantByDomain(tenantDomain)
+        if (tenant) {
+          const categoriesWithProduct = await categoryDao.getCategoriesWithProductsByTenantId(tenant.id)
+          localTenantState.updateTenant(tenant)
+          localCategoryState.updateCategoriesWithProduct(categoriesWithProduct)
+        } else {
+          localTenantState.updateTenant(tenant)
+        }
       } catch (e) {
         console.log(e)
       }

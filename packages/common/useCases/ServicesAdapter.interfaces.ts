@@ -4,7 +4,7 @@ import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 export interface LocalTenantStateService {
   tenant: Tenant | null
 
-  updateTenant(tenant: Tenant): void
+  updateTenant(tenant: Tenant | null): void
 }
 
 export interface LocalCategoryStateService {

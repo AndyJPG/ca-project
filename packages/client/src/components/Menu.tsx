@@ -11,7 +11,7 @@ export const Menu = () => {
     return null
   }
 
-  const {companyLogoUrl, companyName, companyAddress, companyAddressUrl, companyContactNumber} = tenant
+  const {companyLogoUrl, companyName, companyAddress, companyAddressUrl, companyContactNumber, companyDomain} = tenant
   return (
     <BaseContainer
       sx={{
@@ -24,7 +24,7 @@ export const Menu = () => {
       }}>
       <BaseContainer sx={{padding: "3.5rem 2rem 0 2rem"}}>
         <Box sx={{height: "3rem"}}>
-          <Link to={"/cbd-dumpling-house"}>
+          <Link to={`/${companyDomain}`}>
             <img src={companyLogoUrl} style={{height: "100%"}} alt={companyName + " logo"}/>
           </Link>
         </Box>
