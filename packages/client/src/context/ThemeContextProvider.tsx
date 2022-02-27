@@ -73,6 +73,10 @@ const theme = createTheme(baseTheme, {
       fontWeight: 500,
       lineHeight: "1.25rem"
     },
+    subtitle2: {
+      fontWeight: 400,
+      marginBottom: "1rem"
+    },
     body1: {
       margin: "0.2rem 0"
     },
@@ -91,7 +95,13 @@ const theme = createTheme(baseTheme, {
         {
           props: {color: "primary"},
           style: {
-            backgroundColor: "white"
+            color: "white"
+          }
+        },
+        {
+          props: {color: "secondary"},
+          style: {
+            color: baseTheme.palette.text.primary
           }
         }
       ]
@@ -187,6 +197,31 @@ const theme = createTheme(baseTheme, {
           props: {color: "secondary"},
           style: {
             boxShadow: "none"
+          }
+        }
+      ]
+    },
+    MuiLink: {
+      variants: [
+        {
+          props: {variant: "body2"},
+          style: {
+            display: "block",
+            color: baseTheme.palette.text.primary,
+            textDecorationColor: baseTheme.palette.text.primary,
+            margin: "0 0 1rem 0"
+          }
+        }
+      ]
+    },
+    MuiDrawer: {
+      variants: [
+        {
+          props: {anchor: "left"},
+          style: {
+            "& .MuiDrawer-paper": {
+              overflow: "visible"
+            }
           }
         }
       ]

@@ -1,16 +1,18 @@
-import * as React from 'react'
-import {useEffect} from 'react'
+import * as React from "react"
+import {useEffect} from "react"
 import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
 import {BrowserRouter} from "react-router-dom"
 import {ThemeContextProvider} from "./context"
 import {PageRoutes} from "./pages/PageRoutes"
 import {ScrollToAnchor} from "./components/ScrollToAnchor"
+import {SidePanel} from "./components/SidePanel"
+import {RxjsContextProvider} from "./context/RxjsContextProvider"
 
 function App() {
   const {initializeTenant} = useInitializeTenant()
 
   useEffect(() => {
-    initializeTenant('1')
+    initializeTenant("1")
       .catch(e => console.log(e))
   }, [])
 
@@ -18,8 +20,10 @@ function App() {
     <ThemeContextProvider>
       <BrowserRouter>
         <ScrollToAnchor/>
-        {/*<Layout/>*/}
-        <PageRoutes/>
+        <SidePanel/>
+        <RxjsContextProvider>
+          <PageRoutes/>
+        </RxjsContextProvider>
       </BrowserRouter>
     </ThemeContextProvider>
   )
