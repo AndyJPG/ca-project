@@ -8,12 +8,14 @@ type AnchorProps = "top" | "left" | "bottom" | "right"
 interface SidePanelProps {
   children: React.ReactNode,
   anchor?: AnchorProps
+  closeIcon?: boolean
 }
 
 export const sidePanel$ = new Subject<SidePanelProps>()
 
 export const SidePanel = () => {
   const [open, setOpen] = useState(false)
+  const [closeIcon, setCloseIcon] = useState(false)
   const [children, setChildren] = useState<React.ReactNode | null>(null)
   const [anchor, setAnchor] = useState<AnchorProps>("left")
 
@@ -21,9 +23,8 @@ export const SidePanel = () => {
     sidePanel$.subscribe({
       next: value => {
         setChildren(value.children)
-        if (value.anchor) {
-          setAnchor(value.anchor)
-        }
+        value.anchor && setAnchor(value.anchor)
+        value.closeIcon && setCloseIcon(value.closeIcon)
         setOpen(true)
       }
     })
@@ -31,11 +32,11 @@ export const SidePanel = () => {
 
   return (
     <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
-      <Box sx={{position: "absolute", top: 0, right: "-3rem"}}>
-        <IconButton color="primary" size="large" onClick={() => setOpen(false)}>
-          <CloseIcon/>
-        </IconButton>
-      </Box>
+      {closeIcon && <Box sx={{position: "absolute", top: 0, right: "-3rem"}}>
+          <IconButton color="primary" size="large" onClick={() => setOpen(false)}>
+              <CloseIcon/>
+          </IconButton>
+      </Box>}
       {children}
     </Drawer>
   )

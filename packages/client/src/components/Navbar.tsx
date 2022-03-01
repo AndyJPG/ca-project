@@ -7,6 +7,7 @@ import {Menu} from "./Menu"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 import {BaseContainer} from "../containers/BaseContainer"
 import SearchIcon from "@mui/icons-material/Search"
+import {CategoryMenu} from "./CategoryMenu"
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -20,11 +21,11 @@ export const Navbar = () => {
   const {companyName, companyDomain} = tenant
 
   return (
-    <AppBar color="secondary">
+    <AppBar color="primary">
       <Toolbar>
         <IconButton edge="start" color="inherit"
                     onClick={() => openSidePanel(
-                      <Menu/>
+                      <Menu/>, undefined, true
                     )}>
           <MenuIcon/>
         </IconButton>
@@ -41,7 +42,7 @@ export const Navbar = () => {
           <SearchIcon fontSize="small"/>
         </IconButton>
         <Box flexGrow={1}/>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" color="primary" onClick={() => openSidePanel(<CategoryMenu/>, "right")}>
           menu
         </Button>
       </BaseContainer>

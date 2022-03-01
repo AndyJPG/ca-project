@@ -29,10 +29,10 @@ const baseTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#E84C4F"
+      main: "#1D1D1D"
     },
     secondary: {
-      main: "#1D1D1D"
+      main: "#E84C4F"
     },
     text: {
       primary: "#1D1D1D",
@@ -194,7 +194,7 @@ const theme = createTheme(baseTheme, {
     MuiAppBar: {
       variants: [
         {
-          props: {color: "secondary"},
+          props: {color: "primary"},
           style: {
             boxShadow: "none"
           }
