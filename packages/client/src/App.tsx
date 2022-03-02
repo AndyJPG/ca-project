@@ -21,15 +21,13 @@ function App() {
   }, [])
 
   return (
-    <>
+    <RxjsContextProvider>
       <ScrollToAnchor/>
       <SidePanel/>
-      <RxjsContextProvider>
-        <LazySuspense>
-          <PageRoutes/>
-        </LazySuspense>
-      </RxjsContextProvider>
-    </>
+      <LazySuspense>
+        <PageRoutes/>
+      </LazySuspense>
+    </RxjsContextProvider>
   )
 }
 

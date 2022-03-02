@@ -1,12 +1,15 @@
 import {List, ListItem, ListItemButton, ListItemText} from "@mui/material"
-import * as React from "react"
 import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
 import {BaseContainer} from "../containers/BaseContainer"
+import React, {useState} from "react"
+import {useRxjsContext} from "../context/RxjsContextProvider"
 
-export const CategoryMenu = () => {
+const CategoryMenu = () => {
   const {categories} = useLocalCategoryStateService()
+  const {openSidePanel} = useRxjsContext()
+  const [selectedIndex, setSelectedIndex] = useState(0)
 
-  const handleOnClick = (categoryId: string) => {
+  const handleOnClick = (categoryId: string, index: number) => {
     const categoryEl = document.querySelector(categoryId) as HTMLElement
     if (categoryEl) {
       window.scrollTo({
@@ -14,6 +17,8 @@ export const CategoryMenu = () => {
         behavior: "smooth"
       })
     }
+    setSelectedIndex(index)
+    openSidePanel({open: false})
   }
 
   return (
@@ -21,11 +26,12 @@ export const CategoryMenu = () => {
       width: "17.5rem",
       backgroundColor: "white"
     }}>
-      <List>
+      <List disablePadding>
         {categories && categories.map((category, index) => (
-          <ListItem key={category.id + category.name}>
-            <ListItemButton selected={index === 0} onClick={() => handleOnClick(`#${category.name}`)}>
-              <ListItemText primary={category.name}/>
+          <ListItem key={category.id + category.name} disablePadding>
+            <ListItemButton selected={index === selectedIndex}
+                            onClick={() => handleOnClick(`#${category.name}`, index)}>
+              <ListItemText primary={category.name.slice(0, 1).toUpperCase() + category.name.slice(1)}/>
             </ListItemButton>
           </ListItem>
         ))}
@@ -33,3 +39,5 @@ export const CategoryMenu = () => {
     </BaseContainer>
   )
 }
+
+export default CategoryMenu

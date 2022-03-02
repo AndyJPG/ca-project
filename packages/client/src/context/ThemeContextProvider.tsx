@@ -171,6 +171,18 @@ const theme = createTheme(baseTheme, {
         }
       }
     },
+    MuiListItemButton: {
+      variants: [
+        {
+          props: {selected: true},
+          style: {
+            "& .MuiTypography-root": {
+              fontWeight: 700
+            }
+          }
+        }
+      ]
+    },
     MuiListSubheader: {
       styleOverrides: {
         root: {

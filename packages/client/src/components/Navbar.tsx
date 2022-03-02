@@ -1,13 +1,15 @@
 import {AppBar, Box, Button, IconButton, Toolbar, Typography} from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
-import * as React from "react"
+import React, {lazy} from "react"
 import {useNavigate} from "react-router-dom"
 import {useRxjsContext} from "../context/RxjsContextProvider"
-import {Menu} from "./Menu"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 import {BaseContainer} from "../containers/BaseContainer"
 import SearchIcon from "@mui/icons-material/Search"
-import {CategoryMenu} from "./CategoryMenu"
+import LazySuspense from "./LazySuspense"
+
+const Menu = lazy(() => import(/* webpackChunkName: 'navbar-menu' */ "./Menu"))
+const CategoryMenu = lazy(() => import(/* webpackChunkName: 'category-menu' */ "./CategoryMenu"))
 
 export const Navbar = () => {
   const navigate = useNavigate()
@@ -24,9 +26,11 @@ export const Navbar = () => {
     <AppBar color="primary">
       <Toolbar>
         <IconButton edge="start" color="inherit"
-                    onClick={() => openSidePanel(
-                      <Menu/>, undefined, true
-                    )}>
+                    onClick={() => openSidePanel({
+                      children: <LazySuspense><Menu/></LazySuspense>,
+                      showCloseIcon: true,
+                      anchor: "left"
+                    })}>
           <MenuIcon/>
         </IconButton>
         <Typography variant="h6" sx={{
@@ -42,7 +46,11 @@ export const Navbar = () => {
           <SearchIcon fontSize="small"/>
         </IconButton>
         <Box flexGrow={1}/>
-        <Button variant="contained" color="primary" onClick={() => openSidePanel(<CategoryMenu/>, "right")}>
+        <Button variant="contained" color="primary"
+                onClick={() => openSidePanel({
+                  children: <LazySuspense><CategoryMenu/></LazySuspense>,
+                  anchor: "right"
+                })}>
           menu
         </Button>
       </BaseContainer>

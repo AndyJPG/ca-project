@@ -1,16 +1,17 @@
 import React, {createContext, useContext} from "react"
-import {sidePanel$} from "../components/SidePanel"
+import {sidePanel$, SidePanelProps} from "../components/SidePanel"
 
 interface IRxjsContext {
-  openSidePanel: (children: React.ReactNode, anchor?: "top" | "left" | "bottom" | "right", closeIcon?: boolean) => void
+  openSidePanel: (sidePanelProps: SidePanelProps) => void
 }
 
 const RxjsContext = createContext<IRxjsContext>({} as IRxjsContext)
 
 export const RxjsContextProvider: React.FC = (props) => {
 
-  const openSidePanel = (children: React.ReactNode, anchor?: "top" | "left" | "bottom" | "right", closeIcon?: boolean) => {
-    sidePanel$.next({children, anchor, closeIcon})
+  const openSidePanel = (sidePanelProps: SidePanelProps) => {
+    const {children, anchor, showCloseIcon, open} = sidePanelProps
+    sidePanel$.next({children, anchor, showCloseIcon, open})
   }
 
   return (

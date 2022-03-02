@@ -4,7 +4,7 @@ import {Link} from "react-router-dom"
 import * as React from "react"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 
-export const Menu = () => {
+const Menu = () => {
   const {tenant} = useLocalTenantStateService()
 
   if (!tenant) {
@@ -39,3 +39,5 @@ export const Menu = () => {
     </BaseContainer>
   )
 }
+
+export default Menu
