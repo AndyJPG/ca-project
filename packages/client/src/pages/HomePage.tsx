@@ -8,11 +8,13 @@ import {useLocalCategoryStateService} from "@ca/common/services/LocalCategorySta
 import {Hero} from "../components/Hero"
 import {ProductList} from "../components/ProductList"
 import {Navbar} from "../components/Navbar"
+import {useLocalProductSearchResultServiceAdapter} from "@ca/common/services/LocalProductSearchResultServiceAdapter"
 
 const HomePage = () => {
   const {categoriesWithProduct} = useLocalCategoryStateService()
+  const {categoriesWithProductSearchResult} = useLocalProductSearchResultServiceAdapter()
   const {tenant} = useLocalTenantStateService()
-  
+
   return (
     <>
       <Navbar/>
@@ -33,7 +35,9 @@ const HomePage = () => {
                      )
                    }}/>
       </BaseContainer>
-      {categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
+      {categoriesWithProductSearchResult.length > 0 ? categoriesWithProductSearchResult.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
+        <ProductList key={category.name} products={category.products} title={category.name}/>
+      )) : categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
         <ProductList key={category.name} products={category.products} title={category.name}/>
       ))}
     </>

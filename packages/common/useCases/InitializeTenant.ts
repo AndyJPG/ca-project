@@ -41,7 +41,9 @@ export const initializeTenant = (dependencies: Dependencies) => {
 
 export const useInitializeTenant = () => {
   const tenantDao = useTenantRepository()
-  const categoryDao = useCategoryRepository()
+  const categoryDao = useCategoryRepository(
+
+  )
   const localTenantState = useLocalTenantStateService()
   const localCategoryState = useLocalCategoryStateService()
 
