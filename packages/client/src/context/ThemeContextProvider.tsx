@@ -140,12 +140,8 @@ const theme = createTheme(baseTheme, {
             width: "100%",
             "& .MuiOutlinedInput-root": {
               borderRadius: baseTheme.shape.borderRadiusFull,
-              padding: "0 1.8rem",
               "&:before": {
                 border: "none"
-              },
-              "& .MuiFilledInput-input": {
-                paddingRight: 0
               }
             }
           }
