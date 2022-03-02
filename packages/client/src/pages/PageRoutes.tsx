@@ -1,8 +1,9 @@
+import React, {lazy} from "react"
 import {RouteObject, useRoutes} from "react-router-dom"
-import * as React from "react"
-import {HomePage} from "./HomePage"
-import {ProductDetailPage} from "./ProductDetailPage"
 import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
+
+const HomePage = lazy(() => import(/* webpackChunkName: 'home-page' */ "./HomePage"))
+const ProductDetailPage = lazy(() => import(/* webpackChunkName: 'product-detail-page' */ "./ProductDetailPage"))
 
 export const PageRoutes = () => {
   const {tenant} = useLocalTenantStateService()

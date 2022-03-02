@@ -6,6 +6,7 @@ import {PageRoutes} from "./pages/PageRoutes"
 import {ScrollToAnchor} from "./components/ScrollToAnchor"
 import {SidePanel} from "./components/SidePanel"
 import {RxjsContextProvider} from "./context/RxjsContextProvider"
+import LazySuspense from "./components/LazySuspense"
 
 function App() {
   const {initializeTenant} = useInitializeTenant()
@@ -24,7 +25,9 @@ function App() {
       <ScrollToAnchor/>
       <SidePanel/>
       <RxjsContextProvider>
-        <PageRoutes/>
+        <LazySuspense>
+          <PageRoutes/>
+        </LazySuspense>
       </RxjsContextProvider>
     </>
   )

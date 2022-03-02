@@ -9,7 +9,7 @@ import {Hero} from "../components/Hero"
 import {ProductList} from "../components/ProductList"
 import {Navbar} from "../components/Navbar"
 
-export const HomePage = () => {
+const HomePage = () => {
   const {categoriesWithProduct, categories} = useLocalCategoryStateService()
   const {tenant} = useLocalTenantStateService()
 
@@ -46,8 +46,10 @@ export const HomePage = () => {
                    }}/>
       </BaseContainer>
       {categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
-          <ProductList key={category.name} products={category.products} title={category.name}/>
+        <ProductList key={category.name} products={category.products} title={category.name}/>
       ))}
     </>
   )
 }
+
+export default HomePage

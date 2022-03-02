@@ -9,7 +9,7 @@ import {ProductDetailNavBar} from "../components/ProductDetailNavBar"
 import {ProductDetailInfoSection} from "../components/ProductDetailInfoSection"
 import {ProductOptionsList} from "../components/ProductOptionsList"
 
-export const ProductDetailPage = () => {
+const ProductDetailPage = () => {
   const [product, setProduct] = useState<Product | null>(null)
   const {getProductById} = useProductRepository()
   const params = useParams()
@@ -31,8 +31,8 @@ export const ProductDetailPage = () => {
     <BaseContainer sx={{margin: 0, padding: 0, position: "relative", pb: "4.2rem"}}>
       <ProductDetailNavBar title={name}/>
       {imageUrl && <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
-          <img src={imageUrl} alt={name}
-               style={{width: "100%", height: "auto"}}/>
+        <img src={imageUrl} alt={name}
+             style={{width: "100%", height: "auto"}}/>
       </Box>}
       <BaseContainer sx={{pt: "2.8rem", pb: 0}}>
         <Typography variant="h5" sx={{
@@ -71,3 +71,5 @@ export const ProductDetailPage = () => {
     </BaseContainer>
   )
 }
+
+export default ProductDetailPage
