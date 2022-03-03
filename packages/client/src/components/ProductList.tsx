@@ -13,9 +13,10 @@ export const ProductList = (props: ProductListProps) => {
   const {title, products} = props
 
   return (
-    <BaseContainer id={title} sx={{marginTop: "2rem"}}>
+    <BaseContainer id={title}>
       {title &&
-      <Typography variant="h5" sx={{paddingY: "0.5rem"}}>{title.slice(0, 1).toUpperCase()}{title.slice(1)}</Typography>}
+      <Typography variant="h5"
+                  sx={{padding: "0.5rem 0 0.8rem 0"}}>{title.slice(0, 1).toUpperCase()}{title.slice(1)}</Typography>}
       {products.map(product =>
         <ProductListItem key={product.id}
                          id={product.id}

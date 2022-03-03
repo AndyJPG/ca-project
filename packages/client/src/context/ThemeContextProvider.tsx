@@ -58,20 +58,17 @@ const theme = createTheme(baseTheme, {
       fontWeight: 700
     },
     h5: {
-      fontSize: "1.75rem",
       fontWeight: 600,
-      lineHeight: "2rem"
+      fontSize: "1.5rem",
     },
     h6: {
-      fontSize: "1.125rem",
       fontWeight: 600,
-      textTransform: "capitalize",
-      overflow: "hidden",
-      textOverflow: "ellipsis"
+      fontSize: "1.125rem",
+      textTransform: "capitalize"
     },
     subtitle1: {
-      fontWeight: 500,
-      lineHeight: "1.25rem"
+      fontWeight: 600,
+
     },
     subtitle2: {
       fontWeight: 400,

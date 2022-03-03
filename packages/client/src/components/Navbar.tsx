@@ -35,7 +35,9 @@ export const Navbar = () => {
           flexGrow: 1,
           textAlign: "center",
           whiteSpace: "nowrap",
-          cursor: "pointer"
+          cursor: "pointer",
+          overflow: "hidden",
+          textOverflow: "ellipsis"
         }} onClick={() => navigate(`/${companyDomain}`)}>{companyName}</Typography>
       </Toolbar>
       <NavToolbar/>

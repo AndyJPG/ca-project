@@ -17,28 +17,34 @@ export const ProductListItem = (props: ProductListItemProps) => {
   return (
     <Box sx={{
       width: "100%",
+      height: "9rem",
       display: "flex",
-      flexWrap: imageTop ? "wrap" : "nowrap",
-      flexDirection: imageTop ? "column-reverse" : "initial",
+      flexWrap: "nowrap",
       alignItems: "center",
       position: "relative",
       background: "white",
       overflow: "hidden",
-      marginTop: "1rem",
+      marginBottom: "1rem",
       boxShadow: theme => theme.themeShadows[1],
       borderRadius: theme => theme.shape.borderRadius
     }} onClick={() => navigate(id)}>
-      <Box sx={{flexGrow: 1, padding: imageUrl ? "0 1rem" : "1rem"}}>
+      <Box sx={{
+        flexGrow: 1,
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        padding: "0.75rem 1rem"
+      }}>
         <Typography variant="subtitle1">{subtitle.slice(0, 1).toUpperCase()}{subtitle.slice(1)}</Typography>
-        <Typography fontWeight="body2" sx={{marginY: "0.2rem", fontSize: "0.875rem"}}>${price}</Typography>
-        {description && !imageTop &&
+        {description &&
         <Typography variant="body1">{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
+        <Box flexGrow={1}/>
+        <Typography fontWeight="body1">${price}</Typography>
       </Box>
       {imageUrl && (
         <Box sx={{
-          height: imageTop ? "8.25rem" : "7rem",
-          width: imageTop ? "100%" : "7rem",
-          marginBottom: imageTop ? "0.4rem" : "0",
+          height: "9rem",
+          width: "9rem",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
