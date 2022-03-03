@@ -59,7 +59,7 @@ const theme = createTheme(baseTheme, {
     },
     h5: {
       fontWeight: 600,
-      fontSize: "1.5rem",
+      fontSize: "1.5rem"
     },
     h6: {
       fontWeight: 600,
@@ -67,7 +67,7 @@ const theme = createTheme(baseTheme, {
       textTransform: "capitalize"
     },
     subtitle1: {
-      fontWeight: 600,
+      fontWeight: 600
 
     },
     subtitle2: {
@@ -188,10 +188,21 @@ const theme = createTheme(baseTheme, {
         {
           props: {variant: "contained"},
           style: {
-            borderRadius: baseTheme.shape.borderRadiusFull,
             boxShadow: "none",
             textTransform: "none",
             fontWeight: 400
+          }
+        },
+        {
+          props: {color: "primary"},
+          style: {
+            borderRadius: baseTheme.shape.borderRadiusFull
+          }
+        },
+        {
+          props: {color: "secondary"},
+          style: {
+            borderRadius: baseTheme.shape.borderRadius
           }
         }
       ]
