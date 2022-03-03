@@ -15,14 +15,13 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
   return {
     searchProductLocalState(keyword: string) {
       const filterKeyword = keyword.toLowerCase()
-      const {categoriesWithProduct} = localCategoryState
+      const categoriesWithProduct: CategoryWithProductDto[] = JSON.parse(JSON.stringify(localCategoryState.categoriesWithProduct))
       const {updateCategoriesWithProductSearchResult} = localProductSearchResult
 
       if (keyword === "") {
         updateCategoriesWithProductSearchResult([])
       } else {
-        const categoriesWithProductCopy: CategoryWithProductDto[] = JSON.parse(JSON.stringify(categoriesWithProduct))
-        const filteredCategories = categoriesWithProductCopy.filter(category => {
+        const filteredCategories = categoriesWithProduct.filter(category => {
           const filteredProducts = category.products.filter(product => {
             return product.name.toLowerCase().includes(filterKeyword) || product.description.toLowerCase().includes(filterKeyword) || product.ingredients.join(" ").toLowerCase().includes(filterKeyword)
           })
