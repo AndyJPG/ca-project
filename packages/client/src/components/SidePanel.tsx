@@ -29,6 +29,9 @@ export const SidePanel = () => {
         value.open !== undefined ? setOpen(value.open) : setOpen(true)
       }
     })
+    return () => {
+      sidePanel$.unsubscribe()
+    }
   }, [])
 
   return (

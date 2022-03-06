@@ -13,8 +13,8 @@
   },
   "scripts": {
     "start": "lerna run --parallel start",
-    "start-dev": "lerna run --parallel dev",
-    "start-client-dev": "yarn --cwd packages/client start",
+    "start:dev": "lerna run --parallel dev",
+    "start-client:dev": "yarn --cwd packages/client start",
     "test": "cd packages/common && yarn run test"
   }
 }

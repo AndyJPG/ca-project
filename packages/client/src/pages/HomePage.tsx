@@ -5,22 +5,24 @@ import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
 import {ProductList} from "../components/ProductList"
 import {Navbar} from "../components/Navbar"
-import {useLocalProductSearchResultServiceAdapter} from "@ca/common/services/LocalProductSearchResultServiceAdapter"
+import {useLocalProductSearchResultService} from "@ca/common/services/LocalProductSearchResultServiceAdapter"
 import Footer from "../components/Footer"
 import {BaseContainer} from "../containers/BaseContainer"
 
 const HomePage = () => {
   const {categoriesWithProduct} = useLocalCategoryStateService()
-  const {categoriesWithProductSearchResult} = useLocalProductSearchResultServiceAdapter()
+  const {categoriesWithProductSearchResult, noSearchResult} = useLocalProductSearchResultService()
   const {tenant} = useLocalTenantStateService()
 
   return (
     <>
       <Navbar/>
       <Box height="7rem"/>
-      {categoriesWithProductSearchResult.length > 0 ? categoriesWithProductSearchResult.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
+      {categoriesWithProductSearchResult.length > 0 && categoriesWithProductSearchResult.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
         <ProductList key={category.name} products={category.products} title={category.name}/>
-      )) : categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
+      ))}
+      {noSearchResult && <p>No result</p>}
+      {categoriesWithProductSearchResult.length === 0 && !noSearchResult && categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
         <ProductList key={category.name} products={category.products} title={category.name}/>
       ))}
       <Footer/>

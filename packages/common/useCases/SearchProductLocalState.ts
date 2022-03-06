@@ -1,6 +1,6 @@
 import {LocalCategoryStateService, LocalProductSearchResultService} from "./ServicesAdapter.interfaces"
 import {useLocalCategoryStateService} from "../services/LocalCategoryStateServiceAdapter"
-import {useLocalProductSearchResultServiceAdapter} from "../services/LocalProductSearchResultServiceAdapter"
+import {useLocalProductSearchResultService} from "../services/LocalProductSearchResultServiceAdapter"
 import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 
 interface Dependencies {
@@ -16,7 +16,7 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
     searchProductLocalState(keyword: string) {
       const filterKeyword = keyword.toLowerCase()
       const categoriesWithProduct: CategoryWithProductDto[] = JSON.parse(JSON.stringify(localCategoryState.categoriesWithProduct))
-      const {updateCategoriesWithProductSearchResult} = localProductSearchResult
+      const {updateCategoriesWithProductSearchResult, updateNoSearchResult} = localProductSearchResult
 
       if (keyword === "") {
         updateCategoriesWithProductSearchResult([])
@@ -32,7 +32,13 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
             return true
           }
         })
-        updateCategoriesWithProductSearchResult(filteredCategories)
+
+        if (filteredCategories.length === 0 && keyword !== "") {
+          updateNoSearchResult(true)
+        } else {
+          updateNoSearchResult(false)
+          updateCategoriesWithProductSearchResult(filteredCategories)
+        }
       }
     }
   }
@@ -40,7 +46,7 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
 
 export const useSearchProductLocalState = () => {
   const localCategoryState = useLocalCategoryStateService()
-  const localProductSearchResult = useLocalProductSearchResultServiceAdapter()
+  const localProductSearchResult = useLocalProductSearchResultService()
 
   return searchProductLocalState({localCategoryState, localProductSearchResult})
 }

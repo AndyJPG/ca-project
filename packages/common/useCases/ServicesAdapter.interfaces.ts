@@ -25,7 +25,10 @@ export interface LocalProductStateService {
 }
 
 export interface LocalProductSearchResultService {
+  noSearchResult: boolean
   categoriesWithProductSearchResult: CategoryWithProductDto[]
+
+  updateNoSearchResult(noResult: boolean): void
 
   updateCategoriesWithProductSearchResult(data: CategoryWithProductDto[]): void
 }

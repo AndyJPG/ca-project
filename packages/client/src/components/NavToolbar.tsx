@@ -1,4 +1,4 @@
-import {Box, Button, IconButton, TextField} from "@mui/material"
+import {Button, IconButton, TextField} from "@mui/material"
 import SearchIcon from "@mui/icons-material/Search"
 import LazySuspense from "./LazySuspense"
 import {BaseContainer} from "../containers/BaseContainer"
@@ -22,15 +22,15 @@ export const NavToolbar = () => {
                  sx={{
                    "& .MuiOutlinedInput-input": {
                      padding: "0.3rem 0"
-                   }
+                   },
+                   pr: "1rem"
                  }}
                  InputProps={{
                    startAdornment: <IconButton color="secondary" size="small">
                      <SearchIcon fontSize="small"/>
                    </IconButton>
                  }}/>
-      <Box width="1rem"/>
-      <Button variant="contained" color="primary"
+      <Button variant="contained" color="primary" sx={{py: 0, my: "0.2rem", minHeight: "1rem"}}
               onClick={() => openSidePanel({
                 children: <LazySuspense><CategoryMenu/></LazySuspense>,
                 anchor: "right"
