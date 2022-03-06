@@ -1,11 +1,11 @@
 import {List, ListItem, ListItemButton, ListItemText} from "@mui/material"
-import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
 import {BaseContainer} from "../containers/BaseContainer"
 import React, {useState} from "react"
 import {useRxjsContext} from "../context/RxjsContextProvider"
+import {useLocalCategoryService} from "@ca/common/services/LocalCategoryServiceAdapter"
 
 const CategoryMenu = () => {
-  const {categories} = useLocalCategoryStateService()
+  const {categories} = useLocalCategoryService()
   const {openSidePanel} = useRxjsContext()
   const [selectedIndex, setSelectedIndex] = useState(0)
 

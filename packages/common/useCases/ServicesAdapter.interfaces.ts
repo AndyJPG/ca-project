@@ -3,25 +3,25 @@ import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 import Category from "../domain/category/Category"
 import Product from "../domain/product/Product"
 
-export interface LocalTenantStateService {
+export interface LocalTenantService {
   tenant: Tenant | null
 
-  updateTenant(tenant: Tenant | null): void
+  setTenant(tenant: Tenant | null): void
 }
 
-export interface LocalCategoryStateService {
+export interface LocalCategoryService {
   categories: Category[] | null
   categoriesWithProduct: CategoryWithProductDto[]
 
-  updateCategories(data: Category[]): void
+  setCategories(data: Category[]): void
 
-  updateCategoriesWithProduct(data: CategoryWithProductDto[]): void
+  setCategoriesWithProduct(data: CategoryWithProductDto[]): void
 }
 
-export interface LocalProductStateService {
+export interface LocalProductService {
   products: Product[] | null
 
-  updateProducts(data: Product[] | null): void
+  setProducts(data: Product[] | null): void
 }
 
 export interface LocalProductSearchService {

@@ -1,15 +1,15 @@
-import {LocalCategoryStateService, LocalProductSearchService} from "./ServicesAdapter.interfaces"
-import {useLocalCategoryStateService} from "../services/LocalCategoryStateServiceAdapter"
-import {useLocalProductSearchService} from "../services/LocalProductSearchResultServiceAdapter"
+import {LocalCategoryService, LocalProductSearchService} from "./ServicesAdapter.interfaces"
+import {useLocalCategoryService} from "../services/LocalCategoryServiceAdapter"
+import {useLocalProductSearchService} from "../services/LocalProductSearchServiceAdapter"
 import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 
 interface Dependencies {
-  localCategoryState: LocalCategoryStateService
+  localCategoryState: LocalCategoryService
   localProductSearch: LocalProductSearchService
 }
 
 export const searchProductLocalState = (dependencies: Dependencies) => {
-  const localCategoryState: LocalCategoryStateService = dependencies.localCategoryState
+  const localCategoryState: LocalCategoryService = dependencies.localCategoryState
   const localProductSearch: LocalProductSearchService = dependencies.localProductSearch
 
   return {
@@ -40,7 +40,7 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
 }
 
 export const useSearchProductLocalState = () => {
-  const localCategoryState = useLocalCategoryStateService()
+  const localCategoryState = useLocalCategoryService()
   const localProductSearch = useLocalProductSearchService()
 
   return searchProductLocalState({localCategoryState, localProductSearch})

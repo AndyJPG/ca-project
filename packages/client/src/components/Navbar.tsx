@@ -3,16 +3,16 @@ import MenuIcon from "@mui/icons-material/Menu"
 import React, {lazy} from "react"
 import {useNavigate} from "react-router-dom"
 import {useRxjsContext} from "../context/RxjsContextProvider"
-import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 import LazySuspense from "./LazySuspense"
 import {NavToolbar} from "./NavToolbar"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
 
 const Menu = lazy(() => import(/* webpackChunkName: 'navbar-menu' */ "./Menu"))
 
 export const Navbar = () => {
   const navigate = useNavigate()
   const {openSidePanel} = useRxjsContext()
-  const {tenant} = useLocalTenantStateService()
+  const {tenant} = useLocalTenantService()
 
   if (!tenant) {
     return null

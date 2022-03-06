@@ -1,18 +1,18 @@
 import {Box, Button} from "@mui/material"
 import * as React from "react"
-import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
 import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
-import {useLocalCategoryStateService} from "@ca/common/services/LocalCategoryStateServiceAdapter"
 import {ProductList} from "../components/ProductList"
 import {Navbar} from "../components/Navbar"
-import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchResultServiceAdapter"
+import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchServiceAdapter"
 import Footer from "../components/Footer"
 import {BaseContainer} from "../containers/BaseContainer"
+import {useLocalCategoryService} from "@ca/common/services/LocalCategoryServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
 
 const HomePage = () => {
-  const {categoriesWithProduct} = useLocalCategoryStateService()
+  const {categoriesWithProduct} = useLocalCategoryService()
   const {searchMode, searchResult} = useLocalProductSearchService()
-  const {tenant} = useLocalTenantStateService()
+  const {tenant} = useLocalTenantService()
 
   return (
     <>

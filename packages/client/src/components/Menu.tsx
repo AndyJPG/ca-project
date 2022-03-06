@@ -2,10 +2,10 @@ import {BaseContainer} from "../containers/BaseContainer"
 import {Box, Link as MuiLink} from "@mui/material"
 import {Link} from "react-router-dom"
 import * as React from "react"
-import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
 
 const Menu = () => {
-  const {tenant} = useLocalTenantStateService()
+  const {tenant} = useLocalTenantService()
 
   if (!tenant) {
     return null

@@ -5,11 +5,11 @@ import Category from "@ca/common/domain/category/Category"
 
 interface IAppContext {
   tenant: Tenant | null
-  updateTenant: (tenant: Tenant | null) => void
+  setTenant: (tenant: Tenant | null) => void
   categories: Category[] | null
-  updateCategories: (categories: Category[]) => void
+  setCategories: (categories: Category[]) => void
   categoriesWithProduct: CategoryWithProductDto[]
-  updateCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
+  setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
   searchResult: CategoryWithProductDto[]
   setSearchResult: (categories: CategoryWithProductDto[]) => void
   searchMode: boolean
@@ -20,7 +20,7 @@ const AppContext = createContext<IAppContext>({} as IAppContext)
 
 export const AppContextProvider: React.FC = (props) => {
   const [tenant, setTenant] = useState<Tenant | null>(null)
-  const [categories, seCategories] = useState<Category[] | null>(null)
+  const [categories, setCategories] = useState<Category[] | null>(null)
   const [categoriesWithProduct, setCategoriesWithProduct] = useState<CategoryWithProductDto[]>([])
   const [searchResult, setSearchResult] = useState<CategoryWithProductDto[]>([])
   const [searchMode, setSearchMode] = useState(false)
@@ -29,11 +29,11 @@ export const AppContextProvider: React.FC = (props) => {
     <AppContext.Provider
       value={{
         tenant,
-        updateTenant: setTenant,
+        setTenant,
         categories,
-        updateCategories: seCategories,
+        setCategories,
         categoriesWithProduct,
-        updateCategoriesWithProduct: setCategoriesWithProduct,
+        setCategoriesWithProduct,
         searchResult,
         setSearchResult,
         searchMode,
