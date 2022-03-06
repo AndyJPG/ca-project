@@ -2,11 +2,11 @@ import * as React from "react"
 import {useEffect} from "react"
 import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
 import {useLocation} from "react-router-dom"
-import {PageRoutes} from "./pages/PageRoutes"
 import {ScrollToAnchor} from "./components/ScrollToAnchor"
 import {SidePanel} from "./components/SidePanel"
 import {RxjsContextProvider} from "./context/RxjsContextProvider"
 import LazySuspense from "./components/LazySuspense"
+import {PageRoutes} from "./pages/PageRoutes"
 
 function App() {
   const {initializeTenant} = useInitializeTenant()

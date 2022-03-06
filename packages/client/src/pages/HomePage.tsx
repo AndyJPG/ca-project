@@ -1,29 +1,28 @@
 import {Box, Button} from "@mui/material"
 import * as React from "react"
-import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import {ProductList} from "../components/ProductList"
 import {Navbar} from "../components/Navbar"
-import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchServiceAdapter"
 import Footer from "../components/Footer"
 import {BaseContainer} from "../containers/BaseContainer"
+import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import {useLocalCategoryService} from "@ca/common/services/LocalCategoryServiceAdapter"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchServiceAdapter"
 
 const HomePage = () => {
   const {categoriesWithProduct} = useLocalCategoryService()
-  const {searchMode, searchResult} = useLocalProductSearchService()
-  const {tenant} = useLocalTenantService()
+  const {searchResult} = useLocalProductSearchService()
 
   return (
     <>
       <Navbar/>
       <Box height="7rem"/>
-      {searchMode ? searchResult.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
+      {searchResult ? searchResult.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
         <ProductList key={category.name} products={category.products} title={category.name}/>
       )) : categoriesWithProduct.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
         <ProductList key={category.name} products={category.products} title={category.name}/>
       ))}
-      {searchMode && searchResult.length === 0 && <p>No result</p>}
+      {searchResult && searchResult.length === 0 && <p>No result</p>}
+
       <Footer/>
       <Box height="5rem"/>
       <BaseContainer

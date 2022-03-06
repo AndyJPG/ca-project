@@ -25,10 +25,7 @@ export interface LocalProductService {
 }
 
 export interface LocalProductSearchService {
-  searchMode: boolean
-  searchResult: CategoryWithProductDto[]
+  searchResult: CategoryWithProductDto[] | null
 
-  setSearchMode(searchMode: boolean): void
-
-  setSearchResult(data: CategoryWithProductDto[]): void
+  setSearchResult(data: CategoryWithProductDto[] | null): void
 }

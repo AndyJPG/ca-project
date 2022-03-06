@@ -10,10 +10,6 @@ interface IAppContext {
   setCategories: (categories: Category[]) => void
   categoriesWithProduct: CategoryWithProductDto[]
   setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
-  searchResult: CategoryWithProductDto[]
-  setSearchResult: (categories: CategoryWithProductDto[]) => void
-  searchMode: boolean
-  setSearchMode: (noResult: boolean) => void
 }
 
 const AppContext = createContext<IAppContext>({} as IAppContext)
@@ -22,8 +18,6 @@ export const AppContextProvider: React.FC = (props) => {
   const [tenant, setTenant] = useState<Tenant | null>(null)
   const [categories, setCategories] = useState<Category[] | null>(null)
   const [categoriesWithProduct, setCategoriesWithProduct] = useState<CategoryWithProductDto[]>([])
-  const [searchResult, setSearchResult] = useState<CategoryWithProductDto[]>([])
-  const [searchMode, setSearchMode] = useState(false)
 
   return (
     <AppContext.Provider
@@ -33,11 +27,7 @@ export const AppContextProvider: React.FC = (props) => {
         categories,
         setCategories,
         categoriesWithProduct,
-        setCategoriesWithProduct,
-        searchResult,
-        setSearchResult,
-        searchMode,
-        setSearchMode
+        setCategoriesWithProduct
       }}>{props.children}</AppContext.Provider>
   )
 }

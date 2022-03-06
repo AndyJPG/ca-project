@@ -16,10 +16,10 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
     searchProductLocalState(keyword: string) {
       const filterKeyword = keyword.toLowerCase()
       const categoriesWithProduct: CategoryWithProductDto[] = JSON.parse(JSON.stringify(localCategoryState.categoriesWithProduct))
-      const {setSearchResult, setSearchMode} = localProductSearch
+      const {setSearchResult} = localProductSearch
 
       if (keyword === "") {
-        setSearchMode(false)
+        setSearchResult(null)
       } else {
         const filteredCategories = categoriesWithProduct.filter(category => {
           const filteredProducts = category.products.filter(product => {
@@ -33,7 +33,6 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
           }
         })
         setSearchResult(filteredCategories)
-        setSearchMode(true)
       }
     }
   }
