@@ -1,25 +1,25 @@
-import {LocalCategoryStateService, LocalProductSearchResultService} from "./ServicesAdapter.interfaces"
+import {LocalCategoryStateService, LocalProductSearchService} from "./ServicesAdapter.interfaces"
 import {useLocalCategoryStateService} from "../services/LocalCategoryStateServiceAdapter"
-import {useLocalProductSearchResultService} from "../services/LocalProductSearchResultServiceAdapter"
+import {useLocalProductSearchService} from "../services/LocalProductSearchResultServiceAdapter"
 import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 
 interface Dependencies {
   localCategoryState: LocalCategoryStateService
-  localProductSearchResult: LocalProductSearchResultService
+  localProductSearch: LocalProductSearchService
 }
 
 export const searchProductLocalState = (dependencies: Dependencies) => {
   const localCategoryState: LocalCategoryStateService = dependencies.localCategoryState
-  const localProductSearchResult: LocalProductSearchResultService = dependencies.localProductSearchResult
+  const localProductSearch: LocalProductSearchService = dependencies.localProductSearch
 
   return {
     searchProductLocalState(keyword: string) {
       const filterKeyword = keyword.toLowerCase()
       const categoriesWithProduct: CategoryWithProductDto[] = JSON.parse(JSON.stringify(localCategoryState.categoriesWithProduct))
-      const {updateCategoriesWithProductSearchResult, updateNoSearchResult} = localProductSearchResult
+      const {setSearchResult, setSearchMode} = localProductSearch
 
       if (keyword === "") {
-        updateCategoriesWithProductSearchResult([])
+        setSearchMode(false)
       } else {
         const filteredCategories = categoriesWithProduct.filter(category => {
           const filteredProducts = category.products.filter(product => {
@@ -32,13 +32,8 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
             return true
           }
         })
-
-        if (filteredCategories.length === 0 && keyword !== "") {
-          updateNoSearchResult(true)
-        } else {
-          updateNoSearchResult(false)
-          updateCategoriesWithProductSearchResult(filteredCategories)
-        }
+        setSearchResult(filteredCategories)
+        setSearchMode(true)
       }
     }
   }
@@ -46,7 +41,7 @@ export const searchProductLocalState = (dependencies: Dependencies) => {
 
 export const useSearchProductLocalState = () => {
   const localCategoryState = useLocalCategoryStateService()
-  const localProductSearchResult = useLocalProductSearchResultService()
+  const localProductSearch = useLocalProductSearchService()
 
-  return searchProductLocalState({localCategoryState, localProductSearchResult})
+  return searchProductLocalState({localCategoryState, localProductSearch})
 }

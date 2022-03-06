@@ -24,11 +24,11 @@ export interface LocalProductStateService {
   updateProducts(data: Product[] | null): void
 }
 
-export interface LocalProductSearchResultService {
-  noSearchResult: boolean
-  categoriesWithProductSearchResult: CategoryWithProductDto[]
+export interface LocalProductSearchService {
+  searchMode: boolean
+  searchResult: CategoryWithProductDto[]
 
-  updateNoSearchResult(noResult: boolean): void
+  setSearchMode(searchMode: boolean): void
 
-  updateCategoriesWithProductSearchResult(data: CategoryWithProductDto[]): void
+  setSearchResult(data: CategoryWithProductDto[]): void
 }
