@@ -6,7 +6,6 @@ import {useEffect, useState} from "react"
 import Product from "@ca/common/domain/product/Product"
 import {useParams} from "react-router-dom"
 import {ProductDetailNavBar} from "../components/ProductDetailNavBar"
-import {ProductDetailInfoSection} from "../components/ProductDetailInfoSection"
 import {ProductOptionsList} from "../components/ProductOptionsList"
 
 const ProductDetailPage = () => {
@@ -35,19 +34,19 @@ const ProductDetailPage = () => {
         <img src={imageUrl} alt={name}
              style={{width: "100%", height: "auto"}}/>
       </Box>}
-      <BaseContainer>
+      <BaseContainer sx={{backgroundColor: "white"}}>
         <Typography variant="h4">{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
-        <Typography variant="body1"
-                    sx={{fontSize: "1.125rem", color: theme => theme.palette.text.secondary}}>{description}</Typography>
-        <Typography variant="subtitle1">${price}</Typography>
+        <Typography variant="body2"
+                    sx={{
+                      fontSize: "1.125rem",
+                      mb: "2rem"
+                    }}>{description}</Typography>
+        <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+          <Typography variant="h6">${price}</Typography>
+          <Typography variant="body2" sx={{fontSize: "1.125rem", mb: 0}}>V / VG / GF</Typography>
+        </Box>
       </BaseContainer>
-      <BaseContainer sx={{pt: 0}}>
-        {description && <ProductDetailInfoSection title="Info" content={description}/>}
-        {ingredients && <ProductDetailInfoSection title="Ingredients" content={ingredients.join(", ")}/>}
-      </BaseContainer>
-      <BaseContainer sx={{py: "2rem"}}>
-        <ProductOptionsList productOptions={productOptions}/>
-      </BaseContainer>
+      <ProductOptionsList productOptions={productOptions}/>
       <BaseContainer
         sx={{
           position: "fixed",

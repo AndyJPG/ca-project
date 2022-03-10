@@ -168,14 +168,16 @@ const theme = createTheme(baseTheme, {
     },
     MuiList: {
       styleOverrides: {
-        root: {
-          backgroundColor: "white",
-          boxShadow: baseTheme.themeShadows[1],
-          borderRadius: baseTheme.shape.borderRadius
-        }
+        root: {}
       }
     },
     MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "white",
+          padding: "1rem"
+        }
+      },
       variants: [
         {
           props: {selected: true},
@@ -188,10 +190,26 @@ const theme = createTheme(baseTheme, {
         }
       ]
     },
+    MuiListItemText: {
+      styleOverrides: {
+        root: {
+          "& .MuiTypography-body1": {
+            margin: 0,
+            fontWeight: 700,
+            color: baseTheme.palette.text.secondary
+          }
+        }
+      }
+    },
     MuiListSubheader: {
       styleOverrides: {
         root: {
-          backgroundColor: "transparent"
+          backgroundColor: "transparent",
+          padding: "1rem",
+          lineHeight: "2rem",
+          fontSize: "1rem",
+          fontWeight: 700,
+          color: baseTheme.palette.text.primary
         }
       }
     },
