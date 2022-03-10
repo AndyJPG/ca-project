@@ -28,24 +28,18 @@ const ProductDetailPage = () => {
   const {name, description, ingredients, price, productOptions, imageUrl} = product
 
   return (
-    <BaseContainer sx={{margin: 0, padding: 0, position: "relative", pb: "4.2rem"}}>
+    <>
       <ProductDetailNavBar title={name}/>
-      {imageUrl && <Box sx={{display: "flex", alignItems: "center", justifyContent: "center"}}>
+      {imageUrl &&
+      <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", height: "15rem", overflow: "hidden"}}>
         <img src={imageUrl} alt={name}
              style={{width: "100%", height: "auto"}}/>
       </Box>}
-      <BaseContainer sx={{pt: "2.8rem", pb: 0}}>
-        <Typography variant="h5" sx={{
-          width: "100%",
-          textAlign: "center",
-          paddingX: "2rem"
-        }}>{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
-        <Typography variant="h6" sx={{
-          width: "100%",
-          textAlign: "center",
-          marginTop: "1.125rem",
-          color: theme => theme.palette.primary.main
-        }}>${price}</Typography>
+      <BaseContainer>
+        <Typography variant="h4">{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
+        <Typography variant="body1"
+                    sx={{fontSize: "1.125rem", color: theme => theme.palette.text.secondary}}>{description}</Typography>
+        <Typography variant="subtitle1">${price}</Typography>
       </BaseContainer>
       <BaseContainer sx={{pt: 0}}>
         {description && <ProductDetailInfoSection title="Info" content={description}/>}
@@ -68,7 +62,7 @@ const ProductDetailPage = () => {
         <Button variant="contained" sx={{width: "100%", height: "4rem"}}>Add to
           Order Note</Button>
       </BaseContainer>
-    </BaseContainer>
+    </>
   )
 }
 

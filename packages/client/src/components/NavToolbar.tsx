@@ -30,7 +30,7 @@ export const NavToolbar = () => {
                      <SearchIcon fontSize="small"/>
                    </IconButton>
                  }}/>
-      <Button variant="contained" color="primary" sx={{py: 0, my: "0.2rem", minHeight: "1rem"}}
+      <Button variant="contained" color="primary" sx={{py: 0, minHeight: "1rem"}}
               onClick={() => openSidePanel({
                 children: <LazySuspense><CategoryMenu/></LazySuspense>,
                 anchor: "right"

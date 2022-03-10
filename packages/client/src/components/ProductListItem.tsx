@@ -37,9 +37,13 @@ export const ProductListItem = (props: ProductListItemProps) => {
       }}>
         <Typography variant="subtitle1">{subtitle.slice(0, 1).toUpperCase()}{subtitle.slice(1)}</Typography>
         {description &&
-        <Typography variant="body1">{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
+        <Typography variant="body1"
+                    sx={{
+                      color: theme => theme.palette.text.secondary,
+                      mb: 0
+                    }}>{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
         {imageUrl && <Box flexGrow={1}/>}
-        {imageUrl && <Typography fontWeight="body1">${price}</Typography>}
+        {imageUrl && <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>}
       </Box>
       {!imageUrl && <Box sx={{
         height: "100%",
@@ -47,7 +51,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         flexDirection: "column",
         padding: "0.75rem 1rem"
       }}>
-        <Typography fontWeight="body1">${price}</Typography>
+        <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>
       </Box>}
       {imageUrl && (
         <Box sx={{

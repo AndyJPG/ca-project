@@ -37,7 +37,7 @@ export const SidePanel = () => {
   return (
     <Drawer anchor={anchor} open={open} onClose={() => setOpen(false)}>
       {showCloseIcon && <Box sx={{position: "absolute", top: 0, right: "-3rem"}}>
-        <IconButton color="primary" size="large" onClick={() => setOpen(false)}>
+        <IconButton color="primary" size="large" sx={{color: "white"}} onClick={() => setOpen(false)}>
           <CloseIcon/>
         </IconButton>
       </Box>}

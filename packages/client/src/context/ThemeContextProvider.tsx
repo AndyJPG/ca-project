@@ -36,7 +36,7 @@ const baseTheme = createTheme({
     },
     text: {
       primary: "#1D1D1D",
-      secondary: "#7E7E7E"
+      secondary: "#4D4D4D"
     },
     background: {
       default: "#F5F5F8"
@@ -55,31 +55,44 @@ const baseTheme = createTheme({
 const theme = createTheme(baseTheme, {
   typography: {
     h4: {
-      fontWeight: 700
+      fontWeight: 600,
+      fontSize: "1.6rem",
+      marginBottom: "0.5rem",
+      color: baseTheme.palette.text.primary
     },
     h5: {
       fontWeight: 600,
-      fontSize: "1.5rem"
+      fontSize: "1.5rem",
+      color: baseTheme.palette.text.primary
     },
     h6: {
       fontWeight: 600,
       fontSize: "1.125rem",
-      textTransform: "capitalize"
+      textTransform: "capitalize",
+      color: baseTheme.palette.text.primary
     },
     subtitle1: {
-      fontWeight: 600
-
+      fontWeight: 600,
+      color: baseTheme.palette.text.primary
     },
     subtitle2: {
       fontWeight: 400,
-      marginBottom: "1rem"
+      marginBottom: "1rem",
+      color: baseTheme.palette.text.primary
     },
     body1: {
-      margin: "0.2rem 0"
+      marginBottom: "0.875rem",
+      color: baseTheme.palette.text.primary,
+      [baseTheme.breakpoints.up("md")]: {
+        marginBottom: "1rem"
+      }
     },
     body2: {
-      margin: "0.2rem 0",
-      color: baseTheme.palette.text.secondary
+      marginBottom: "0.875rem",
+      color: baseTheme.palette.text.secondary,
+      [baseTheme.breakpoints.up("md")]: {
+        marginBottom: "1rem"
+      }
     },
     caption: {
       fontSize: "0.875rem",
@@ -90,10 +103,7 @@ const theme = createTheme(baseTheme, {
     MuiIconButton: {
       variants: [
         {
-          props: {color: "primary"},
-          style: {
-            color: "white"
-          }
+          props: {color: "primary"}
         },
         {
           props: {color: "secondary"},
@@ -136,6 +146,7 @@ const theme = createTheme(baseTheme, {
           style: {
             width: "100%",
             "& .MuiOutlinedInput-root": {
+              margin: "0",
               borderRadius: baseTheme.shape.borderRadiusFull,
               "&:before": {
                 border: "none"
@@ -170,7 +181,8 @@ const theme = createTheme(baseTheme, {
           props: {selected: true},
           style: {
             "& .MuiTypography-root": {
-              fontWeight: 700
+              fontWeight: 700,
+              margin: 0
             }
           }
         }
@@ -190,7 +202,10 @@ const theme = createTheme(baseTheme, {
           style: {
             boxShadow: "none",
             textTransform: "none",
-            fontWeight: 400
+            fontWeight: 400,
+            "& .MuiButton-contained": {
+              margin: 0
+            }
           }
         },
         {

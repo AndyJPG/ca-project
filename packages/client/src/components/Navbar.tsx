@@ -33,6 +33,7 @@ export const Navbar = () => {
         </IconButton>
         <Typography variant="h6" sx={{
           flexGrow: 1,
+          color: "inherit",
           textAlign: "center",
           whiteSpace: "nowrap",
           cursor: "pointer",

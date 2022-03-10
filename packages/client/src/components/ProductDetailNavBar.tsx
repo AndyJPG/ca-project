@@ -4,6 +4,7 @@ import {AppBar, IconButton, Typography} from "@mui/material"
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import * as React from "react"
 import {useNavigate} from "react-router-dom"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
 
 interface ProductDetailNavBarProps {
   title: string
@@ -12,6 +13,7 @@ interface ProductDetailNavBarProps {
 export const ProductDetailNavBar = (props: ProductDetailNavBarProps) => {
   const {title} = props
   const navigate = useNavigate()
+  const {tenant} = useLocalTenantService()
 
   return (
     <>
@@ -29,7 +31,9 @@ export const ProductDetailNavBar = (props: ProductDetailNavBarProps) => {
       </ShowOnScroll>
       <AppBar color="default" sx={{backgroundColor: "transparent", boxShadow: "none"}}>
         <BaseContainer>
-          <IconButton color="primary" onClick={() => navigate("/cbd-dumpling-house")}><NavigateBeforeIcon/></IconButton>
+          <IconButton color="primary"
+                      sx={{backgroundColor: "white"}}
+                      onClick={() => navigate(`/${tenant?.companyDomain}` || "/")}><NavigateBeforeIcon/></IconButton>
         </BaseContainer>
       </AppBar>
     </>
