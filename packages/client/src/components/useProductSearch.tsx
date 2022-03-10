@@ -12,11 +12,15 @@ export const useProductSearch = () => {
   const [searchResult, setSearchResult] = useState<CategoryWithProductDto[] | null>(null)
 
   useEffect(() => {
-    productSearch$.subscribe({
+    const productSearchSub = productSearch$.subscribe({
       next: value => {
         setSearchResult(value.searchResult)
       }
     })
+    
+    return () => {
+      productSearchSub.unsubscribe()
+    }
   }, [])
 
   return {searchResult}

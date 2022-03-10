@@ -17,7 +17,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
   return (
     <Box sx={{
       width: "100%",
-      height: "9rem",
+      height: imageUrl ? "9rem" : "6rem",
       display: "flex",
       flexWrap: "nowrap",
       alignItems: "center",
@@ -38,9 +38,17 @@ export const ProductListItem = (props: ProductListItemProps) => {
         <Typography variant="subtitle1">{subtitle.slice(0, 1).toUpperCase()}{subtitle.slice(1)}</Typography>
         {description &&
         <Typography variant="body1">{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
-        <Box flexGrow={1}/>
-        <Typography fontWeight="body1">${price}</Typography>
+        {imageUrl && <Box flexGrow={1}/>}
+        {imageUrl && <Typography fontWeight="body1">${price}</Typography>}
       </Box>
+      {!imageUrl && <Box sx={{
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        padding: "0.75rem 1rem"
+      }}>
+        <Typography fontWeight="body1">${price}</Typography>
+      </Box>}
       {imageUrl && (
         <Box sx={{
           height: "9rem",

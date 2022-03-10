@@ -21,7 +21,7 @@ export const SidePanel = () => {
   const [anchor, setAnchor] = useState<AnchorProps>("left")
 
   useEffect(() => {
-    sidePanel$.subscribe({
+    const sidePanelSub = sidePanel$.subscribe({
       next: value => {
         value.children && setChildren(value.children)
         value.anchor && setAnchor(value.anchor)
@@ -30,7 +30,7 @@ export const SidePanel = () => {
       }
     })
     return () => {
-      sidePanel$.unsubscribe()
+      sidePanelSub.unsubscribe()
     }
   }, [])
 
