@@ -18,9 +18,9 @@ export const ProductOptionsList = (props: ProductOptionsListProps) => {
         </ListSubheader>
       }>
         {optionList.options.map((option, index) => (
-          <>
+          <React.Fragment key={option.name}>
             {index !== 0 && <Divider variant="middle"/>}
-            <ListItem key={option.name} sx={{padding: 0}}
+            <ListItem sx={{padding: 0}}
                       secondaryAction={<Checkbox color="secondary" sx={{padding: 0}}/>}>
               <ListItemButton>
                 <ListItemText primary={`${option.name.slice(0, 1).toUpperCase()}${option.name.slice(1)}`}
@@ -29,7 +29,7 @@ export const ProductOptionsList = (props: ProductOptionsListProps) => {
                               sx={{display: "flex", alignItems: "center"}}/>
               </ListItemButton>
             </ListItem>
-          </>
+          </React.Fragment>
         ))}
       </List>
     ))}

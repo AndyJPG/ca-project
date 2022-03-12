@@ -1,4 +1,6 @@
-import {Box, Button, Typography} from "@mui/material"
+import {Box, Button, IconButton, TextField, Typography} from "@mui/material"
+import AddIcon from "@mui/icons-material/Add"
+import RemoveIcon from "@mui/icons-material/Remove"
 import {BaseContainer} from "../containers/BaseContainer"
 import {useProductRepository} from "@ca/common/domain/product/ProductRepository"
 import * as React from "react"
@@ -12,6 +14,7 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState<Product | null>(null)
   const {getProductById} = useProductRepository()
   const params = useParams()
+  const [value, setValue] = useState(1)
 
   useEffect(() => {
     const productId = params.productId
@@ -25,6 +28,14 @@ const ProductDetailPage = () => {
   }
 
   const {name, description, ingredients, price, productOptions, imageUrl} = product
+
+  const handleValueChange = (addOn: number) => {
+    if (value + addOn < 1) {
+      return
+    }
+
+    setValue(prevState => prevState + addOn)
+  }
 
   return (
     <>
@@ -47,21 +58,46 @@ const ProductDetailPage = () => {
         </Box>
       </BaseContainer>
       <ProductOptionsList productOptions={productOptions}/>
+      <Box sx={{height: "10rem"}}/>
       <BaseContainer
         sx={{
           position: "fixed",
+          width: "100%",
           bottom: 0,
-          left: 0,
-          right: 0,
-          display: "flex",
-          justifyContent: "center",
-          backgroundColor: theme => theme.palette.background.default,
-          zIndex: theme => theme.zIndex.appBar
+          background: "rgba(255, 255, 255, 0.8)",
+          backdropFilter: "blur(4px)",
+          display: "flex"
         }}>
-        <Button variant="contained" sx={{width: "100%", height: "4rem"}}>Add to
-          Order Note</Button>
+
+        <Box sx={{
+          mr: "1rem",
+          flex: 0.9,
+          border: "0.15rem solid",
+          borderColor: theme => theme.palette.primary.main,
+          borderRadius: "4.4px",
+          display: "flex",
+          alignItems: "center"
+        }}>
+          <IconButton color="primary" onClick={() => handleValueChange(-1)}>
+            <RemoveIcon/>
+          </IconButton>
+          <TextField value={value} variant="standard" InputProps={{disableUnderline: true}} sx={{
+            "& .MuiInput-root": {
+              marginBottom: 0,
+              "& .MuiInput-input": {
+                textAlign: "center"
+              }
+            }
+
+          }}/>
+          <IconButton color="primary" onClick={() => handleValueChange(1)}>
+            <AddIcon/>
+          </IconButton>
+        </Box>
+        <Button variant="contained" color="secondary"
+                sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600, flex: 1}}>Add to
+          order</Button>
       </BaseContainer>
-      <Box sx={{height: "10rem"}}/>
     </>
   )
 }
