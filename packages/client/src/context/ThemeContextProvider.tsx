@@ -204,7 +204,7 @@ const theme = createTheme(baseTheme, {
     MuiListSubheader: {
       styleOverrides: {
         root: {
-          backgroundColor: "transparent",
+          backgroundColor: baseTheme.palette.background.default,
           padding: "1rem",
           lineHeight: "2rem",
           fontSize: "1rem",

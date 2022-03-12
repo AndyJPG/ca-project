@@ -7,7 +7,7 @@ import {useNavigate} from "react-router-dom"
 import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
 
 interface ProductDetailNavBarProps {
-  title: string
+  title?: string
 }
 
 export const ProductDetailNavBar = (props: ProductDetailNavBarProps) => {
@@ -17,7 +17,7 @@ export const ProductDetailNavBar = (props: ProductDetailNavBarProps) => {
 
   return (
     <>
-      <ShowOnScroll threshold={1}>
+      {title && <ShowOnScroll threshold={1}>
         <BaseContainer sx={{
           position: "fixed",
           top: 0,
@@ -28,7 +28,7 @@ export const ProductDetailNavBar = (props: ProductDetailNavBarProps) => {
           alignItems: "center",
           backgroundColor: "white"
         }}><Typography variant="body1">{title.slice(0, 1).toUpperCase()}{title.slice(1)}</Typography></BaseContainer>
-      </ShowOnScroll>
+      </ShowOnScroll>}
       <AppBar color="default" sx={{backgroundColor: "transparent", boxShadow: "none"}}>
         <BaseContainer>
           <IconButton color="primary"

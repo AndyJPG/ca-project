@@ -28,7 +28,7 @@ const ProductDetailPage = () => {
 
   return (
     <>
-      <ProductDetailNavBar title={name}/>
+      <ProductDetailNavBar/>
       {imageUrl &&
       <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", height: "15rem", overflow: "hidden"}}>
         <img src={imageUrl} alt={name}
@@ -61,6 +61,7 @@ const ProductDetailPage = () => {
         <Button variant="contained" sx={{width: "100%", height: "4rem"}}>Add to
           Order Note</Button>
       </BaseContainer>
+      <Box sx={{height: "10rem"}}/>
     </>
   )
 }

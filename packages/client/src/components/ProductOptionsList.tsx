@@ -1,4 +1,5 @@
-import {Divider, List, ListItemButton, ListItemText, ListSubheader, Typography} from "@mui/material"
+import {Divider, List, ListItem, ListItemButton, ListItemText, ListSubheader, Typography} from "@mui/material"
+import Checkbox from "@mui/material/Checkbox"
 import * as React from "react"
 import {ProductOptions} from "@ca/common/domain/product/ProductOption"
 
@@ -19,11 +20,15 @@ export const ProductOptionsList = (props: ProductOptionsListProps) => {
         {optionList.options.map((option, index) => (
           <>
             {index !== 0 && <Divider variant="middle"/>}
-            <ListItemButton key={option.name}>
-              <ListItemText primary={`${option.name.slice(0, 1).toUpperCase()}${option.name.slice(1)}`}/>
-              <Typography variant="body2" sx={{margin: 0}}>{`+$${option.price}`}</Typography>
-            </ListItemButton>
-
+            <ListItem key={option.name} sx={{padding: 0}}
+                      secondaryAction={<Checkbox color="secondary" sx={{padding: 0}}/>}>
+              <ListItemButton>
+                <ListItemText primary={`${option.name.slice(0, 1).toUpperCase()}${option.name.slice(1)}`}
+                              secondary={`+$${option.price}`}
+                              secondaryTypographyProps={{margin: "0 0 0 1rem"}}
+                              sx={{display: "flex", alignItems: "center"}}/>
+              </ListItemButton>
+            </ListItem>
           </>
         ))}
       </List>

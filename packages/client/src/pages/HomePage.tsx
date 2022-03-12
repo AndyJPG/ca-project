@@ -13,7 +13,7 @@ const HomePage = () => {
   const {searchResult} = useLocalProductSearchService()
 
   return (
-    <>
+    <BaseContainer sx={{backgroundColor: theme => theme.palette.background.default, margin: 0, padding: 0}}>
       <Navbar/>
       <Box height="7rem"/>
       {searchResult ? searchResult.map((category: CategoryWithProductDto) => (category.products.length > 0 &&
@@ -37,7 +37,7 @@ const HomePage = () => {
                 sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600}}>View
           order</Button>
       </BaseContainer>
-    </>
+    </BaseContainer>
   )
 }
 
