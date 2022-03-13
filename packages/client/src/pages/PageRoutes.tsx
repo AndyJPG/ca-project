@@ -1,6 +1,8 @@
 import React, {lazy} from "react"
 import {RouteObject, useRoutes} from "react-router-dom"
 import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import OrderPage from "./OrderPage"
+import Layout from "../containers/Layout"
 
 const HomePage = lazy(() => import(/* webpackChunkName: 'home-page' */ "./HomePage"))
 const ProductDetailPage = lazy(() => import(/* webpackChunkName: 'product-detail-page' */ "./ProductDetailPage"))
@@ -25,11 +27,19 @@ export const PageRoutes = () => {
     routes.push(
       {
         path: `/${companyDomain}`,
-        element: <HomePage/>
+        element: <Layout/>,
+        children: [
+          {index: true, element: <HomePage/>},
+          {path: "order", element: <OrderPage/>}
+        ]
       },
       {
         path: `/${companyDomain}/:productId`,
         element: <ProductDetailPage/>
+      },
+      {
+        path: `/${companyDomain}/order`,
+        element: <OrderPage/>
       }
     )
   }

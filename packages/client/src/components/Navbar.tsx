@@ -1,18 +1,28 @@
-import {AppBar, IconButton, Toolbar, Typography} from "@mui/material"
+import {AppBar, Box, IconButton, Toolbar, Typography} from "@mui/material"
 import MenuIcon from "@mui/icons-material/Menu"
-import React, {lazy} from "react"
-import {useNavigate} from "react-router-dom"
-import {useRxjsContext} from "../context/RxjsContextProvider"
+import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
+import React, {lazy, useEffect, useState} from "react"
+import {useLocation, useNavigate} from "react-router-dom"
+import {useRxjsContext} from "../context"
 import LazySuspense from "./LazySuspense"
-import {NavToolbar} from "./NavToolbar"
 import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
 
 const Menu = lazy(() => import(/* webpackChunkName: 'navbar-menu' */ "./Menu"))
 
 export const Navbar = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const [from, setFrom] = useState<string | null>(null)
   const {openSidePanel} = useRxjsContext()
   const {tenant} = useLocalTenantService()
+
+  useEffect(() => {
+    if (tenant && location.pathname !== `/${tenant?.companyDomain}`) {
+      setFrom(`/${tenant?.companyDomain}`)
+    } else {
+      setFrom(null)
+    }
+  }, [location])
 
   if (!tenant) {
     return null
@@ -20,18 +30,29 @@ export const Navbar = () => {
 
   const {companyName, companyDomain} = tenant
 
+  const currentPageTile = () => {
+    const pathList = location.pathname.split("/")
+    return pathList[pathList.length - 1]
+  }
+
   return (
     <AppBar color="primary">
       <Toolbar>
-        <IconButton edge="start" color="inherit"
-                    onClick={() => openSidePanel({
-                      children: <LazySuspense><Menu/></LazySuspense>,
-                      showCloseIcon: true,
-                      anchor: "left"
-                    })}>
-          <MenuIcon/>
-        </IconButton>
-        <Typography variant="h6" sx={{
+        <Box flex={0.1}>
+          {!from && <IconButton color="inherit"
+                                sx={{padding: 0}}
+                                onClick={() => openSidePanel({
+                                  children: <LazySuspense><Menu/></LazySuspense>,
+                                  showCloseIcon: true,
+                                  anchor: "left"
+                                })}>
+            <MenuIcon/>
+          </IconButton>}
+          {from && <IconButton color="inherit" sx={{padding: 0}} onClick={() => navigate(from)}>
+            <NavigateBeforeIcon/>
+          </IconButton>}
+        </Box>
+        {!from && <Typography variant="h6" sx={{
           flexGrow: 1,
           color: "inherit",
           textAlign: "center",
@@ -39,9 +60,18 @@ export const Navbar = () => {
           cursor: "pointer",
           overflow: "hidden",
           textOverflow: "ellipsis"
-        }} onClick={() => navigate(`/${companyDomain}`)}>{companyName}</Typography>
+        }} onClick={() => navigate(`/${companyDomain}`)}>{companyName}</Typography>}
+        {from && <Typography variant="h6" sx={{
+          flexGrow: 1,
+          color: "inherit",
+          textAlign: "center",
+          whiteSpace: "nowrap",
+          cursor: "pointer",
+          overflow: "hidden",
+          textOverflow: "ellipsis"
+        }}>{currentPageTile()}</Typography>}
+        <Box flex={0.1}/>
       </Toolbar>
-      <NavToolbar/>
     </AppBar>
   )
 }
