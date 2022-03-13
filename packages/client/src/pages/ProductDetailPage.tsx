@@ -66,12 +66,13 @@ const ProductDetailPage = () => {
           bottom: 0,
           background: "rgba(255, 255, 255, 0.8)",
           backdropFilter: "blur(4px)",
-          display: "flex"
+          display: "flex",
+          zIndex: theme => theme.zIndex.drawer
         }}>
 
         <Box sx={{
           mr: "1rem",
-          flex: 0.9,
+          flex: 0.7,
           border: "0.15rem solid",
           borderColor: theme => theme.palette.primary.main,
           borderRadius: "4.4px",
