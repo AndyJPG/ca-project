@@ -8,6 +8,7 @@ export default interface Product {
   description: string
   price: number
   imageUrl: string | null
+  ingredients: string[]
   categories: Category[]
   productOptions: ProductOptions[]
 }

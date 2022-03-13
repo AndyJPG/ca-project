@@ -1,23 +1,33 @@
-import * as React from 'react'
-import {useEffect} from 'react'
-import {Layout} from "./containers/Layout"
+import * as React from "react"
+import {useEffect} from "react"
 import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
-import {useLocalTenantStateService} from "@ca/common/services/LocalTenantStateServiceAdapter"
+import {useLocation} from "react-router-dom"
+import {ScrollToAnchor} from "./components/ScrollToAnchor"
+import {SidePanel} from "./components/SidePanel"
+import {RxjsContextProvider} from "./context/RxjsContextProvider"
+import LazySuspense from "./components/LazySuspense"
+import {PageRoutes} from "./pages/PageRoutes"
 
 function App() {
-  const {tenant} = useLocalTenantStateService()
   const {initializeTenant} = useInitializeTenant()
+  const location = useLocation()
 
   useEffect(() => {
-    initializeTenant('1')
-      .catch(e => console.log(e))
+    const pathName = location.pathname.split("/")
+    if (pathName.length > 1) {
+      initializeTenant(pathName[1])
+        .catch(e => console.log(e))
+    }
   }, [])
 
   return (
-    <>
-      {tenant ? tenant.companyName : "loading"}
-      <Layout/>
-    </>
+    <RxjsContextProvider>
+      <ScrollToAnchor/>
+      <SidePanel/>
+      <LazySuspense>
+        <PageRoutes/>
+      </LazySuspense>
+    </RxjsContextProvider>
   )
 }
 

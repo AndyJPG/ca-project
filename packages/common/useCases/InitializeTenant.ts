@@ -1,31 +1,37 @@
 import TenantDaoInterface from "../domain/tenant/TenantDao.Interface"
-import {LocalCategoryStateService, LocalTenantStateService} from "./ServicesAdapter.interfaces"
+import {LocalCategoryService, LocalTenantService} from "./ServicesAdapter.interfaces"
 import {useTenantRepository} from "../domain/tenant/TenantRepository"
-import {useLocalTenantStateService} from "../services/LocalTenantStateServiceAdapter"
+import {useLocalTenantService} from "../services/LocalTenantServiceAdapter"
 import {CategoryDaoInterface} from "../domain/category/CategoryDao.interface"
 import {useCategoryRepository} from "../domain/category/CategoryRepository"
-import {useLocalCategoryStateService} from "../services/LocalCategoryStateServiceAdapter"
+import {useLocalCategoryService} from "../services/LocalCategoryServiceAdapter"
 
 interface Dependencies {
   tenantDao: TenantDaoInterface
   categoryDao: CategoryDaoInterface
-  localTenantState: LocalTenantStateService
-  localCategoryState: LocalCategoryStateService
+  localTenantState: LocalTenantService
+  localCategoryState: LocalCategoryService
 }
 
 export const initializeTenant = (dependencies: Dependencies) => {
   const tenantDao: TenantDaoInterface = dependencies.tenantDao
   const categoryDao: CategoryDaoInterface = dependencies.categoryDao
-  const localTenantState: LocalTenantStateService = dependencies.localTenantState
-  const localCategoryState: LocalCategoryStateService = dependencies.localCategoryState
+  const localTenantState: LocalTenantService = dependencies.localTenantState
+  const localCategoryState: LocalCategoryService = dependencies.localCategoryState
 
   return {
-    async initializeTenant(tenantId: string): Promise<void> {
+    async initializeTenant(tenantDomain: string): Promise<void> {
       try {
-        const tenant = await tenantDao.getTenantById(tenantId)
-        const categoriesWithProduct = await categoryDao.getCategoriesWithProductsByTenantId(tenant.id)
-        localTenantState.updateTenant(tenant)
-        localCategoryState.updateCategoriesWithProduct(categoriesWithProduct)
+        const tenant = await tenantDao.getTenantByDomain(tenantDomain)
+        if (tenant) {
+          const categories = await categoryDao.getCategoriesByTenantId(tenant.id)
+          const categoriesWithProduct = await categoryDao.getCategoriesWithProductsByTenantId(tenant.id)
+          localTenantState.setTenant(tenant)
+          localCategoryState.setCategories(categories)
+          localCategoryState.setCategoriesWithProduct(categoriesWithProduct)
+        } else {
+          localTenantState.setTenant(tenant)
+        }
       } catch (e) {
         console.log(e)
       }
@@ -36,8 +42,8 @@ export const initializeTenant = (dependencies: Dependencies) => {
 export const useInitializeTenant = () => {
   const tenantDao = useTenantRepository()
   const categoryDao = useCategoryRepository()
-  const localTenantState = useLocalTenantStateService()
-  const localCategoryState = useLocalCategoryStateService()
+  const localTenantState = useLocalTenantService()
+  const localCategoryState = useLocalCategoryService()
 
   return initializeTenant({tenantDao, categoryDao, localTenantState, localCategoryState})
 }

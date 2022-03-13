@@ -12,6 +12,9 @@ const tenantRepository = (dependencies: Dependencies) => {
   return {
     getTenantById(tenantId: string): Promise<Tenant> {
       return tenantDao.getTenantById(tenantId)
+    },
+    getTenantByDomain(tenantDomain: string): Promise<Tenant | null> {
+      return tenantDao.getTenantByDomain(tenantDomain)
     }
   }
 }
