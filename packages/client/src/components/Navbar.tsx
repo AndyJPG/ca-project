@@ -22,7 +22,7 @@ export const Navbar = () => {
     } else {
       setFrom(null)
     }
-  }, [location])
+  }, [location, tenant])
 
   if (!tenant) {
     return null

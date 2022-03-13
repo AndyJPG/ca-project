@@ -21,13 +21,13 @@ const ProductDetailPage = () => {
     if (productId) {
       getProductById(productId).then(product => setProduct(product))
     }
-  }, [])
+  }, [getProductById])
 
   if (!product) {
     return null
   }
 
-  const {name, description, ingredients, price, productOptions, imageUrl} = product
+  const {name, description, price, productOptions, imageUrl} = product
 
   const handleValueChange = (addOn: number) => {
     if (value + addOn < 1) {
