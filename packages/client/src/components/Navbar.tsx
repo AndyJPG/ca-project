@@ -5,7 +5,7 @@ import React, {lazy, useEffect, useState} from "react"
 import {useLocation, useNavigate} from "react-router-dom"
 import {useRxjsContext} from "../context"
 import LazySuspense from "./LazySuspense"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 
 const Menu = lazy(() => import(/* webpackChunkName: 'navbar-menu' */ "./Menu"))
 

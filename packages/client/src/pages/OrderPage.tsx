@@ -5,12 +5,14 @@ import {Box, Button, IconButton, TextField, Typography} from "@mui/material"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import {useNavigate} from "react-router-dom"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
+import {useLocalCartService} from "@ca/common/services/LocalCartService"
 
 const OrderPage = () => {
   const [value, setValue] = useState(1)
   const navigate = useNavigate()
   const {tenant} = useLocalTenantService()
+  const {cart, getTotal} = useLocalCartService()
 
   const handleValueChange = (addOn: number) => {
     if (value + addOn < 1) {
@@ -34,16 +36,17 @@ const OrderPage = () => {
         <Typography variant="h6">Order details</Typography>
       </BaseContainer>
       <Box height="7.3rem"/>
-      <BaseContainer sx={{display: "flex", background: "white"}}>
+      {cart.map(({product, quantity}) => <BaseContainer sx={{display: "flex", background: "white"}}>
         <Box flex={1}>
-          <Typography variant="body1" sx={{mb: "0.25rem"}}>Satay Chicken Skewers (6pcs)</Typography>
-          <Typography variant="body1" sx={{mb: 0, color: theme => theme.palette.text.secondary}}>$15.00</Typography>
+          <Typography variant="body1" sx={{mb: "0.25rem"}}>{product.name}</Typography>
+          <Typography variant="body1"
+                      sx={{mb: 0, color: theme => theme.palette.text.secondary}}>${product.price}</Typography>
         </Box>
         <Box flex={0.45} sx={{display: "flex", alignItems: "start"}}>
           <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(-1)}>
             <RemoveCircleOutlineIcon/>
           </IconButton>
-          <TextField value={value} variant="standard" InputProps={{disableUnderline: true}} sx={{
+          <TextField value={quantity} variant="standard" InputProps={{disableUnderline: true}} sx={{
             "& .MuiInput-root": {
               marginBottom: 0,
               "& .MuiInput-input": {
@@ -60,7 +63,7 @@ const OrderPage = () => {
             <AddCircleOutlineIcon/>
           </IconButton>
         </Box>
-      </BaseContainer>
+      </BaseContainer>)}
       <BaseContainer
         sx={{
           position: "fixed",
@@ -76,7 +79,7 @@ const OrderPage = () => {
           mb: "1rem"
         }}>
           <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>Total</Typography>
-          <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>$16.8</Typography>
+          <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>${getTotal()}</Typography>
         </Box>
         <Button variant="contained" color="secondary"
                 onClick={() => navigate(`/${tenant?.companyDomain}`)}

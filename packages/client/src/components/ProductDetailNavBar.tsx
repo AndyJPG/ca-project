@@ -4,7 +4,7 @@ import {AppBar, IconButton, Typography} from "@mui/material"
 import NavigateBeforeIcon from "@mui/icons-material/NavigateBefore"
 import * as React from "react"
 import {useNavigate} from "react-router-dom"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 
 interface ProductDetailNavBarProps {
   title?: string

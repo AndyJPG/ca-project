@@ -1,10 +1,10 @@
 import TenantDaoInterface from "../domain/tenant/TenantDao.Interface"
 import {LocalCategoryService, LocalTenantService} from "./ServicesAdapter.interfaces"
 import {useTenantRepository} from "../domain/tenant/TenantRepository"
-import {useLocalTenantService} from "../services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "../services/LocalTenantService"
 import {CategoryDaoInterface} from "../domain/category/CategoryDao.interface"
 import {useCategoryRepository} from "../domain/category/CategoryRepository"
-import {useLocalCategoryService} from "../services/LocalCategoryServiceAdapter"
+import {useLocalCategoryService} from "../services/LocalCategoryService"
 
 interface Dependencies {
   tenantDao: TenantDaoInterface
@@ -13,7 +13,7 @@ interface Dependencies {
   localCategoryState: LocalCategoryService
 }
 
-export const initializeTenant = (dependencies: Dependencies) => {
+const initializeTenant = (dependencies: Dependencies) => {
   const tenantDao: TenantDaoInterface = dependencies.tenantDao
   const categoryDao: CategoryDaoInterface = dependencies.categoryDao
   const localTenantState: LocalTenantService = dependencies.localTenantState

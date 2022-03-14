@@ -1,6 +1,6 @@
 import React, {lazy} from "react"
 import {RouteObject, useRoutes} from "react-router-dom"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 import OrderPage from "./OrderPage"
 import Layout from "../containers/Layout"
 

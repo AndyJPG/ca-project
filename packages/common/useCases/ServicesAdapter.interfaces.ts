@@ -2,6 +2,7 @@ import Tenant from "../domain/tenant/Tenant"
 import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 import Category from "../domain/category/Category"
 import Product from "../domain/product/Product"
+import CartItem from "../domain/cart/CartItem"
 
 export interface LocalTenantService {
   tenant: Tenant | null
@@ -28,4 +29,12 @@ export interface LocalProductSearchService {
   searchResult: CategoryWithProductDto[] | null
 
   setSearchResult(data: CategoryWithProductDto[] | null): void
+}
+
+export interface LocalCartService {
+  cart: CartItem[]
+
+  addToCart(product: Product, quantity: number): void
+
+  getTotal(): number
 }

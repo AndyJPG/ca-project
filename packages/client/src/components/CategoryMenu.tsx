@@ -1,8 +1,8 @@
 import {List, ListItem, ListItemButton, ListItemText} from "@mui/material"
 import {BaseContainer} from "../containers/BaseContainer"
 import React, {useState} from "react"
-import {useRxjsContext} from "../context/RxjsContextProvider"
-import {useLocalCategoryService} from "@ca/common/services/LocalCategoryServiceAdapter"
+import {useRxjsContext} from "../context"
+import {useLocalCategoryService} from "@ca/common/services/LocalCategoryService"
 
 const CategoryMenu = () => {
   const {categories} = useLocalCategoryService()

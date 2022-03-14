@@ -9,10 +9,12 @@ import Product from "@ca/common/domain/product/Product"
 import {useParams} from "react-router-dom"
 import {ProductDetailNavBar} from "../components/ProductDetailNavBar"
 import {ProductOptionsList} from "../components/ProductOptionsList"
+import {useAddToCart} from "@ca/common/useCases/AddToCart"
 
 const ProductDetailPage = () => {
   const [product, setProduct] = useState<Product | null>(null)
   const {getProductById} = useProductRepository()
+  const {addToCart} = useAddToCart()
   const params = useParams()
   const [value, setValue] = useState(1)
 
@@ -95,7 +97,7 @@ const ProductDetailPage = () => {
             <AddIcon/>
           </IconButton>
         </Box>
-        <Button variant="contained" color="secondary"
+        <Button variant="contained" color="secondary" onClick={() => addToCart(product, 1)}
                 sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600, flex: 1}}>Add to
           order</Button>
       </BaseContainer>
