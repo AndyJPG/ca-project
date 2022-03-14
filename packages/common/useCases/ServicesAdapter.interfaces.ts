@@ -36,5 +36,7 @@ export interface LocalCartService {
 
   addToCart(product: Product, quantity: number): void
 
+  getTotalItems(): number
+
   getTotal(): number
 }

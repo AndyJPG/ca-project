@@ -22,7 +22,15 @@ const OrderPage = () => {
     setValue(prevState => prevState + addOn)
   }
   return (
-    <BaseContainer sx={{p: 0, background: theme => theme.palette.background.default, height: "100vh"}}>
+    <>
+      <Box
+        sx={{
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+          background: theme => theme.palette.background.default,
+          zIndex: -1
+        }}/>
       <BaseContainer
         sx={{
           position: "fixed",
@@ -36,7 +44,8 @@ const OrderPage = () => {
         <Typography variant="h6">Order details</Typography>
       </BaseContainer>
       <Box height="7.3rem"/>
-      {cart.map(({product, quantity}) => <BaseContainer sx={{display: "flex", background: "white"}}>
+      {cart.map(({product, quantity}) => <BaseContainer key={product.id + "_" + quantity}
+                                                        sx={{display: "flex", background: "white"}}>
         <Box flex={1}>
           <Typography variant="body1" sx={{mb: "0.25rem"}}>{product.name}</Typography>
           <Typography variant="body1"
@@ -85,7 +94,8 @@ const OrderPage = () => {
                 onClick={() => navigate(`/${tenant?.companyDomain}`)}
                 sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600}}>Add more</Button>
       </BaseContainer>
-    </BaseContainer>
+      <Box height="16rem"/>
+    </>
   )
 }
 

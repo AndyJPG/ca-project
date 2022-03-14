@@ -1,4 +1,4 @@
-import {Box, Button, IconButton, TextField, Typography} from "@mui/material"
+import {Box, Button, IconButton, Typography} from "@mui/material"
 import AddIcon from "@mui/icons-material/Add"
 import RemoveIcon from "@mui/icons-material/Remove"
 import {BaseContainer} from "../containers/BaseContainer"
@@ -6,24 +6,27 @@ import {useProductRepository} from "@ca/common/domain/product/ProductRepository"
 import * as React from "react"
 import {useEffect, useState} from "react"
 import Product from "@ca/common/domain/product/Product"
-import {useParams} from "react-router-dom"
+import {useNavigate, useParams} from "react-router-dom"
 import {ProductDetailNavBar} from "../components/ProductDetailNavBar"
 import {ProductOptionsList} from "../components/ProductOptionsList"
 import {useAddToCart} from "@ca/common/useCases/AddToCart"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 
 const ProductDetailPage = () => {
   const [product, setProduct] = useState<Product | null>(null)
   const {getProductById} = useProductRepository()
+  const {tenant} = useLocalTenantService()
   const {addToCart} = useAddToCart()
   const params = useParams()
-  const [value, setValue] = useState(1)
+  const navigate = useNavigate()
+  const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
     const productId = params.productId
     if (productId) {
       getProductById(productId).then(product => setProduct(product))
     }
-  }, [getProductById])
+  }, [getProductById, params.productId])
 
   if (!product) {
     return null
@@ -32,21 +35,27 @@ const ProductDetailPage = () => {
   const {name, description, price, productOptions, imageUrl} = product
 
   const handleValueChange = (addOn: number) => {
-    if (value + addOn < 1) {
+    if (quantity + addOn < 1) {
       return
     }
 
-    setValue(prevState => prevState + addOn)
+    setQuantity(prevState => prevState + addOn)
+  }
+
+  const addProductToCart = () => {
+    addToCart(product, quantity)
+    navigate(`/${tenant?.companyDomain}` || '/')
   }
 
   return (
     <>
       <ProductDetailNavBar/>
-      {imageUrl &&
-      <Box sx={{display: "flex", alignItems: "center", justifyContent: "center", height: "15rem", overflow: "hidden"}}>
-        <img src={imageUrl} alt={name}
-             style={{width: "100%", height: "auto"}}/>
-      </Box>}
+      {imageUrl ?
+        <Box
+          sx={{display: "flex", alignItems: "center", justifyContent: "center", height: "15rem", overflow: "hidden"}}>
+          <img src={imageUrl} alt={name}
+               style={{width: "100%", height: "auto"}}/>
+        </Box> : <Box height="3.5rem"/>}
       <BaseContainer sx={{backgroundColor: "white"}}>
         <Typography variant="h4">{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
         <Typography variant="body2"
@@ -84,20 +93,12 @@ const ProductDetailPage = () => {
           <IconButton color="primary" onClick={() => handleValueChange(-1)}>
             <RemoveIcon/>
           </IconButton>
-          <TextField value={value} variant="standard" InputProps={{disableUnderline: true}} sx={{
-            "& .MuiInput-root": {
-              marginBottom: 0,
-              "& .MuiInput-input": {
-                textAlign: "center"
-              }
-            }
-
-          }}/>
+          <Typography variant="body1" sx={{mb: 0, flex: 1, textAlign: "center"}}>{quantity}</Typography>
           <IconButton color="primary" onClick={() => handleValueChange(1)}>
             <AddIcon/>
           </IconButton>
         </Box>
-        <Button variant="contained" color="secondary" onClick={() => addToCart(product, 1)}
+        <Button variant="contained" color="secondary" onClick={addProductToCart}
                 sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600, flex: 1}}>Add to
           order</Button>
       </BaseContainer>

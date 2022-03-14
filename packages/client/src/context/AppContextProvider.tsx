@@ -15,6 +15,7 @@ interface IAppContext {
   cart: CartItem[]
   addToCart: (product: Product, quantity: number) => void
   getTotal: () => number
+  getTotalItems: () => number
 }
 
 const AppContext = createContext<IAppContext>({} as IAppContext)
@@ -33,6 +34,10 @@ export const AppContextProvider: React.FC = (props) => {
     return cart.reduce((prev, current) => prev + current.product.price * current.quantity, 0)
   }
 
+  const getTotalItems = () => {
+    return cart.reduce((prev, current) => prev + current.quantity, 0)
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -44,7 +49,8 @@ export const AppContextProvider: React.FC = (props) => {
         setCategoriesWithProduct,
         cart,
         addToCart,
-        getTotal
+        getTotal,
+        getTotalItems
       }}>{props.children}</AppContext.Provider>
   )
 }
