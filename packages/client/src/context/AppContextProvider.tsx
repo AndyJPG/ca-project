@@ -5,6 +5,8 @@ import Category from "@ca/common/domain/category/Category"
 import Product from "@ca/common/domain/product/Product"
 import CartItem from "@ca/common/domain/cart/CartItem"
 import {Decimal} from "decimal.js"
+import shortid from "shortid"
+import {ProductOptions} from "@ca/common/domain/product/ProductOption"
 
 interface IAppContext {
   tenant: Tenant | null
@@ -14,7 +16,7 @@ interface IAppContext {
   categoriesWithProduct: CategoryWithProductDto[]
   setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
   cart: CartItem[]
-  addToCart: (product: Product, quantity: number) => void
+  addToCart: (product: Product, quantity: number, productOptions: ProductOptions[]) => void
   getTotal: () => number
   getTotalItems: () => number
 }
@@ -27,8 +29,8 @@ export const AppContextProvider: React.FC = (props) => {
   const [categoriesWithProduct, setCategoriesWithProduct] = useState<CategoryWithProductDto[]>([])
   const [cart, setCart] = useState<CartItem[]>([])
 
-  const addToCart = (product: Product, quantity: number) => {
-    setCart([...cart, {product, quantity}])
+  const addToCart = (product: Product, quantity: number, productOptions: ProductOptions[]) => {
+    setCart([...cart, {id: shortid.generate(), product, quantity, productOptions}])
   }
 
   const getTotal = () => {

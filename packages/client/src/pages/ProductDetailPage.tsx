@@ -43,8 +43,8 @@ const ProductDetailPage = () => {
   }
 
   const addProductToCart = () => {
-    addToCart(product, quantity)
-    navigate(`/${tenant?.companyDomain}` || '/')
+    addToCart(product, quantity, [])
+    navigate(`/${tenant?.companyDomain}` || "/")
   }
 
   return (

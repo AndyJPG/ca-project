@@ -1,7 +1,7 @@
 import * as React from "react"
 import {useState} from "react"
 import {BaseContainer} from "../containers/BaseContainer"
-import {Box, Button, IconButton, TextField, Typography} from "@mui/material"
+import {Box, Button, IconButton, Typography} from "@mui/material"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import {useNavigate} from "react-router-dom"
@@ -44,35 +44,28 @@ const OrderPage = () => {
         <Typography variant="h6">Order details</Typography>
       </BaseContainer>
       <Box height="7.3rem"/>
-      {cart.map(({product, quantity}) => <BaseContainer key={product.id + "_" + quantity}
-                                                        sx={{display: "flex", background: "white"}}>
-        <Box flex={1}>
-          <Typography variant="body1" sx={{mb: "0.25rem"}}>{product.name}</Typography>
-          <Typography variant="body1"
-                      sx={{mb: 0, color: theme => theme.palette.text.secondary}}>${product.price}</Typography>
-        </Box>
-        <Box flex={0.45} sx={{display: "flex", alignItems: "start"}}>
-          <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(-1)}>
-            <RemoveCircleOutlineIcon/>
-          </IconButton>
-          <TextField value={quantity} variant="standard" InputProps={{disableUnderline: true}} sx={{
-            "& .MuiInput-root": {
-              marginBottom: 0,
-              "& .MuiInput-input": {
-                textAlign: "center",
-                padding: 0,
-                fontSize: "1.125rem",
-                fontWeight: 600,
-                color: theme => theme.palette.text.primary
-              }
-            }
+      {cart.map(({id, product, quantity}) =>
+        <BaseContainer key={id}
+                       sx={{display: "flex", background: "white"}}>
+          <Box flex={1}>
+            <Typography variant="body1" sx={{mb: "0.25rem"}}>{product.name}</Typography>
+            <Typography variant="body1"
+                        sx={{mb: 0, color: theme => theme.palette.text.secondary}}>${product.price}</Typography>
+          </Box>
+          <Box flex={0.45}>
+            <Box sx={{display: "flex", alignItems: "center"}}>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(-1)}>
+                <RemoveCircleOutlineIcon/>
+              </IconButton>
+              <Typography variant="h6" sx={{flex: 1, textAlign: "center"}}>{quantity}</Typography>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(1)}>
+                <AddCircleOutlineIcon/>
+              </IconButton>
+            </Box>
+          </Box>
 
-          }}/>
-          <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(1)}>
-            <AddCircleOutlineIcon/>
-          </IconButton>
-        </Box>
-      </BaseContainer>)}
+        </BaseContainer>
+      )}
       <BaseContainer
         sx={{
           position: "fixed",

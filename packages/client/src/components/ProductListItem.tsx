@@ -1,6 +1,6 @@
 import {Box, Typography} from "@mui/material"
 import * as React from "react"
-import {useNavigate} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 
 interface ProductListItemProps {
   id: string
@@ -13,7 +13,8 @@ interface ProductListItemProps {
 
 export const ProductListItem = (props: ProductListItemProps) => {
   const navigate = useNavigate()
-  const {id, subtitle, price, description, imageUrl, imageTop} = props
+  const location = useLocation()
+  const {id, subtitle, price, description, imageUrl} = props
   return (
     <Box sx={{
       width: "100%",
@@ -27,7 +28,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
       marginBottom: "1rem",
       boxShadow: theme => theme.themeShadows[1],
       borderRadius: theme => theme.shape.borderRadius
-    }} onClick={() => navigate(id)}>
+    }} onClick={() => navigate(id, {state: {from: location.pathname, position: window.scrollY}})}>
       <Box sx={{
         flexGrow: 1,
         height: "100%",

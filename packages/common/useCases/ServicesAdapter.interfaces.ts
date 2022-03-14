@@ -3,6 +3,7 @@ import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 import Category from "../domain/category/Category"
 import Product from "../domain/product/Product"
 import CartItem from "../domain/cart/CartItem"
+import {ProductOptions} from "../domain/product/ProductOption"
 
 export interface LocalTenantService {
   tenant: Tenant | null
@@ -34,7 +35,7 @@ export interface LocalProductSearchService {
 export interface LocalCartService {
   cart: CartItem[]
 
-  addToCart(product: Product, quantity: number): void
+  addToCart(product: Product, quantity: number, productOptions: ProductOptions[]): void
 
   getTotalItems(): number
 
