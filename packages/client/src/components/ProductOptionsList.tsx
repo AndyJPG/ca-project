@@ -14,7 +14,7 @@ export const ProductOptionsList = (props: ProductOptionsListProps) => {
       <List key={optionList.name} subheader={
         <ListSubheader>
           {optionList.name.slice(0, 1).toUpperCase()}{optionList.name.slice(1)}
-          <Typography variant="body2" sx={{margin: "0.2rem 0 0 0"}}>Required</Typography>
+          {optionList.required && <Typography variant="body2" sx={{margin: "0.2rem 0 0 0"}}>Required</Typography>}
         </ListSubheader>
       }>
         {optionList.options.map((option, index) => (

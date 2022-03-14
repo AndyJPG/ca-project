@@ -22,6 +22,8 @@ const sampleProductData = {
   "productOptions": [
     {
       "name": "choice of dim sim",
+      "required": true,
+      "singleSelection": true,
       "options": [
         {
           "name": "fried",
@@ -52,7 +54,46 @@ const sampleProductsData = [
         "tenantId": "1"
       }
     ],
-    "productOptions": []
+    "productOptions": [
+      {
+        "name": "choice of dim sim",
+        "required": true,
+        "singleSelection": true,
+        "options": [
+          {
+            "name": "fried",
+            "price": 0
+          },
+          {
+            "name": "steamed",
+            "price": 0
+          }
+        ]
+      },
+      {
+        "name": "choice of something",
+        "required": false,
+        "singleSelection": false,
+        "options": [
+          {
+            "name": "duck",
+            "price": 3.5
+          },
+          {
+            "name": "chicken",
+            "price": 2.5
+          },
+          {
+            "name": "prawn",
+            "price": 5
+          },
+          {
+            "name": "veg",
+            "price": 2.5
+          }
+        ]
+      }
+    ]
   },
   {
     "id": "4",
@@ -174,6 +215,8 @@ const sampleProductsData = [
     "productOptions": [
       {
         "name": "choice of dim sim",
+        "required": true,
+        "singleSelection": true,
         "options": [
           {
             "name": "fried",

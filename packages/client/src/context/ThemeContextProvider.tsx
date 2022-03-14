@@ -168,7 +168,9 @@ const theme = createTheme(baseTheme, {
     },
     MuiList: {
       styleOverrides: {
-        root: {}
+        root: {
+          paddingBottom: 0
+        }
       }
     },
     MuiListItemButton: {

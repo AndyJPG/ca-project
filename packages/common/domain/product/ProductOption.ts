@@ -1,5 +1,7 @@
 export interface ProductOptions {
   name: string
+  required: boolean
+  singleSelection: boolean
   options: ProductOption[]
 }
 
