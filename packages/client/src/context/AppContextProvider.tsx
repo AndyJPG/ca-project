@@ -4,6 +4,7 @@ import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import Category from "@ca/common/domain/category/Category"
 import Product from "@ca/common/domain/product/Product"
 import CartItem from "@ca/common/domain/cart/CartItem"
+import {Decimal} from "decimal.js"
 
 interface IAppContext {
   tenant: Tenant | null
@@ -31,7 +32,11 @@ export const AppContextProvider: React.FC = (props) => {
   }
 
   const getTotal = () => {
-    return cart.reduce((prev, current) => prev + current.product.price * current.quantity, 0)
+    return cart.reduce((prev, current) => {
+      const prevNumber = new Decimal(prev)
+      const currentNumber = new Decimal(current.product.price)
+      return currentNumber.mul(current.quantity).plus(prevNumber).toNumber()
+    }, 0)
   }
 
   const getTotalItems = () => {
