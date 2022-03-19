@@ -39,5 +39,7 @@ export interface LocalCartService {
 
   getTotalItems(): number
 
+  getSubTotal(): number
+  
   getTotal(): number
 }

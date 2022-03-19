@@ -12,7 +12,7 @@ const OrderPage = () => {
   const [value, setValue] = useState(1)
   const navigate = useNavigate()
   const {tenant} = useLocalTenantService()
-  const {cart, getTotal} = useLocalCartService()
+  const {cart, getTotal, getSubTotal} = useLocalCartService()
 
   const handleValueChange = (addOn: number) => {
     if (value + addOn < 1) {
@@ -77,11 +77,27 @@ const OrderPage = () => {
         }}>
         <Box sx={{
           display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <Typography variant="body1" sx={{m: 0, color: theme => theme.palette.text.secondary}}>Subtotal</Typography>
+          <Typography variant="body1"
+                      sx={{m: 0, color: theme => theme.palette.text.secondary}}>${getSubTotal().toFixed(2)}</Typography>
+        </Box>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <Typography variant="body1" sx={{m: 0, color: theme => theme.palette.text.secondary}}>Card
+            surcharge</Typography>
+          <Typography variant="body1" sx={{m: 0, color: theme => theme.palette.text.secondary}}>$0.00</Typography>
+        </Box>
+        <Box sx={{
+          display: "flex",
           justifyContent: "space-between",
           mb: "1rem"
         }}>
           <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>Total</Typography>
-          <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>${getTotal()}</Typography>
+          <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>${getTotal().toFixed(2)}</Typography>
         </Box>
         <Button variant="contained" color="secondary"
                 onClick={() => navigate(`/${tenant?.companyDomain}`)}

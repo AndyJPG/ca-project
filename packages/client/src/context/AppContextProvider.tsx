@@ -17,6 +17,7 @@ interface IAppContext {
   setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
   cart: CartItem[]
   addToCart: (product: Product, quantity: number, productOptions: ProductOptions[]) => void
+  getSubTotal: () => number
   getTotal: () => number
   getTotalItems: () => number
 }
@@ -33,12 +34,17 @@ export const AppContextProvider: React.FC = (props) => {
     setCart([...cart, {id: shortid.generate(), product, quantity, productOptions}])
   }
 
-  const getTotal = () => {
+  const getSubTotal = () => {
     return cart.reduce((prev, current) => {
       const prevNumber = new Decimal(prev)
       const currentNumber = new Decimal(current.product.price)
       return currentNumber.mul(current.quantity).plus(prevNumber).toNumber()
     }, 0)
+  }
+
+  const getTotal = () => {
+    const surcharge = new Decimal(0.00)
+    return (new Decimal(getSubTotal()).plus(surcharge)).toNumber()
   }
 
   const getTotalItems = () => {
@@ -56,6 +62,7 @@ export const AppContextProvider: React.FC = (props) => {
         setCategoriesWithProduct,
         cart,
         addToCart,
+        getSubTotal,
         getTotal,
         getTotalItems
       }}>{props.children}</AppContext.Provider>
