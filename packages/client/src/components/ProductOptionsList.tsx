@@ -3,6 +3,7 @@ import Checkbox from "@mui/material/Checkbox"
 import Radio from "@mui/material/Radio"
 import * as React from "react"
 import {useEffect, useState} from "react"
+import * as Yup from "yup"
 import {ProductOptions} from "@ca/common/domain/product/ProductOption"
 import {Form, Formik} from "formik"
 
@@ -14,28 +15,40 @@ interface InitialValues {
   [key: string]: string | string[]
 }
 
+interface ValidationSchema {
+  [key: string]: Yup.StringSchema | Yup.ArraySchema<Yup.StringSchema>
+}
+
 export const ProductOptionsList = (props: ProductOptionsListProps) => {
   const {productOptions} = props
   const [initialValues, setInitialValues] = useState<InitialValues | null>(null)
+  const [validationSchema, setValidationSchema] = useState<ValidationSchema | null>(null)
 
   useEffect(() => {
     if (!initialValues) {
       const values: InitialValues = {}
+      const validation: ValidationSchema = {}
       for (const optionList of productOptions) {
-        optionList.singleSelection ? values[optionList.name] = "" : values[optionList.name] = []
+        if (optionList.singleSelection) {
+          values[optionList.name] = ""
+          validation[optionList.name] = Yup.string().required(`${optionList.name} required`)
+        } else {
+          values[optionList.name] = []
+        }
       }
       setInitialValues(values)
+      setValidationSchema(validation)
     }
   }, [])
 
-  if (!initialValues) {
+  if (!initialValues || !validationSchema) {
     return null
   }
 
   return (
-    <Formik initialValues={initialValues} onSubmit={() => {
+    <Formik initialValues={initialValues} validationSchema={Yup.object(validationSchema)} onSubmit={() => {
     }}>
-      {({values, handleChange, setValues}) => (
+      {({values, handleChange, errors}) => (
         <Form>
           {productOptions.map(optionList => (
             <List key={optionList.name} subheader={
@@ -68,6 +81,7 @@ export const ProductOptionsList = (props: ProductOptionsListProps) => {
             </List>
           ))}
           <pre>{JSON.stringify(values)}</pre>
+          <pre>{JSON.stringify(errors)}</pre>
         </Form>
       )}
     </Formik>
