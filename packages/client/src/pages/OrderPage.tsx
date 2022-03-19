@@ -12,7 +12,7 @@ const OrderPage = () => {
   const [value, setValue] = useState(1)
   const navigate = useNavigate()
   const {tenant} = useLocalTenantService()
-  const {cart, getTotal, getSubTotal} = useLocalCartService()
+  const {cart, getTotal, getSubTotal, changeCartItemQuantity} = useLocalCartService()
 
   const handleValueChange = (addOn: number) => {
     if (value + addOn < 1) {
@@ -54,11 +54,11 @@ const OrderPage = () => {
           </Box>
           <Box flex={0.45}>
             <Box sx={{display: "flex", alignItems: "center"}}>
-              <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(-1)}>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => changeCartItemQuantity(id, -1)}>
                 <RemoveCircleOutlineIcon/>
               </IconButton>
               <Typography variant="h6" sx={{flex: 1, textAlign: "center"}}>{quantity}</Typography>
-              <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(1)}>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => changeCartItemQuantity(id, 1)}>
                 <AddCircleOutlineIcon/>
               </IconButton>
             </Box>

@@ -20,6 +20,7 @@ interface IAppContext {
   getSubTotal: () => number
   getTotal: () => number
   getTotalItems: () => number
+  changeCartItemQuantity: (id: string, quantity: number) => void
 }
 
 const AppContext = createContext<IAppContext>({} as IAppContext)
@@ -51,6 +52,25 @@ export const AppContextProvider: React.FC = (props) => {
     return cart.reduce((prev, current) => prev + current.quantity, 0)
   }
 
+  const changeCartItemQuantity = (id: string, quantity: number) => {
+    const newCart: CartItem[] = JSON.parse(JSON.stringify(cart))
+    const itemIndex = newCart.findIndex(cart => cart.id === id)
+    
+    if ((newCart[itemIndex].quantity + quantity) < 1) {
+      removeCartItem(id)
+      return
+    }
+
+    newCart[itemIndex].quantity += quantity
+    setCart(newCart)
+  }
+
+  const removeCartItem = (id: string) => {
+    // const newCart: CartItem[] = JSON.parse(JSON.stringify(cart))
+    const newCart = cart.filter(cart => cart.id !== id)
+    setCart(newCart)
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -64,7 +84,8 @@ export const AppContextProvider: React.FC = (props) => {
         addToCart,
         getSubTotal,
         getTotal,
-        getTotalItems
+        getTotalItems,
+        changeCartItemQuantity
       }}>{props.children}</AppContext.Provider>
   )
 }

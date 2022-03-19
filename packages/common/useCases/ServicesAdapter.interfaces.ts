@@ -35,11 +35,13 @@ export interface LocalProductSearchService {
 export interface LocalCartService {
   cart: CartItem[]
 
+  changeCartItemQuantity(id: string, newQuantity: number): void
+
   addToCart(product: Product, quantity: number, productOptions: ProductOptions[]): void
 
   getTotalItems(): number
 
   getSubTotal(): number
-  
+
   getTotal(): number
 }
