@@ -2,17 +2,18 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText} from "@
 import {Subject} from "rxjs"
 import {useEffect, useState} from "react"
 
-interface AppDialogProps {
+export interface AppDialogProps {
   contentText?: string
   agreeAction?: () => void
   disagreeAction?: () => void
+  open: boolean
 }
 
 export const appDialog$ = new Subject<AppDialogProps>()
 
 const AppDialog = () => {
-  const [dialogProps, setDialogProps] = useState<AppDialogProps>({})
-  const {contentText, agreeAction, disagreeAction} = dialogProps
+  const [dialogProps, setDialogProps] = useState<AppDialogProps>({open: false})
+  const {contentText, agreeAction, disagreeAction, open} = dialogProps
 
   useEffect(() => {
     const appDialogSub = appDialog$.subscribe({
@@ -23,19 +24,24 @@ const AppDialog = () => {
     }
   })
 
+  const disagreeHandler = () => {
+    disagreeAction && disagreeAction()
+    setDialogProps(prevState => ({...prevState, open: false}))
+  }
+
+  const agreeHandler = () => {
+    agreeAction && agreeAction()
+    setDialogProps(prevState => ({...prevState, open: false}))
+  }
+
   return (
-    <Dialog open={true}>
+    <Dialog open={open}>
       <DialogContent>
-        {contentText && <DialogContentText>
-          {contentText}
-        </DialogContentText>}
+        {contentText && <DialogContentText>{contentText}</DialogContentText>}
       </DialogContent>
       <DialogActions>
-        {disagreeAction && <Button onClick={disagreeAction}>Disagree</Button>}
-        <Button onClick={() => {
-        }} autoFocus>
-          Agree
-        </Button>
+        {disagreeAction && <Button variant="contained" onClick={disagreeHandler} autoFocus>Cancel</Button>}
+        {agreeAction && <Button variant="text" onClick={agreeHandler}>Confirm</Button>}
       </DialogActions>
     </Dialog>
   )

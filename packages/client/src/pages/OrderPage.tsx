@@ -1,5 +1,4 @@
 import * as React from "react"
-import {useState} from "react"
 import {BaseContainer} from "../containers/BaseContainer"
 import {Box, Button, IconButton, Typography} from "@mui/material"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
@@ -7,19 +6,27 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import {useNavigate} from "react-router-dom"
 import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 import {useLocalCartService} from "@ca/common/services/LocalCartService"
+import {useRxjsContext} from "../context"
+import Product from "@ca/common/domain/product/Product"
 
 const OrderPage = () => {
-  const [value, setValue] = useState(1)
   const navigate = useNavigate()
   const {tenant} = useLocalTenantService()
+  const {openAppDialog} = useRxjsContext()
   const {cart, getTotal, getSubTotal, changeCartItemQuantity} = useLocalCartService()
 
-  const handleValueChange = (addOn: number) => {
-    if (value + addOn < 1) {
-      return
+  const handleQuantityChange = (id: string, product: Product, quantity: number, addOn: number) => {
+    if (quantity + addOn < 1) {
+      openAppDialog({
+        contentText: `Would you like to remove ${product.name}`,
+        agreeAction: () => changeCartItemQuantity(id, addOn),
+        disagreeAction: () => {
+        },
+        open: true
+      })
+    } else {
+      changeCartItemQuantity(id, addOn)
     }
-
-    setValue(prevState => prevState + addOn)
   }
   return (
     <>
@@ -54,11 +61,11 @@ const OrderPage = () => {
           </Box>
           <Box flex={0.45}>
             <Box sx={{display: "flex", alignItems: "center"}}>
-              <IconButton color="primary" sx={{p: 0}} onClick={() => changeCartItemQuantity(id, -1)}>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => handleQuantityChange(id, product, quantity, -1)}>
                 <RemoveCircleOutlineIcon/>
               </IconButton>
               <Typography variant="h6" sx={{flex: 1, textAlign: "center"}}>{quantity}</Typography>
-              <IconButton color="primary" sx={{p: 0}} onClick={() => changeCartItemQuantity(id, 1)}>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => handleQuantityChange(id, product, quantity, 1)}>
                 <AddCircleOutlineIcon/>
               </IconButton>
             </Box>

@@ -2,10 +2,12 @@ import React, {createContext, useContext} from "react"
 import {sidePanel$, SidePanelProps} from "../components/SidePanel"
 import {productSearch$} from "../components/useProductSearch"
 import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
+import {appDialog$, AppDialogProps} from "../components/AppDialog"
 
 interface IRxjsContext {
   openSidePanel: (sidePanelProps: SidePanelProps) => void
   productSearch: (searchResult: CategoryWithProductDto[] | null) => void
+  openAppDialog: (appDialogProps: AppDialogProps) => void
 }
 
 const RxjsContext = createContext<IRxjsContext>({} as IRxjsContext)
@@ -20,8 +22,12 @@ export const RxjsContextProvider: React.FC = (props) => {
     productSearch$.next({searchResult: searchResult})
   }
 
+  const openAppDialog = (appDialogProps: AppDialogProps) => {
+    appDialog$.next(appDialogProps)
+  }
+
   return (
-    <RxjsContext.Provider value={{openSidePanel, productSearch}}>
+    <RxjsContext.Provider value={{openSidePanel, productSearch, openAppDialog}}>
       {props.children}
     </RxjsContext.Provider>
   )

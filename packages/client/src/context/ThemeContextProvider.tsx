@@ -229,6 +229,12 @@ const theme = createTheme(baseTheme, {
           }
         },
         {
+          props: {variant: "text"},
+          style: {
+            textTransform: "none"
+          }
+        },
+        {
           props: {color: "primary"},
           style: {
             borderRadius: baseTheme.shape.borderRadiusFull

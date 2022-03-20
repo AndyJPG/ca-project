@@ -7,6 +7,7 @@ import {SidePanel} from "./components/SidePanel"
 import {RxjsContextProvider} from "./context"
 import LazySuspense from "./components/LazySuspense"
 import {PageRoutes} from "./pages/PageRoutes"
+import AppDialog from "./components/AppDialog"
 
 function App() {
   const {initializeTenant} = useInitializeTenant()
@@ -24,6 +25,7 @@ function App() {
     <RxjsContextProvider>
       <ScrollToAnchor/>
       <SidePanel/>
+      <AppDialog/>
       <LazySuspense>
         <PageRoutes/>
       </LazySuspense>
