@@ -4,7 +4,7 @@ import {useInitializeTenant} from "@ca/common/useCases/InitializeTenant"
 import {useLocation} from "react-router-dom"
 import {ScrollToAnchor} from "./components/ScrollToAnchor"
 import {SidePanel} from "./components/SidePanel"
-import {RxjsContextProvider} from "./context/RxjsContextProvider"
+import {RxjsContextProvider} from "./context"
 import LazySuspense from "./components/LazySuspense"
 import {PageRoutes} from "./pages/PageRoutes"
 

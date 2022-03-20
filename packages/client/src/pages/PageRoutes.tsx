@@ -1,5 +1,5 @@
 import React, {lazy} from "react"
-import {RouteObject, useRoutes} from "react-router-dom"
+import {Route, RouteObject, Routes, useLocation, useRoutes} from "react-router-dom"
 import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 import OrderPage from "./OrderPage"
 import Layout from "../containers/Layout"
@@ -9,6 +9,8 @@ const ProductDetailPage = lazy(() => import(/* webpackChunkName: 'product-detail
 
 export const PageRoutes = () => {
   const {tenant} = useLocalTenantService()
+  const location = useLocation()
+  const state = location.state as { backgroundLocation?: Location }
 
   const routes: RouteObject[] = [
     {
@@ -34,15 +36,22 @@ export const PageRoutes = () => {
         ]
       },
       {
-        path: `/${companyDomain}/:productId`,
-        element: <ProductDetailPage/>
-      },
-      {
         path: `/${companyDomain}/order`,
         element: <OrderPage/>
       }
     )
   }
 
-  return useRoutes(routes)
+  const routesElement = useRoutes(routes, state?.backgroundLocation || location)
+
+  return (
+    <>
+      {routesElement}
+      {state?.backgroundLocation && tenant && (
+        <Routes>
+          <Route path={`/${tenant.companyDomain}/:productId`} element={<ProductDetailPage/>}/>
+        </Routes>
+      )}
+    </>
+  )
 }

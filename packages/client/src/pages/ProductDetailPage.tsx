@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Divider,
+  Drawer,
   FormHelperText,
   IconButton,
   List,
@@ -19,10 +20,9 @@ import * as React from "react"
 import {useEffect, useState} from "react"
 import {Form, Formik, FormikHelpers} from "formik"
 import Product from "@ca/common/domain/product/Product"
-import {useNavigate, useParams} from "react-router-dom"
+import {useLocation, useNavigate, useParams} from "react-router-dom"
 import {ProductDetailNavBar} from "../components/ProductDetailNavBar"
 import {useAddToCart} from "@ca/common/useCases/AddToCart"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
 
 interface InitialValues {
   quantity: number
@@ -38,10 +38,12 @@ const ProductDetailPage = () => {
   const [initialValues, setInitialValues] = useState<InitialValues | null>(null)
   const [product, setProduct] = useState<Product | null>(null)
   const {getProductById} = useProductRepository()
-  const {tenant} = useLocalTenantService()
   const {addToCart} = useAddToCart()
   const params = useParams()
   const navigate = useNavigate()
+  const location = useLocation()
+  const {from} = location.state as LocationState
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const productId = params.productId
@@ -59,9 +61,10 @@ const ProductDetailPage = () => {
 
         setInitialValues(values)
         setProduct(product)
+        setOpen(true)
       })
     }
-  }, [getProductById, params.productId, product])
+  }, [])
 
   if (!product || !initialValues) {
     return null
@@ -71,12 +74,23 @@ const ProductDetailPage = () => {
 
   const addProductToCart = (values: InitialValues, formikHelpers: FormikHelpers<InitialValues>) => {
     addToCart(product, values.quantity, [])
-    navigate(`/${tenant?.companyDomain}` || "/")
+    backAction()
+  }
+
+  const backAction = () => {
+    setOpen(false)
+    setTimeout(() => {
+      if (from) {
+        navigate(from.pathname)
+      } else {
+        navigate(-1)
+      }
+    }, 500)
   }
 
   return (
-    <>
-      <ProductDetailNavBar/>
+    <Drawer anchor={"bottom"} open={open} transitionDuration={500} PaperProps={{sx: {top: 0}}}>
+      <ProductDetailNavBar backBtnAction={backAction}/>
       {imageUrl ?
         <Box
           sx={{
@@ -88,7 +102,7 @@ const ProductDetailPage = () => {
           }}>
           <img src={imageUrl} alt={name}
                style={{width: "100%", height: "auto"}}/>
-        </Box> : <Box height="3.5rem"/>}
+        </Box> : <Box height="3.5rem" minHeight="3.5rem"/>}
       <BaseContainer sx={{backgroundColor: "white"}}>
         <Typography variant="h4">{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
         <Typography variant="body2"
@@ -189,7 +203,7 @@ const ProductDetailPage = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </Drawer>
   )
 }
 
