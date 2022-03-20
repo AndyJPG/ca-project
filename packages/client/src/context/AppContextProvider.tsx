@@ -16,6 +16,9 @@ interface IAppContext {
   categoriesWithProduct: CategoryWithProductDto[]
   setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
   cart: CartItem[]
+  setCart: (cart: CartItem[]) => void
+  getLocalStorageCart: (companyDomain: string) => CartItem[] | null
+  setLocalStorageCart: (companyDomain: string, cart: CartItem[]) => void
   addToCart: (product: Product, quantity: number, productOptions: ProductOptions[]) => void
   getSubTotal: () => number
   getTotal: () => number
@@ -32,7 +35,11 @@ export const AppContextProvider: React.FC = (props) => {
   const [cart, setCart] = useState<CartItem[]>([])
 
   const addToCart = (product: Product, quantity: number, productOptions: ProductOptions[]) => {
-    setCart([...cart, {id: shortid.generate(), product, quantity, productOptions}])
+    const newCart = [...cart, {id: shortid.generate(), product, quantity, productOptions}]
+    setCart(newCart)
+    if (tenant) {
+      setLocalStorageCart(tenant.companyDomain, newCart)
+    }
   }
 
   const getSubTotal = () => {
@@ -55,7 +62,7 @@ export const AppContextProvider: React.FC = (props) => {
   const changeCartItemQuantity = (id: string, quantity: number) => {
     const newCart: CartItem[] = JSON.parse(JSON.stringify(cart))
     const itemIndex = newCart.findIndex(cart => cart.id === id)
-    
+
     if ((newCart[itemIndex].quantity + quantity) < 1) {
       removeCartItem(id)
       return
@@ -63,12 +70,26 @@ export const AppContextProvider: React.FC = (props) => {
 
     newCart[itemIndex].quantity += quantity
     setCart(newCart)
+    if (tenant) {
+      setLocalStorageCart(tenant.companyDomain, newCart)
+    }
   }
 
   const removeCartItem = (id: string) => {
-    // const newCart: CartItem[] = JSON.parse(JSON.stringify(cart))
     const newCart = cart.filter(cart => cart.id !== id)
     setCart(newCart)
+  }
+
+  const getLocalStorageCart = (companyDomain: string) => {
+    const localCart = localStorage.getItem(`${companyDomain}-cart`)
+    if (localCart) {
+      return JSON.parse(localCart)
+    }
+    return null
+  }
+
+  const setLocalStorageCart = (companyDomain: string, cart: CartItem[]) => {
+    localStorage.setItem(`${companyDomain}-cart`, JSON.stringify(cart))
   }
 
   return (
@@ -81,6 +102,9 @@ export const AppContextProvider: React.FC = (props) => {
         categoriesWithProduct,
         setCategoriesWithProduct,
         cart,
+        setCart,
+        getLocalStorageCart,
+        setLocalStorageCart,
         addToCart,
         getSubTotal,
         getTotal,
