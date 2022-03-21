@@ -1,23 +1,26 @@
 import TenantDaoInterface from "../domain/tenant/TenantDao.Interface"
-import {LocalCategoryService, LocalTenantService} from "./ServicesAdapter.interfaces"
+import {LocalCartService, LocalCategoryService, LocalTenantService} from "./ServicesAdapter.interfaces"
 import {useTenantRepository} from "../domain/tenant/TenantRepository"
-import {useLocalTenantService} from "../services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "../services/LocalTenantService"
 import {CategoryDaoInterface} from "../domain/category/CategoryDao.interface"
 import {useCategoryRepository} from "../domain/category/CategoryRepository"
-import {useLocalCategoryService} from "../services/LocalCategoryServiceAdapter"
+import {useLocalCategoryService} from "../services/LocalCategoryService"
+import {useLocalCartService} from "../services/LocalCartService"
 
 interface Dependencies {
   tenantDao: TenantDaoInterface
   categoryDao: CategoryDaoInterface
   localTenantState: LocalTenantService
   localCategoryState: LocalCategoryService
+  localCartState: LocalCartService
 }
 
-export const initializeTenant = (dependencies: Dependencies) => {
+const initializeTenant = (dependencies: Dependencies) => {
   const tenantDao: TenantDaoInterface = dependencies.tenantDao
   const categoryDao: CategoryDaoInterface = dependencies.categoryDao
   const localTenantState: LocalTenantService = dependencies.localTenantState
   const localCategoryState: LocalCategoryService = dependencies.localCategoryState
+  const localCartState: LocalCartService = dependencies.localCartState
 
   return {
     async initializeTenant(tenantDomain: string): Promise<void> {
@@ -29,6 +32,7 @@ export const initializeTenant = (dependencies: Dependencies) => {
           localTenantState.setTenant(tenant)
           localCategoryState.setCategories(categories)
           localCategoryState.setCategoriesWithProduct(categoriesWithProduct)
+          localCartState.initializeCart(tenant.companyDomain)
         } else {
           localTenantState.setTenant(tenant)
         }
@@ -44,6 +48,7 @@ export const useInitializeTenant = () => {
   const categoryDao = useCategoryRepository()
   const localTenantState = useLocalTenantService()
   const localCategoryState = useLocalCategoryService()
+  const localCartState = useLocalCartService()
 
-  return initializeTenant({tenantDao, categoryDao, localTenantState, localCategoryState})
+  return initializeTenant({tenantDao, categoryDao, localTenantState, localCategoryState, localCartState})
 }

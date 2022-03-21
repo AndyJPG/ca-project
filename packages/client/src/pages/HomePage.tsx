@@ -1,18 +1,20 @@
-import {Box, Button} from "@mui/material"
+import {Box, Button, Typography} from "@mui/material"
 import * as React from "react"
 import {ProductList} from "../components/ProductList"
 import {Navbar} from "../components/Navbar"
 import Footer from "../components/Footer"
 import {BaseContainer} from "../containers/BaseContainer"
 import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
-import {useLocalCategoryService} from "@ca/common/services/LocalCategoryServiceAdapter"
-import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchServiceAdapter"
+import {useLocalCategoryService} from "@ca/common/services/LocalCategoryService"
+import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchService"
 import {NavToolbar} from "../components/NavToolbar"
 import {useLocation, useNavigate} from "react-router-dom"
+import {useLocalCartService} from "@ca/common/services/LocalCartService"
 
 const HomePage = () => {
   const {categoriesWithProduct} = useLocalCategoryService()
   const {searchResult} = useLocalProductSearchService()
+  const {getTotalItems} = useLocalCartService()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -39,6 +41,23 @@ const HomePage = () => {
           background: "rgba(255, 255, 255, 0.8)",
           backdropFilter: "blur(4px)"
         }}>
+        {getTotalItems() > 0 && <Box sx={{
+          position: "absolute",
+          left: 0,
+          top: 0,
+          bottom: 0,
+          pl: "1.8rem",
+          display: "flex",
+          alignItems: "center",
+          zIndex: theme => theme.zIndex.appBar
+        }}>
+          <Typography variant="h6" color="secondary" sx={{
+            background: "white",
+            textAlign: "center",
+            padding: "0 0.6rem",
+            borderRadius: "10%"
+          }}>{getTotalItems()}</Typography>
+        </Box>}
         <Button variant="contained" color="secondary" onClick={() => navigate("order", {state: {from: location}})}
                 sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600}}>View
           order</Button>

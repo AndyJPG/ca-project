@@ -1,26 +1,43 @@
 import * as React from "react"
-import {useState} from "react"
 import {BaseContainer} from "../containers/BaseContainer"
-import {Box, Button, IconButton, TextField, Typography} from "@mui/material"
+import {Box, Button, IconButton, Typography} from "@mui/material"
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline"
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline"
 import {useNavigate} from "react-router-dom"
-import {useLocalTenantService} from "@ca/common/services/LocalTenantServiceAdapter"
+import {useLocalTenantService} from "@ca/common/services/LocalTenantService"
+import {useLocalCartService} from "@ca/common/services/LocalCartService"
+import {useRxjsContext} from "../context"
+import Product from "@ca/common/domain/product/Product"
 
 const OrderPage = () => {
-  const [value, setValue] = useState(1)
   const navigate = useNavigate()
   const {tenant} = useLocalTenantService()
+  const {openAppDialog} = useRxjsContext()
+  const {cart, getTotal, getSubTotal, changeCartItemQuantity} = useLocalCartService()
 
-  const handleValueChange = (addOn: number) => {
-    if (value + addOn < 1) {
-      return
+  const handleQuantityChange = (id: string, product: Product, quantity: number, addOn: number) => {
+    if (quantity + addOn < 1) {
+      openAppDialog({
+        contentText: `Would you like to remove ${product.name}`,
+        agreeAction: () => changeCartItemQuantity(id, addOn),
+        disagreeAction: () => {
+        },
+        open: true
+      })
+    } else {
+      changeCartItemQuantity(id, addOn)
     }
-
-    setValue(prevState => prevState + addOn)
   }
   return (
-    <BaseContainer sx={{p: 0, background: theme => theme.palette.background.default, height: "100vh"}}>
+    <>
+      <Box
+        sx={{
+          position: "fixed",
+          width: "100%",
+          height: "100%",
+          background: theme => theme.palette.background.default,
+          zIndex: -1
+        }}/>
       <BaseContainer
         sx={{
           position: "fixed",
@@ -34,33 +51,28 @@ const OrderPage = () => {
         <Typography variant="h6">Order details</Typography>
       </BaseContainer>
       <Box height="7.3rem"/>
-      <BaseContainer sx={{display: "flex", background: "white"}}>
-        <Box flex={1}>
-          <Typography variant="body1" sx={{mb: "0.25rem"}}>Satay Chicken Skewers (6pcs)</Typography>
-          <Typography variant="body1" sx={{mb: 0, color: theme => theme.palette.text.secondary}}>$15.00</Typography>
-        </Box>
-        <Box flex={0.45} sx={{display: "flex", alignItems: "start"}}>
-          <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(-1)}>
-            <RemoveCircleOutlineIcon/>
-          </IconButton>
-          <TextField value={value} variant="standard" InputProps={{disableUnderline: true}} sx={{
-            "& .MuiInput-root": {
-              marginBottom: 0,
-              "& .MuiInput-input": {
-                textAlign: "center",
-                padding: 0,
-                fontSize: "1.125rem",
-                fontWeight: 600,
-                color: theme => theme.palette.text.primary
-              }
-            }
+      {cart.map(({id, product, quantity}) =>
+        <BaseContainer key={id}
+                       sx={{display: "flex", background: "white"}}>
+          <Box flex={1}>
+            <Typography variant="body1" sx={{mb: "0.25rem"}}>{product.name}</Typography>
+            <Typography variant="body1"
+                        sx={{mb: 0, color: theme => theme.palette.text.secondary}}>${product.price}</Typography>
+          </Box>
+          <Box flex={0.45}>
+            <Box sx={{display: "flex", alignItems: "center"}}>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => handleQuantityChange(id, product, quantity, -1)}>
+                <RemoveCircleOutlineIcon/>
+              </IconButton>
+              <Typography variant="h6" sx={{flex: 1, textAlign: "center"}}>{quantity}</Typography>
+              <IconButton color="primary" sx={{p: 0}} onClick={() => handleQuantityChange(id, product, quantity, 1)}>
+                <AddCircleOutlineIcon/>
+              </IconButton>
+            </Box>
+          </Box>
 
-          }}/>
-          <IconButton color="primary" sx={{p: 0}} onClick={() => handleValueChange(1)}>
-            <AddCircleOutlineIcon/>
-          </IconButton>
-        </Box>
-      </BaseContainer>
+        </BaseContainer>
+      )}
       <BaseContainer
         sx={{
           position: "fixed",
@@ -72,17 +84,34 @@ const OrderPage = () => {
         }}>
         <Box sx={{
           display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <Typography variant="body1" sx={{m: 0, color: theme => theme.palette.text.secondary}}>Subtotal</Typography>
+          <Typography variant="body1"
+                      sx={{m: 0, color: theme => theme.palette.text.secondary}}>${getSubTotal().toFixed(2)}</Typography>
+        </Box>
+        <Box sx={{
+          display: "flex",
+          justifyContent: "space-between"
+        }}>
+          <Typography variant="body1" sx={{m: 0, color: theme => theme.palette.text.secondary}}>Card
+            surcharge</Typography>
+          <Typography variant="body1" sx={{m: 0, color: theme => theme.palette.text.secondary}}>$0.00</Typography>
+        </Box>
+        <Box sx={{
+          display: "flex",
           justifyContent: "space-between",
           mb: "1rem"
         }}>
           <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>Total</Typography>
-          <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>$16.8</Typography>
+          <Typography variant="body1" sx={{m: 0, fontWeight: 600}}>${getTotal().toFixed(2)}</Typography>
         </Box>
         <Button variant="contained" color="secondary"
                 onClick={() => navigate(`/${tenant?.companyDomain}`)}
                 sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600}}>Add more</Button>
       </BaseContainer>
-    </BaseContainer>
+      <Box height="16rem"/>
+    </>
   )
 }
 

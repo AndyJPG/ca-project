@@ -1,6 +1,6 @@
 import {Box, Typography} from "@mui/material"
 import * as React from "react"
-import {useNavigate} from "react-router-dom"
+import {useLocation, useNavigate} from "react-router-dom"
 
 interface ProductListItemProps {
   id: string
@@ -13,7 +13,8 @@ interface ProductListItemProps {
 
 export const ProductListItem = (props: ProductListItemProps) => {
   const navigate = useNavigate()
-  const {id, subtitle, price, description, imageUrl, imageTop} = props
+  const location = useLocation()
+  const {id, subtitle, price, description, imageUrl} = props
   return (
     <Box sx={{
       width: "100%",
@@ -27,7 +28,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
       marginBottom: "1rem",
       boxShadow: theme => theme.themeShadows[1],
       borderRadius: theme => theme.shape.borderRadius
-    }} onClick={() => navigate(id)}>
+    }} onClick={() => navigate(id, {state: {backgroundLocation: location, from: location}})}>
       <Box sx={{
         flexGrow: 1,
         height: "100%",
@@ -37,11 +38,11 @@ export const ProductListItem = (props: ProductListItemProps) => {
       }}>
         <Typography variant="subtitle1">{subtitle.slice(0, 1).toUpperCase()}{subtitle.slice(1)}</Typography>
         {description &&
-        <Typography variant="body1"
-                    sx={{
-                      color: theme => theme.palette.text.secondary,
-                      mb: 0
-                    }}>{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
+            <Typography variant="body1"
+                        sx={{
+                          color: theme => theme.palette.text.secondary,
+                          mb: 0
+                        }}>{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
         {imageUrl && <Box flexGrow={1}/>}
         {imageUrl && <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>}
       </Box>
@@ -51,7 +52,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         flexDirection: "column",
         padding: "0.75rem 1rem"
       }}>
-        <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>
+          <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>
       </Box>}
       {imageUrl && (
         <Box sx={{
