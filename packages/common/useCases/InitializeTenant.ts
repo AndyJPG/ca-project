@@ -32,10 +32,7 @@ const initializeTenant = (dependencies: Dependencies) => {
           localTenantState.setTenant(tenant)
           localCategoryState.setCategories(categories)
           localCategoryState.setCategoriesWithProduct(categoriesWithProduct)
-          const localStorageCart = localCartState.getLocalStorageCart(tenant.companyDomain)
-          if (localStorageCart) {
-            localCartState.setCart(localStorageCart)
-          }
+          localCartState.initializeCart(tenant.companyDomain)
         } else {
           localTenantState.setTenant(tenant)
         }

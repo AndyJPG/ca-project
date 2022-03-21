@@ -35,12 +35,8 @@ export interface LocalProductSearchService {
 export interface LocalCartService {
   cart: CartItem[]
 
-  setLocalStorageCart(companyDomain: string, cart: CartItem[]): void
-
-  getLocalStorageCart(companyDomain: string): CartItem[] | null
-
-  setCart(cart: CartItem[]): void
-
+  initializeCart(companyDomain: string): void
+  
   changeCartItemQuantity(id: string, newQuantity: number): void
 
   addToCart(product: Product, quantity: number, productOptions: ProductOptions[]): void

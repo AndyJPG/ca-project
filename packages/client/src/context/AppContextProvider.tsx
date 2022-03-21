@@ -16,9 +16,7 @@ interface IAppContext {
   categoriesWithProduct: CategoryWithProductDto[]
   setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
   cart: CartItem[]
-  setCart: (cart: CartItem[]) => void
-  getLocalStorageCart: (companyDomain: string) => CartItem[] | null
-  setLocalStorageCart: (companyDomain: string, cart: CartItem[]) => void
+  initializeCart: (companyDomain: string) => void
   addToCart: (product: Product, quantity: number, productOptions: ProductOptions[]) => void
   getSubTotal: () => number
   getTotal: () => number
@@ -80,16 +78,18 @@ export const AppContextProvider: React.FC = (props) => {
     setCart(newCart)
   }
 
-  const getLocalStorageCart = (companyDomain: string) => {
+  const initializeCart = (companyDomain: string) => {
     const localCart = localStorage.getItem(`${companyDomain}-cart`)
     if (localCart) {
-      return JSON.parse(localCart)
+      const cart = JSON.parse(localCart) as { cart: CartItem[], ttl: number }
+      if (cart.ttl > Date.now()) {
+        setCart(cart.cart)
+      }
     }
-    return null
   }
 
   const setLocalStorageCart = (companyDomain: string, cart: CartItem[]) => {
-    localStorage.setItem(`${companyDomain}-cart`, JSON.stringify(cart))
+    localStorage.setItem(`${companyDomain}-cart`, JSON.stringify({cart: cart, ttl: Date.now() + (12 * 60 * 60 * 1000)}))
   }
 
   return (
@@ -102,9 +102,7 @@ export const AppContextProvider: React.FC = (props) => {
         categoriesWithProduct,
         setCategoriesWithProduct,
         cart,
-        setCart,
-        getLocalStorageCart,
-        setLocalStorageCart,
+        initializeCart,
         addToCart,
         getSubTotal,
         getTotal,
