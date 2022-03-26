@@ -5,6 +5,8 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/client": "^3.5.8",
+    "firebase": "^9.6.9",
+    "firebase-admin": "^10.0.2",
     "graphql": "^16.3.0"
   },
   "devDependencies": {
@@ -14,11 +16,13 @@
     "@types/jest": "^27.0.3",
     "babel-jest": "^27.4.5",
     "jest": "^27.4.5",
+    "nodemon": "^2.0.15",
     "ts-jest": "^27.1.2",
-    "ts-node": "^10.4.0",
+    "ts-node": "^10.7.0",
     "typescript": "^4.5.4"
   },
   "scripts": {
+    "data-feed": "ts-node data/dataFeed.ts",
     "test": "jest"
   }
 }
