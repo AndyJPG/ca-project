@@ -1,6 +1,6 @@
 import TenantDaoInterface from "./TenantDao.Interface"
 import Tenant from "./Tenant"
-import {FirebaseTenantDao} from "./FirebaseTenantDao"
+import {FirestoreTenantDao} from "./FirestoreTenantDao"
 
 interface Dependencies {
   tenantDao: TenantDaoInterface
@@ -20,6 +20,6 @@ const tenantRepository = (dependencies: Dependencies) => {
 }
 
 export const useTenantRepository = () => {
-  const tenantDao: TenantDaoInterface = FirebaseTenantDao()
+  const tenantDao: TenantDaoInterface = FirestoreTenantDao()
   return tenantRepository({tenantDao})
 }

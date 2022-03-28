@@ -1,26 +1,13 @@
-import {
-  QuerySnapshot,
-  DocumentData,
-  addDoc,
-  collection,
-  getFirestore,
-  deleteDoc,
-  doc,
-  getDoc,
-  limit,
-  query,
-  getDocs,
-  where
-} from "firebase/firestore"
+import {collection, doc, getDoc, getDocs, query, where} from "firebase/firestore"
 import TenantDaoInterface from "./TenantDao.Interface"
 import Tenant from "./Tenant"
 import {db} from "../../index"
 import {TenantDto} from "./TenantDto"
 
-export const FirebaseTenantDao = (): TenantDaoInterface => {
+export const FirestoreTenantDao = (): TenantDaoInterface => {
   return {
     async getTenantByDomain(tenantDomain: string): Promise<Tenant | null> {
-      const tenantsSnapshot: QuerySnapshot<DocumentData> = await getDocs(query(collection(db, "mp_tenants"), where("domain", "==", tenantDomain)))
+      const tenantsSnapshot = await getDocs(query(collection(db, "mp_tenants"), where("domain", "==", tenantDomain)))
 
       if (tenantsSnapshot.empty) {
         return null

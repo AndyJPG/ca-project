@@ -1,6 +1,6 @@
 import Product from "./Product"
 import ProductDaoInterface from "./ProductDao.interface"
-import {GraphqlProductDao} from "./GraphqlProductDao"
+import {FirestoreProductDao} from "./FirestoreProductDao"
 
 interface Dependencies {
   productDao: ProductDaoInterface
@@ -23,6 +23,6 @@ const productRepository = (dependencies: Dependencies) => {
 }
 
 export const useProductRepository = () => {
-  const productDao: ProductDaoInterface = GraphqlProductDao()
+  const productDao: ProductDaoInterface = FirestoreProductDao()
   return productRepository({productDao})
 }
