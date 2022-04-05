@@ -1,20 +1,20 @@
 import React, {createContext, useContext, useState} from "react"
 import Tenant from "@ca/common/domain/tenant/Tenant"
-import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import Category from "@ca/common/domain/category/Category"
 import Product from "@ca/common/domain/product/Product"
 import CartItem from "@ca/common/domain/cart/CartItem"
 import {Decimal} from "decimal.js"
 import shortid from "shortid"
 import {ProductOptions} from "@ca/common/domain/product/ProductOption"
+import CategoryWithProducts from "@ca/common/domain/category/CategoryWithProducts"
 
 interface IAppContext {
   tenant: Tenant | null
   setTenant: (tenant: Tenant | null) => void
   categories: Category[] | null
   setCategories: (categories: Category[]) => void
-  categoriesWithProduct: CategoryWithProductDto[]
-  setCategoriesWithProduct: (categories: CategoryWithProductDto[]) => void
+  categoriesWithProduct: CategoryWithProducts[]
+  setCategoriesWithProduct: (categories: CategoryWithProducts[]) => void
   cart: CartItem[]
   initializeCart: (companyDomain: string) => void
   addToCart: (product: Product, quantity: number, productOptions: ProductOptions[]) => void
@@ -29,7 +29,7 @@ const AppContext = createContext<IAppContext>({} as IAppContext)
 export const AppContextProvider: React.FC = (props) => {
   const [tenant, setTenant] = useState<Tenant | null>(null)
   const [categories, setCategories] = useState<Category[] | null>(null)
-  const [categoriesWithProduct, setCategoriesWithProduct] = useState<CategoryWithProductDto[]>([])
+  const [categoriesWithProduct, setCategoriesWithProduct] = useState<CategoryWithProducts[]>([])
   const [cart, setCart] = useState<CartItem[]>([])
 
   const addToCart = (product: Product, quantity: number, productOptions: ProductOptions[]) => {

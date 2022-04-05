@@ -1,4 +1,3 @@
-import Category from "../category/Category"
 import {ProductOptionsDto} from "./ProductOptionDto"
 
 export interface ProductDto {
@@ -8,6 +7,6 @@ export interface ProductDto {
   price: number
   image_url: string | null
   ingredients: string[]
-  categories: Category[]
+  categories: string[]
   product_options: ProductOptionsDto[]
 }

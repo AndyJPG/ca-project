@@ -1,9 +1,9 @@
 import Tenant from "../domain/tenant/Tenant"
-import {CategoryWithProductDto} from "../domain/category/CategoryDto"
 import Category from "../domain/category/Category"
 import Product from "../domain/product/Product"
 import CartItem from "../domain/cart/CartItem"
 import {ProductOptions} from "../domain/product/ProductOption"
+import CategoryWithProducts from "../domain/category/CategoryWithProducts"
 
 export interface LocalTenantService {
   tenant: Tenant | null
@@ -13,11 +13,11 @@ export interface LocalTenantService {
 
 export interface LocalCategoryService {
   categories: Category[] | null
-  categoriesWithProduct: CategoryWithProductDto[]
+  categoriesWithProduct: CategoryWithProducts[]
 
   setCategories(data: Category[]): void
 
-  setCategoriesWithProduct(data: CategoryWithProductDto[]): void
+  setCategoriesWithProduct(data: CategoryWithProducts[]): void
 }
 
 export interface LocalProductService {
@@ -27,16 +27,16 @@ export interface LocalProductService {
 }
 
 export interface LocalProductSearchService {
-  searchResult: CategoryWithProductDto[] | null
+  searchResult: CategoryWithProducts[] | null
 
-  setSearchResult(data: CategoryWithProductDto[] | null): void
+  setSearchResult(data: CategoryWithProducts[] | null): void
 }
 
 export interface LocalCartService {
   cart: CartItem[]
 
   initializeCart(companyDomain: string): void
-  
+
   changeCartItemQuantity(id: string, newQuantity: number): void
 
   addToCart(product: Product, quantity: number, productOptions: ProductOptions[]): void

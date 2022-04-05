@@ -1,7 +1,7 @@
 import {LocalCategoryService, LocalProductSearchService} from "./ServicesAdapter.interfaces"
 import {useLocalCategoryService} from "../services/LocalCategoryService"
 import {useLocalProductSearchService} from "../services/LocalProductSearchService"
-import {CategoryWithProductDto} from "../domain/category/CategoryDto"
+import CategoryWithProducts from "../domain/category/CategoryWithProducts"
 
 interface Dependencies {
   localCategoryState: LocalCategoryService
@@ -15,7 +15,7 @@ const searchProductLocalState = (dependencies: Dependencies) => {
   return {
     searchProductLocalState(keyword: string) {
       const filterKeyword = keyword.toLowerCase()
-      const categoriesWithProduct: CategoryWithProductDto[] = JSON.parse(JSON.stringify(localCategoryState.categoriesWithProduct))
+      const categoriesWithProduct: CategoryWithProducts[] = JSON.parse(JSON.stringify(localCategoryState.categoriesWithProduct))
       const {setSearchResult} = localProductSearch
 
       if (keyword === "") {

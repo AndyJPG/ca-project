@@ -1,15 +1,15 @@
 import {useEffect, useState} from "react"
-import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
 import {Subject} from "rxjs"
+import CategoryWithProducts from "@ca/common/domain/category/CategoryWithProducts"
 
 export interface ProductSearchProps {
-  searchResult: CategoryWithProductDto[] | null
+  searchResult: CategoryWithProducts[] | null
 }
 
 export const productSearch$ = new Subject<ProductSearchProps>()
 
 export const useProductSearch = () => {
-  const [searchResult, setSearchResult] = useState<CategoryWithProductDto[] | null>(null)
+  const [searchResult, setSearchResult] = useState<CategoryWithProducts[] | null>(null)
 
   useEffect(() => {
     const productSearchSub = productSearch$.subscribe({
@@ -17,7 +17,7 @@ export const useProductSearch = () => {
         setSearchResult(value.searchResult)
       }
     })
-    
+
     return () => {
       productSearchSub.unsubscribe()
     }

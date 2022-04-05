@@ -1,9 +1,9 @@
 import {Tab, Tabs} from "@mui/material"
 import * as React from "react"
-import {CategoryWithProductDto} from "@ca/common/domain/category/CategoryDto"
+import CategoryWithProducts from "@ca/common/domain/category/CategoryWithProducts"
 
 interface CategoriesTabsProps {
-  categoriesWithProduct: CategoryWithProductDto[]
+  categoriesWithProduct: CategoryWithProducts[]
 }
 
 export const CategoriesTabs = (props: CategoriesTabsProps) => {

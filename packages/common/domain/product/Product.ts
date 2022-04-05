@@ -1,4 +1,3 @@
-import Category from "../category/Category"
 import {ProductOptions} from "./ProductOption"
 
 export default interface Product {
@@ -9,6 +8,6 @@ export default interface Product {
   price: number
   imageUrl: string | null
   ingredients: string[]
-  categories: Category[]
+  categories: string[]
   productOptions: ProductOptions[]
 }

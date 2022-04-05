@@ -1,7 +1,7 @@
 import {CategoryDaoInterface} from "./CategoryDao.interface"
 import Category from "./Category"
-import {graphqlCategoryDao} from "./GraphqlCategoryDao"
-import {CategoryWithProductDto} from "./CategoryDto"
+import CategoryWithProducts from "./CategoryWithProducts"
+import {firestoreCategoryDao} from "./FirestoreCategoryDao"
 
 interface Dependencies {
   categoryDao: CategoryDaoInterface
@@ -11,7 +11,7 @@ const categoryRepository = (dependencies: Dependencies) => {
   const categoryDao: CategoryDaoInterface = dependencies.categoryDao
 
   return {
-    getCategoriesWithProductsByTenantId(tenantId: string): Promise<CategoryWithProductDto[]> {
+    getCategoriesWithProductsByTenantId(tenantId: string): Promise<CategoryWithProducts[]> {
       return categoryDao.getCategoriesWithProductsByTenantId(tenantId)
     },
     getCategoriesByTenantId(tenantId: string): Promise<Category[]> {
@@ -21,6 +21,6 @@ const categoryRepository = (dependencies: Dependencies) => {
 }
 
 export const useCategoryRepository = () => {
-  const categoryDao: CategoryDaoInterface = graphqlCategoryDao()
+  const categoryDao: CategoryDaoInterface = firestoreCategoryDao()
   return categoryRepository({categoryDao})
 }

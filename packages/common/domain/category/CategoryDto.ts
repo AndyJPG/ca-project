@@ -1,6 +1,11 @@
-import Category from "./Category"
-import Product from "../product/Product"
+import {ProductDto} from "../product/ProductDto"
 
-export interface CategoryWithProductDto extends Category {
-  products: Product[]
+export interface CategoryDto {
+  tenant_id: string
+  name: string
+  order: number
+}
+
+export interface CategoryWithProductDto extends CategoryDto {
+  products: (ProductDto & { id: string })[]
 }
