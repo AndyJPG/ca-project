@@ -1,13 +1,13 @@
-import {List, ListItem, ListItemButton, ListItemText} from "@mui/material"
-import {BaseContainer} from "../containers/BaseContainer"
-import React, {useState} from "react"
-import {useRxjsContext} from "../context"
-import {useLocalCategoryService} from "@ca/common/services/LocalCategoryService"
+import { useLocalCategoryService } from "@ca/common/services/LocalCategoryService"
+import { List, ListItem, ListItemButton, ListItemText } from "@mui/material"
+import React, { useState } from "react"
+import { BaseContainer } from "../containers/BaseContainer"
+import { useRxjsContext } from "../context"
 
 const CategoryMenu = () => {
-  const {categories} = useLocalCategoryService()
-  const {openSidePanel} = useRxjsContext()
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const { categoriesWithProduct } = useLocalCategoryService()
+  const { openSidePanel } = useRxjsContext()
+  const [ selectedIndex, setSelectedIndex ] = useState(0)
 
   const handleOnClick = (categoryId: string, index: number) => {
     const categoryEl = document.querySelector(categoryId) as HTMLElement
@@ -18,7 +18,7 @@ const CategoryMenu = () => {
       })
     }
     setSelectedIndex(index)
-    openSidePanel({open: false})
+    openSidePanel({ open: false })
   }
 
   return (
@@ -27,7 +27,7 @@ const CategoryMenu = () => {
       backgroundColor: "white"
     }}>
       <List disablePadding>
-        {categories && categories.map((category, index) => (
+        {categoriesWithProduct && categoriesWithProduct.map((category, index) => (
           <ListItem key={category.id + category.name} disablePadding>
             <ListItemButton selected={index === selectedIndex}
                             onClick={() => handleOnClick(`#${category.name}`, index)}>
