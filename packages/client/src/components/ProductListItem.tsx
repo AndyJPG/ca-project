@@ -1,20 +1,16 @@
-import {Box, Typography} from "@mui/material"
+import Product from "@ca/common/domain/product/Product"
+import { Box, Typography } from "@mui/material"
 import * as React from "react"
-import {useLocation, useNavigate} from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 interface ProductListItemProps {
-  id: string
-  subtitle: string
-  price: number
-  description?: string
-  imageUrl?: string
-  imageTop?: boolean
+  product: Product
 }
 
 export const ProductListItem = (props: ProductListItemProps) => {
   const navigate = useNavigate()
   const location = useLocation()
-  const {id, subtitle, price, description, imageUrl} = props
+  const { id, name, price, description, imageUrl } = props.product
   return (
     <Box sx={{
       width: "100%",
@@ -28,7 +24,13 @@ export const ProductListItem = (props: ProductListItemProps) => {
       marginBottom: "1rem",
       boxShadow: theme => theme.themeShadows[1],
       borderRadius: theme => theme.shape.borderRadius
-    }} onClick={() => navigate(id, {state: {backgroundLocation: location, from: location}})}>
+    }} onClick={() => navigate(id, {
+      state: {
+        backgroundLocation: location,
+        from: location,
+        product: props.product
+      }
+    })}>
       <Box sx={{
         flexGrow: 1,
         height: "100%",
@@ -36,7 +38,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         flexDirection: "column",
         padding: "0.75rem 1rem"
       }}>
-        <Typography variant="subtitle1">{subtitle.slice(0, 1).toUpperCase()}{subtitle.slice(1)}</Typography>
+        <Typography variant="subtitle1">{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
         {description &&
             <Typography variant="body1"
                         sx={{
@@ -44,7 +46,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
                           mb: 0
                         }}>{description.slice(0, 1).toUpperCase()}{description.slice(1)}</Typography>}
         {imageUrl && <Box flexGrow={1}/>}
-        {imageUrl && <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>}
+        {imageUrl && <Typography fontWeight="body1" sx={{ mb: 0 }}>${price}</Typography>}
       </Box>
       {!imageUrl && <Box sx={{
         height: "100%",
@@ -52,7 +54,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
         flexDirection: "column",
         padding: "0.75rem 1rem"
       }}>
-          <Typography fontWeight="body1" sx={{mb: 0}}>${price}</Typography>
+          <Typography fontWeight="body1" sx={{ mb: 0 }}>${price}</Typography>
       </Box>}
       {imageUrl && (
         <Box sx={{
@@ -64,8 +66,8 @@ export const ProductListItem = (props: ProductListItemProps) => {
           overflow: "hidden"
         }}>
           <img src={imageUrl}
-               style={{height: "100%", width: "auto"}}
-               alt={subtitle}/>
+               style={{ height: "100%", width: "auto" }}
+               alt={name}/>
         </Box>
       )}
     </Box>

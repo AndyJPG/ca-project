@@ -1,27 +1,27 @@
-import {Box, Button, Typography} from "@mui/material"
-import * as React from "react"
-import {ProductList} from "../components/ProductList"
-import {Navbar} from "../components/Navbar"
-import Footer from "../components/Footer"
-import {BaseContainer} from "../containers/BaseContainer"
-import {useLocalCategoryService} from "@ca/common/services/LocalCategoryService"
-import {useLocalProductSearchService} from "@ca/common/services/LocalProductSearchService"
-import {NavToolbar} from "../components/NavToolbar"
-import {useLocation, useNavigate} from "react-router-dom"
-import {useLocalCartService} from "@ca/common/services/LocalCartService"
 import CategoryWithProducts from "@ca/common/domain/category/CategoryWithProducts"
+import { useLocalCartService } from "@ca/common/services/LocalCartService"
+import { useLocalCategoryService } from "@ca/common/services/LocalCategoryService"
+import { useLocalProductSearchService } from "@ca/common/services/LocalProductSearchService"
+import { Box, Button, Typography } from "@mui/material"
+import * as React from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import Footer from "../components/Footer"
+import { Navbar } from "../components/Navbar"
+import { NavToolbar } from "../components/NavToolbar"
+import { ProductList } from "../components/ProductList"
+import { BaseContainer } from "../containers/BaseContainer"
 
 const HomePage = () => {
-  const {categoriesWithProduct} = useLocalCategoryService()
-  const {searchResult} = useLocalProductSearchService()
-  const {getTotalItems} = useLocalCartService()
+  const { categoriesWithProduct } = useLocalCategoryService()
+  const { searchResult } = useLocalProductSearchService()
+  const { getTotalItems } = useLocalCartService()
   const navigate = useNavigate()
   const location = useLocation()
 
   return (
-    <BaseContainer sx={{backgroundColor: theme => theme.palette.background.default, margin: 0, padding: 0}}>
+    <BaseContainer sx={{ backgroundColor: theme => theme.palette.background.default, margin: 0, padding: 0 }}>
       <Navbar/>
-      <Box sx={{position: "fixed", top: "3.5rem", left: 0, right: 0, zIndex: theme => theme.zIndex.appBar}}>
+      <Box sx={{ position: "fixed", top: "3.5rem", left: 0, right: 0, zIndex: theme => theme.zIndex.appBar }}>
         <NavToolbar/>
       </Box>
       <Box height="7rem"/>
@@ -58,8 +58,8 @@ const HomePage = () => {
               borderRadius: "10%"
             }}>{getTotalItems()}</Typography>
         </Box>}
-        <Button variant="contained" color="secondary" onClick={() => navigate("order", {state: {from: location}})}
-                sx={{height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600}}>View
+        <Button variant="contained" color="secondary" onClick={() => navigate("order", { state: { from: location } })}
+                sx={{ height: "3.4rem", width: "100%", fontSize: "1.125rem", fontWeight: 600 }}>View
           order</Button>
       </BaseContainer>
     </BaseContainer>

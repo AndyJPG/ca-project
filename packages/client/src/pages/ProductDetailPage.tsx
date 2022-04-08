@@ -1,3 +1,8 @@
+import Product from "@ca/common/domain/product/Product"
+import { useProductRepository } from "@ca/common/domain/product/ProductRepository"
+import { useAddToCart } from "@ca/common/useCases/AddToCart"
+import AddIcon from "@mui/icons-material/Add"
+import RemoveIcon from "@mui/icons-material/Remove"
 import {
   Box,
   Button,
@@ -12,17 +17,12 @@ import {
   ListSubheader,
   Typography
 } from "@mui/material"
-import AddIcon from "@mui/icons-material/Add"
-import RemoveIcon from "@mui/icons-material/Remove"
-import {BaseContainer} from "../containers/BaseContainer"
-import {useProductRepository} from "@ca/common/domain/product/ProductRepository"
+import { Form, Formik, FormikHelpers } from "formik"
 import * as React from "react"
-import {useEffect, useState} from "react"
-import {Form, Formik, FormikHelpers} from "formik"
-import Product from "@ca/common/domain/product/Product"
-import {useLocation, useNavigate, useParams} from "react-router-dom"
-import {ProductDetailNavBar} from "../components/ProductDetailNavBar"
-import {useAddToCart} from "@ca/common/useCases/AddToCart"
+import { useEffect, useState } from "react"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { ProductDetailNavBar } from "../components/ProductDetailNavBar"
+import { BaseContainer } from "../containers/BaseContainer"
 
 interface InitialValues {
   quantity: number
@@ -35,22 +35,22 @@ interface OptionsValues {
 }
 
 const ProductDetailPage = () => {
-  const [initialValues, setInitialValues] = useState<InitialValues | null>(null)
-  const [product, setProduct] = useState<Product | null>(null)
-  const {getProductById} = useProductRepository()
-  const {addToCart} = useAddToCart()
+  const [ initialValues, setInitialValues ] = useState<InitialValues | null>(null)
+  const [ product, setProduct ] = useState<Product | null>(null)
+  const { getProductById } = useProductRepository()
+  const { addToCart } = useAddToCart()
   const params = useParams()
   const navigate = useNavigate()
   const location = useLocation()
-  const {from} = location.state as LocationState
-  const [open, setOpen] = useState(false)
+  const { from } = location.state as LocationState
+  const [ open, setOpen ] = useState(false)
 
   useEffect(() => {
+    console.log(location)
     const productId = params.productId
     if (productId && !product) {
+      const values: InitialValues = { quantity: 1, selectedOptions: {} }
       getProductById(productId).then(product => {
-        const values: InitialValues = {quantity: 1, selectedOptions: {}}
-
         for (const optionList of product?.productOptions || []) {
           if (optionList.singleSelection) {
             values.selectedOptions[optionList.name] = ""
@@ -70,7 +70,7 @@ const ProductDetailPage = () => {
     return null
   }
 
-  const {name, description, price, productOptions, imageUrl} = product
+  const { name, description, price, productOptions, imageUrl } = product
 
   const addProductToCart = (values: InitialValues, formikHelpers: FormikHelpers<InitialValues>) => {
     addToCart(product, values.quantity, [])
@@ -89,7 +89,7 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <Drawer anchor={"bottom"} open={open} transitionDuration={500} PaperProps={{sx: {top: 0}}}>
+    <Drawer anchor={"bottom"} open={open} transitionDuration={500} PaperProps={{ sx: { top: 0 } }}>
       <ProductDetailNavBar backBtnAction={backAction}/>
       {imageUrl ?
         <Box
@@ -101,29 +101,29 @@ const ProductDetailPage = () => {
             overflow: "hidden"
           }}>
           <img src={imageUrl} alt={name}
-               style={{width: "100%", height: "auto"}}/>
+               style={{ width: "100%", height: "auto" }}/>
         </Box> : <Box height="3.5rem" minHeight="3.5rem"/>}
-      <BaseContainer sx={{backgroundColor: "white"}}>
+      <BaseContainer sx={{ backgroundColor: "white" }}>
         <Typography variant="h4">{name.slice(0, 1).toUpperCase()}{name.slice(1)}</Typography>
         <Typography variant="body2"
                     sx={{
                       fontSize: "1.125rem",
                       mb: "2rem"
                     }}>{description}</Typography>
-        <Box sx={{display: "flex", alignItems: "center", justifyContent: "space-between"}}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
           <Typography variant="h6">${price}</Typography>
-          <Typography variant="body2" sx={{fontSize: "1.125rem", mb: 0}}>V / VG / GF</Typography>
+          <Typography variant="body2" sx={{ fontSize: "1.125rem", mb: 0 }}>V / VG / GF</Typography>
         </Box>
       </BaseContainer>
       <Formik initialValues={initialValues} onSubmit={addProductToCart}>
-        {({errors, setValues, values}) => (
+        {({ errors, setValues, values }) => (
           <Form>
             {productOptions.map(optionList => (
               <List key={optionList.name} subheader={
                 <ListSubheader>
                   {optionList.name.slice(0, 1).toUpperCase()}{optionList.name.slice(1)}
                   {optionList.required &&
-                      <Typography variant="body2" sx={{margin: "0.2rem 0 0 0"}}>Required</Typography>}
+                      <Typography variant="body2" sx={{ margin: "0.2rem 0 0 0" }}>Required</Typography>}
                   {errors.selectedOptions && errors.selectedOptions[optionList.name] &&
                       <FormHelperText
                           error>{errors.selectedOptions[optionList.name]}</FormHelperText>}
@@ -136,10 +136,10 @@ const ProductDetailPage = () => {
                       <ListItemText
                         primary={`${option.name.slice(0, 1).toUpperCase()}${option.name.slice(1)}`}
                         secondary={`+$${option.price}`}
-                        secondaryTypographyProps={{margin: "0 0 0 1rem"}}
-                        sx={{display: "flex", alignItems: "center"}}/>
+                        secondaryTypographyProps={{ margin: "0 0 0 1rem" }}
+                        sx={{ display: "flex", alignItems: "center" }}/>
                       <ListItemIcon
-                        sx={{minWidth: 0, "& .MuiButtonBase-root": {position: "inherit"}}}>
+                        sx={{ minWidth: 0, "& .MuiButtonBase-root": { position: "inherit" } }}>
                         {/*{optionList.singleSelection ?*/}
                         {/*  <Radio name={`selectedOptions.${optionList.name}`} value={index}*/}
                         {/*         checked={values.selectedOptions[optionList.name] === index.toString()}*/}
@@ -154,7 +154,7 @@ const ProductDetailPage = () => {
                 ))}
               </List>
             ))}
-            <Box sx={{height: "10rem"}}/>
+            <Box sx={{ height: "10rem" }}/>
             <BaseContainer
               sx={{
                 position: "fixed",
@@ -184,9 +184,12 @@ const ProductDetailPage = () => {
                   <RemoveIcon/>
                 </IconButton>
                 <Typography variant="body1"
-                            sx={{mb: 0, flex: 1, textAlign: "center"}}>{values.quantity}</Typography>
+                            sx={{ mb: 0, flex: 1, textAlign: "center" }}>{values.quantity}</Typography>
                 <IconButton color="primary"
-                            onClick={() => setValues(prevState => ({...prevState, quantity: prevState.quantity + 1}))}>
+                            onClick={() => setValues(prevState => ({
+                              ...prevState,
+                              quantity: prevState.quantity + 1
+                            }))}>
                   <AddIcon/>
                 </IconButton>
               </Box>

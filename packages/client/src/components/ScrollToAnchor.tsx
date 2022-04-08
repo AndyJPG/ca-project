@@ -1,7 +1,7 @@
-import {useLocation} from "react-router-dom"
-import {useEffect} from "react"
+import { useLocation } from "react-router-dom"
+import { useEffect } from "react"
 
-export const ScrollToAnchor = () => {
+const ScrollToAnchor = () => {
   const location = useLocation()
 
   useEffect(() => {
@@ -14,7 +14,9 @@ export const ScrollToAnchor = () => {
         })
       }
     }
-  }, [location])
+  }, [ location ])
 
   return null
 }
+
+export default ScrollToAnchor

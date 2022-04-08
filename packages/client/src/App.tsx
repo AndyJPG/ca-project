@@ -1,13 +1,15 @@
 import { useInitializeTenant } from "@ca/common/useCases/InitializeTenant"
 import * as React from "react"
-import { useEffect, useState } from "react"
+import { lazy, useEffect, useState } from "react"
 import { BrowserRouter } from "react-router-dom"
-import AppDialog from "./components/AppDialog"
 import BackdropSpinner from "./components/BackdropSpinner"
-import { ScrollToAnchor } from "./components/ScrollToAnchor"
-import { SidePanel } from "./components/SidePanel"
+import LazySuspense from "./components/LazySuspense"
 import { RxjsContextProvider } from "./context"
 import { PageRoutes } from "./pages/PageRoutes"
+
+const AppDialog = lazy(() => import("./components/AppDialog"))
+const SidePanel = lazy(() => import("./components/SidePanel"))
+const ScrollToAnchor = lazy(() => import("./components/ScrollToAnchor"))
 
 function App() {
   const [ loading, setLoading ] = useState(true)
@@ -27,11 +29,15 @@ function App() {
 
   return (
     <RxjsContextProvider>
-      <AppDialog/>
+      <LazySuspense name="app dialog">
+        <AppDialog/>
+      </LazySuspense>
       {loading ? <BackdropSpinner/> : (
         <BrowserRouter>
-          <ScrollToAnchor/>
-          <SidePanel/>
+          <LazySuspense name="side panel and scroll to anchor">
+            <ScrollToAnchor/>
+            <SidePanel/>
+          </LazySuspense>
           <PageRoutes/>
         </BrowserRouter>
       )}

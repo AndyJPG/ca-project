@@ -12,7 +12,8 @@ export const PageRoutes = () => {
     <Routes>
       <Route path="/" element={<Outlet/>}>
         <Route index element={<div>Home page</div>}/>
-        {tenant && <Route path={`${tenant.companyDomain}/*`} element={<LazySuspense><MenuRoutes/></LazySuspense>}/>}
+        {tenant && <Route path={`${tenant.companyDomain}/*`}
+                          element={<LazySuspense name="menu routes"><MenuRoutes/></LazySuspense>}/>}
         <Route path="*" element={<div>404 not found</div>}/>
       </Route>
     </Routes>

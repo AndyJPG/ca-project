@@ -1,4 +1,4 @@
-import React, { lazy } from "react"
+import React, { lazy, useEffect } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import LazySuspense from "../components/LazySuspense"
 import Layout from "../containers/Layout"
@@ -15,14 +15,15 @@ const MenuRoutes = () => {
     <>
       <Routes location={state?.backgroundLocation || location}>
         <Route path="/" element={<Layout/>}>
-          <Route index element={<LazySuspense><HomePage/></LazySuspense>}/>
-          <Route path="order" element={<LazySuspense><OrderPage/></LazySuspense>}/>
+          <Route index element={<LazySuspense name="menu home page"><HomePage/></LazySuspense>}/>
+          <Route path="order" element={<LazySuspense name="menu order page"><OrderPage/></LazySuspense>}/>
         </Route>
         <Route path="*" element={<div>404 not found</div>}/>
       </Routes>
       {state?.backgroundLocation && (
         <Routes>
-          <Route path="/:productId" element={<LazySuspense><ProductDetailPage/></LazySuspense>}/>
+          <Route path="/:productId"
+                 element={<LazySuspense name="menu product page"><ProductDetailPage/></LazySuspense>}/>
         </Routes>
       )}
     </>
