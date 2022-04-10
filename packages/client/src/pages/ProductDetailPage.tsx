@@ -8,7 +8,6 @@ import {
   Box,
   Button,
   Divider,
-  Drawer,
   FormHelperText,
   IconButton,
   List,
@@ -18,7 +17,7 @@ import {
   ListSubheader,
   Typography
 } from "@mui/material"
-import { Form, Formik, FormikHelpers } from "formik"
+import { Form, Formik } from "formik"
 import * as React from "react"
 import { useEffect, useState } from "react"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
@@ -90,7 +89,7 @@ const ProductDetailPage = () => {
     return null
   }
 
-  const addProductToCart = (values: InitialValues, formikHelpers: FormikHelpers<InitialValues>) => {
+  const addProductToCart = (values: InitialValues) => {
     if (product) {
       addToCart(product, values.quantity, [])
     }
