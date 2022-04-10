@@ -24,13 +24,7 @@ export const ProductListItem = (props: ProductListItemProps) => {
       marginBottom: "1rem",
       boxShadow: theme => theme.themeShadows[1],
       borderRadius: theme => theme.shape.borderRadius
-    }} onClick={() => navigate(id, {
-      state: {
-        backgroundLocation: location,
-        from: location,
-        product: props.product
-      }
-    })}>
+    }} onClick={() => navigate(id, { state: { from: location, product: props.product } })}>
       <Box sx={{
         flexGrow: 1,
         height: "100%",
