@@ -12,19 +12,19 @@ const SidePanel = lazy(() => import("./components/SidePanel"))
 const ScrollToAnchor = lazy(() => import("./components/ScrollToAnchor"))
 
 function App() {
-  const [ loading, setLoading ] = useState(true)
+  const [ loading, setLoading ] = useState(false)
   const { initializeTenant } = useInitializeTenant()
 
   useEffect(() => {
-    setLoading(true)
-    const pathName = window.location.pathname.split("/")
-    if (pathName.length > 1) {
-      initializeTenant(pathName[1])
-        .catch(e => console.log(e))
-        .finally(() => setLoading(false))
-    } else {
-      setLoading(false)
-    }
+    // setLoading(true)
+    // const pathName = window.location.pathname.split("/")
+    // if (pathName.length > 1) {
+    //   initializeTenant(pathName[1])
+    //     .catch(e => console.log(e))
+    //     .finally(() => setLoading(false))
+    // } else {
+    //   setLoading(false)
+    // }
   }, [])
 
   return (

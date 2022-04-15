@@ -1,10 +1,9 @@
-import {getDoc, collection, doc, query, getDocs, where} from "firebase/firestore"
-import ProductDaoInterface from "./ProductDao.interface"
+import { push, ref } from "firebase/database"
+import { collection, doc, getDoc, getDocs, query, where } from "firebase/firestore"
+import { db, realDb } from "../../index"
 import Product from "./Product"
-import {db} from "../../index"
-import {ProductDto} from "./ProductDto"
-import Category from "../category/Category"
-import {ProductOptions} from "./ProductOption"
+import ProductDaoInterface from "./ProductDao.interface"
+import { ProductDto } from "./ProductDto"
 
 export const FirestoreProductDao = (): ProductDaoInterface => {
   return {
@@ -59,6 +58,10 @@ export const FirestoreProductDao = (): ProductDaoInterface => {
           productOptions
         }
       })
+    },
+    async createProduct(product: ProductDto): Promise<{ id: string } | null> {
+      const productsRef = ref(realDb, "products/")
+      return push(productsRef, product).then(data => data.key ? { id: data.key } : null)
     }
   }
 }

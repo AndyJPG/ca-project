@@ -1,4 +1,4 @@
-import {ProductOptionsDto} from "./ProductOptionDto"
+import { ProductOptionsDto } from "./ProductOptionDto"
 
 export interface ProductDto {
   tenant_id: string
@@ -8,5 +8,6 @@ export interface ProductDto {
   image_url: string | null
   ingredients: string[]
   categories: string[]
+  diet: string[]
   product_options: ProductOptionsDto[]
 }

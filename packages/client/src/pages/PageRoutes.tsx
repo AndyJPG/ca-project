@@ -2,6 +2,7 @@ import { useLocalTenantService } from "@ca/common/services/LocalTenantService"
 import React, { lazy } from "react"
 import { Outlet, Route, Routes } from "react-router-dom"
 import LazySuspense from "../components/LazySuspense"
+import CreatePage from "./CreatePage"
 
 const MenuRoutes = lazy(() => import(/* webpackChunkName: 'menu-routes' */ "./MenuRoutes"))
 
@@ -14,6 +15,7 @@ export const PageRoutes = () => {
         <Route index element={<div>Home page</div>}/>
         {tenant && <Route path={`${tenant.companyDomain}/*`}
                           element={<LazySuspense name="menu routes"><MenuRoutes/></LazySuspense>}/>}
+        <Route path="create" element={<CreatePage/>}/>
         <Route path="*" element={<div>404 not found</div>}/>
       </Route>
     </Routes>
