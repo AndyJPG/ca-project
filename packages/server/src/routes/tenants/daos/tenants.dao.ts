@@ -25,7 +25,7 @@ class TenantsDao {
   }
 
   async getTenantById(tenantId: string) {
-    return this.tenants.find((tenant: { id: string }) => tenant.id === tenantId)
+    return this.tenants.find((tenant: { id: string }) => tenant.id === tenantId) || null
   }
 
   async putTenantById(tenantId: string, tenant: PutTenantDto) {

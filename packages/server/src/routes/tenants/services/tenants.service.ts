@@ -1,34 +1,37 @@
-import {CRUD} from "../../common/interfaces/crud.interface"
-import TenantDto from "../../../domain/tenant/TenantDto"
-import Tenant from "../../../domain/tenant/Tenant"
-import {tenantRepository} from "../../../config/database.service"
+import { CRUD } from "../../common/interfaces/crud.interface"
+import TenantsDao from "../daos/tenants.dao"
+import { PatchTenantDto } from "../dto/patch.tenant.dto"
+import { PutTenantDto } from "../dto/put.tenant.dto"
+import { TenantDto } from "../dto/tenant.dto"
 
 class TenantsService implements CRUD {
-    create(tenant: TenantDto): Promise<Tenant | null> {
-        return tenantRepository.addTenant(tenant)
-    }
+  async create(tenant: TenantDto): Promise<string> {
+    return TenantsDao.addTenant(tenant)
+  }
 
-    deleteById(id: string): Promise<any> {
-        return Promise.resolve(undefined)
-    }
+  async deleteById(id: string): Promise<string> {
+    return TenantsDao.removeTenantById(id)
+  }
 
-    list(limit: number, page: number): Promise<Tenant[]> {
-        return tenantRepository.getTenants()
-    }
+  async list(limit: number, page: number): Promise<TenantDto[]> {
+    return TenantsDao.getTenants()
+  }
 
-    patchById(tenantId: string, tenant: TenantDto): Promise<any> {
-        return tenantRepository.updateTenant(tenantId, tenant)
-    }
+  async patchById(tenantId: string, tenant: PatchTenantDto): Promise<string> {
+    return TenantsDao.patchTenantById(tenantId, tenant)
+  }
 
-    putById(id: string, resource: any): Promise<any> {
-        return Promise.resolve(undefined)
-    }
+  async putById(id: string, tenant: PutTenantDto): Promise<string> {
+    return TenantsDao.putTenantById(id, tenant)
+  }
 
-    readById(tenantId: string): Promise<Tenant | null> {
-        return tenantRepository.getTenantById(tenantId)
-    }
+  async readById(tenantId: string): Promise<TenantDto | null> {
+    return TenantsDao.getTenantById(tenantId)
+  }
 
+  async getTenantByCompanyDomain(companyDomain: string): Promise<TenantDto | null> {
+    return TenantsDao.getTenantByCompanyDomain(companyDomain)
+  }
 }
 
-const tenantsService = new TenantsService()
-export default tenantsService
+export default new TenantsService()
