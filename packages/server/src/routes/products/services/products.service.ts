@@ -1,35 +1,30 @@
-import {productRepository} from "../../../config/database.service"
-import Product from "../../../domain/product/entity/Product"
-import ProductDto from "../../../domain/product/dto/ProductDto"
-import {CRUD} from "../../common/interfaces/crud.interface"
-import {createNewProduct} from "../../../config/useCase.services"
+import { CRUD } from "../../common/interfaces/crud.interface"
 
 class ProductsService implements CRUD {
+  create(resource: any): Promise<any> {
+    return Promise.resolve(undefined)
+  }
 
-    create(product: ProductDto): Promise<Product | null> {
-        return createNewProduct.creatNewProduct(product)
-    }
+  deleteById(id: string): Promise<any> {
+    return Promise.resolve(undefined)
+  }
 
-    deleteById(id: string): Promise<Product | null> {
-        return productRepository.deleteProductById(id)
-    }
+  list(limit: number, page: number): Promise<any> {
+    return Promise.resolve(undefined)
+  }
 
-    list(limit: number, page: number): Promise<Product[]> {
-        return productRepository.getProducts()
-    }
+  patchById(id: string, resource: any): Promise<any> {
+    return Promise.resolve(undefined)
+  }
 
-    patchById(id: string, product: ProductDto): Promise<Product | null> {
-        return productRepository.updateProductById(id, product)
-    }
+  putById(id: string, resource: any): Promise<any> {
+    return Promise.resolve(undefined)
+  }
 
-    putById(id: string, resource: any): Promise<string> {
-        return Promise.resolve("")
-    }
+  readById(id: string): Promise<any> {
+    return Promise.resolve(undefined)
+  }
 
-    readById(id: string): Promise<Product | null> {
-        return productRepository.getProductById(id)
-    }
 }
 
-const productsService = new ProductsService()
-export default productsService
+export default new ProductsService()

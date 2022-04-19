@@ -30,7 +30,7 @@ class TenantsController {
     res.status(204).send()
   }
 
-  async removeUser(req: express.Request, res: express.Response) {
+  async removeTenant(req: express.Request, res: express.Response) {
     log(await tenantsService.deleteById(req.body.id))
     res.status(204).send()
   }
