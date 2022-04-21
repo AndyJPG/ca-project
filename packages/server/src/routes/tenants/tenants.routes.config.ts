@@ -1,5 +1,7 @@
 import express from "express"
+import { body } from "express-validator"
 import { CommonRoutesConfig } from "../common/common.routes.config"
+import BodyValidationMiddleware from "../common/middleware/body.validation.middleware"
 import TenantsController from "./controllers/tenants.controller"
 import TenantsMiddleware from "./middleware/tenants.middleware"
 
@@ -12,7 +14,13 @@ export default class TenantsRoutes extends CommonRoutesConfig {
     this.app.route("/tenants")
       .get(TenantsController.listTenants)
       .post(
-        TenantsMiddleware.validateCreateTenantRequiredBodyFields,
+        body("companyDomain").isString(),
+        body("companyName").isString(),
+        body("companyLogoUrl").isString().optional(),
+        body("companyAddress").isString().optional(),
+        body("companyAddressUrl").isString().optional(),
+        body("companyContactNumber").isString().optional(),
+        BodyValidationMiddleware.verifyBodyFieldsErrors,
         TenantsMiddleware.validateSameCompanyDomainDoesntExist,
         TenantsController.createTenant
       )
@@ -24,12 +32,24 @@ export default class TenantsRoutes extends CommonRoutesConfig {
       .delete(TenantsController.removeTenant)
 
     this.app.put("/tenants/:tenantId", [
-      TenantsMiddleware.validateCreateTenantRequiredBodyFields,
+      body("companyDomain").isString(),
+      body("companyName").isString(),
+      body("companyLogoUrl").isString().optional(),
+      body("companyAddress").isString().optional(),
+      body("companyAddressUrl").isString().optional(),
+      body("companyContactNumber").isString().optional(),
+      BodyValidationMiddleware.verifyBodyFieldsErrors,
       TenantsController.put
     ])
 
     this.app.patch("/tenants/:tenantId", [
-      TenantsMiddleware.validateCreateTenantRequiredBodyFields,
+      body("companyDomain").isString(),
+      body("companyName").isString(),
+      body("companyLogoUrl").isString().optional(),
+      body("companyAddress").isString().optional(),
+      body("companyAddressUrl").isString().optional(),
+      body("companyContactNumber").isString().optional(),
+      BodyValidationMiddleware.verifyBodyFieldsErrors,
       TenantsController.patch
     ])
 

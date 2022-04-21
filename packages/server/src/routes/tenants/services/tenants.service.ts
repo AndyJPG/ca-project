@@ -9,20 +9,20 @@ class TenantsService implements CRUD {
     return TenantsDao.addTenant(tenant)
   }
 
-  async deleteById(id: string): Promise<string> {
+  async deleteById(id: string): Promise<any> {
     return TenantsDao.removeTenantById(id)
   }
 
   async list(limit: number, page: number): Promise<TenantDto[]> {
-    return TenantsDao.getTenants()
+    return TenantsDao.getTenants(limit, page)
   }
 
-  async patchById(tenantId: string, tenant: PatchTenantDto): Promise<string> {
-    return TenantsDao.patchTenantById(tenantId, tenant)
+  async patchById(tenantId: string, tenant: PatchTenantDto): Promise<any> {
+    return TenantsDao.updateTenantById(tenantId, tenant)
   }
 
-  async putById(id: string, tenant: PutTenantDto): Promise<string> {
-    return TenantsDao.putTenantById(id, tenant)
+  async putById(id: string, tenant: PutTenantDto): Promise<any> {
+    return TenantsDao.updateTenantById(id, tenant)
   }
 
   async readById(tenantId: string): Promise<TenantDto | null> {

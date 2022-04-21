@@ -1,73 +1,77 @@
 import debug from "debug"
-import shortid from "shortid"
+import mongooseService from "../../common/services/mongoose.service"
 import { CreateTenantDto } from "../dto/create.tenant.dto"
 import { PatchTenantDto } from "../dto/patch.tenant.dto"
 import { PutTenantDto } from "../dto/put.tenant.dto"
-import { TenantDto } from "../dto/tenant.dto"
 
 const log: debug.IDebugger = debug("app:in-memory-dao")
 
+interface ITenant extends CreateTenantDto {
+  _id: string
+}
+
 class TenantsDao {
-  tenants: Array<TenantDto> = []
+  Schema = mongooseService.getMongoose().Schema
+
+  tenantSchema = new this.Schema<ITenant>({
+    companyDomain: { type: String, unique: true },
+    companyName: String,
+    companyLogoUrl: String,
+    companyAddress: String,
+    companyAddressUrl: String,
+    companyContactNumber: String
+  }, { id: false })
+
+  Tenant = mongooseService.getMongoose().model<ITenant>("Tenants", this.tenantSchema)
 
   constructor() {
     log("Created new instance of TenantDao")
   }
 
   async addTenant(tenant: CreateTenantDto) {
-    const id = shortid.generate()
-    this.tenants.push({ ...tenant, id })
-    return id
+    const newTenant = new this.Tenant(tenant)
+    await newTenant.save()
+    return newTenant._id
   }
 
-  async getTenants() {
-    return this.tenants
+  async getTenants(limit = 25, page = 0) {
+    const tenantsData = await this.Tenant.find().limit(limit).skip(limit * page).exec()
+    return tenantsData.map(tenant => {
+      const { _id, ...values } = tenant.toJSON()
+      return { ...values, id: _id }
+    })
   }
 
   async getTenantById(tenantId: string) {
-    return this.tenants.find((tenant: { id: string }) => tenant.id === tenantId) || null
-  }
-
-  async putTenantById(tenantId: string, tenant: PutTenantDto) {
-    const tenantIndex = this.tenants.findIndex((tenant: { id: string }) => tenant.id === tenantId)
-    this.tenants.splice(tenantIndex, 1, tenant)
-    return `${tenant.id} updated via put`
-  }
-
-  async patchTenantById(tenantId: string, tenant: PatchTenantDto) {
-    const tenantIndex = this.tenants.findIndex((tenant: { id: string }) => tenant.id === tenantId)
-    const currentTenant = this.tenants[tenantIndex]
-    const allowedPatchFields = [
-      "companyName",
-      "companyLogoUrl",
-      "companyAddress",
-      "companyAddressUrl",
-      "companyContactNumber"
-    ]
-    for (const field of allowedPatchFields) {
-      if (field in tenant) {
-        // @ts-ignore
-        currentTenant[field] = tenant[field]
-      }
+    const tenantData = await this.Tenant.findOne({ _id: tenantId }).exec()
+    if (!tenantData) {
+      return null
     }
-    this.tenants.splice(tenantIndex, 1, currentTenant)
-    return `${tenant.id} patched`
+
+    const { _id, ...values } = tenantData.toJSON()
+    return { ...values, id: _id }
+  }
+
+  async updateTenantById(tenantId: string, tenant: PutTenantDto | PatchTenantDto) {
+    return await this.Tenant.findOneAndUpdate(
+      { _id: tenantId },
+      { $set: tenant },
+      { new: true }
+    ).exec()
   }
 
   async removeTenantById(tenantId: string) {
-    const tenantIndex = this.tenants.findIndex((tenant: { id: string }) => tenant.id === tenantId)
-    this.tenants.splice(tenantIndex, 1)
-    return `${tenantId} removed`
+    return this.Tenant.deleteOne({ _id: tenantId }).exec()
   }
 
   async getTenantByCompanyDomain(companyDomain: string) {
-    const tenantIndex = this.tenants.findIndex((tenant) => tenant.companyDomain === companyDomain)
-    const currentTenant = this.tenants[tenantIndex]
-    if (currentTenant) {
-      return currentTenant
-    } else {
+    const tenantData = await this.Tenant.findOne({ companyDomain: companyDomain }).exec()
+    if (!tenantData) {
       return null
     }
+
+    const { _id, ...values } = tenantData.toJSON()
+    return { ...values, id: _id }
   }
 }
 
