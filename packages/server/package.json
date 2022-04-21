@@ -18,7 +18,6 @@
     "cors": "^2.8.5",
     "debug": "^4.3.3",
     "express": "^4.17.2",
-    "express-validator": "^6.14.0",
     "express-winston": "^4.2.0",
     "http-errors": "^2.0.0",
     "mongoose": "^6.3.0",

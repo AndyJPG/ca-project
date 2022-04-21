@@ -40,13 +40,15 @@ class TenantsMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const tenant = await tenantsService.readById(req.params.tenantId)
-    if (tenant) {
-      next()
-    } else {
-      res.status(400).send({
-        error: `Tenant ${req.params.tenantId} not found`
-      })
+    try {
+      const tenant = await tenantsService.readById(req.params.tenantId)
+      if (tenant) {
+        next()
+      } else {
+        next(createHttpError(400, `Tenant ${req.params.tenantId} not found`))
+      }
+    } catch (e) {
+      next(createHttpError(500))
     }
   }
 

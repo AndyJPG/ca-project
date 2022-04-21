@@ -6,16 +6,26 @@ import tenantsService from "../services/tenants.service"
 const log: debug.IDebugger = debug("app:tenants-controller")
 
 class TenantsController {
-  async listTenants(req: express.Request, res: express.Response) {
-    //TODO: Implement error handling
-    const tenants = await tenantsService.list(100, 0)
-    res.status(200).send(tenants)
+  async listTenants(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      const tenants = await tenantsService.list(100, 0)
+      res.status(200).send(tenants)
+    } catch (e) {
+      next(createHttpError(500))
+    }
   }
 
-  async getTenantById(req: express.Request, res: express.Response) {
-    //TODO: Implement error handling
-    const tenant = await tenantsService.readById(req.body.id)
-    res.status(200).send(tenant)
+  async getTenantById(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      const tenant = await tenantsService.readById(req.body.id)
+      if (tenant) {
+        res.status(200).send(tenant)
+      } else {
+        next(createHttpError(404, `Tenant ${req.body.id} not found`))
+      }
+    } catch (e) {
+      next(createHttpError(500))
+    }
   }
 
   async createTenant(req: express.Request, res: express.Response, next: express.NextFunction) {
@@ -27,26 +37,31 @@ class TenantsController {
     }
   }
 
-  async patch(req: express.Request, res: express.Response) {
-    //TODO: Implement error handling
-    log(await tenantsService.patchById(req.body.id, req.body))
-    res.status(204).send()
+  async patch(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      log(await tenantsService.patchById(req.body.id, req.body))
+      res.status(204).send()
+    } catch (e) {
+      next(createHttpError(500))
+    }
   }
 
   async put(req: express.Request, res: express.Response, next: express.NextFunction) {
-    //TODO: Implement error handling
     try {
       log(await tenantsService.putById(req.body.id, req.body))
       res.status(204).send()
     } catch (e) {
-      next(createHttpError(400, "Fail to update tenant"))
+      next(createHttpError(500))
     }
   }
 
-  async removeTenant(req: express.Request, res: express.Response) {
-    //TODO: Implement error handling
-    log(await tenantsService.deleteById(req.body.id))
-    res.status(204).send()
+  async removeTenant(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      log(await tenantsService.deleteById(req.body.id))
+      res.status(204).send()
+    } catch (e) {
+      next(createHttpError(500))
+    }
   }
 }
 
