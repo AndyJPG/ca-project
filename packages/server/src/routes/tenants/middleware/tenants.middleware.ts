@@ -1,5 +1,6 @@
 import debug from "debug"
 import express from "express"
+import createHttpError from "http-errors"
 import tenantsService from "../services/tenants.service"
 
 const log: debug.IDebugger = debug("app:tenants-controller")
@@ -10,13 +11,15 @@ class TenantsMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    const tenant = await tenantsService.getTenantByCompanyDomain(req.body.companyDomain)
-    if (tenant) {
-      res.status(404).send({
-        error: "Tenant domain already exists"
-      })
-    } else {
-      next()
+    try {
+      const tenant = await tenantsService.getTenantByCompanyDomain(req.body.companyDomain)
+      if (tenant) {
+        next(createHttpError(400, "Tenant domain already exists"))
+      } else {
+        next()
+      }
+    } catch (e) {
+      next(createHttpError(500))
     }
   }
 
@@ -25,12 +28,10 @@ class TenantsMiddleware {
     res: express.Response,
     next: express.NextFunction
   ) {
-    if (req.body && req.body.companyName && req.body.companyDomain) {
+    if (req.body && req.body.companyDomain && req.body.companyName) {
       next()
     } else {
-      res.status(400).send({
-        error: "Missing required fields to create tenant"
-      })
+      next(createHttpError(400, "Missing required fields to create tenant"))
     }
   }
 

@@ -18,10 +18,13 @@ class TenantsController {
     res.status(200).send(tenant)
   }
 
-  async createTenant(req: express.Request, res: express.Response) {
-    //TODO: Implement error handling
-    const tenantId = await tenantsService.create(req.body)
-    res.status(201).send({ id: tenantId })
+  async createTenant(req: express.Request, res: express.Response, next: express.NextFunction) {
+    try {
+      const tenantId = await tenantsService.create(req.body)
+      res.status(201).send({ id: tenantId })
+    } catch (e) {
+      next(createHttpError(500))
+    }
   }
 
   async patch(req: express.Request, res: express.Response) {
