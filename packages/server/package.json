@@ -13,12 +13,14 @@
   },
   "dependencies": {
     "@ca/common": "1.0.0",
+    "@types/http-errors": "^1.8.2",
     "argon2": "^0.28.3",
     "cors": "^2.8.5",
     "debug": "^4.3.3",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "express-winston": "^4.2.0",
+    "http-errors": "^2.0.0",
     "mongoose": "^6.3.0",
     "shortid": "^2.2.16",
     "winston": "^3.4.0"
