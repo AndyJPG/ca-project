@@ -3,13 +3,14 @@ import TenantsDao from "../daos/tenants.dao"
 import { PatchTenantDto } from "../dto/patch.tenant.dto"
 import { PutTenantDto } from "../dto/put.tenant.dto"
 import { TenantDto } from "../dto/tenant.dto"
+import { TenantSearchOptions } from "../tenantSearchOptions"
 
 class TenantsService implements CRUD {
   async create(tenant: TenantDto): Promise<string> {
     return TenantsDao.addTenant(tenant)
   }
 
-  async deleteById(id: string): Promise<any> {
+  async deleteById(id: string): Promise<void> {
     return TenantsDao.removeTenantById(id)
   }
 
@@ -17,11 +18,15 @@ class TenantsService implements CRUD {
     return TenantsDao.getTenants(limit, page)
   }
 
-  async patchById(tenantId: string, tenant: PatchTenantDto): Promise<any> {
+  async search(searchOptions?: TenantSearchOptions): Promise<TenantDto[]> {
+    return TenantsDao.searchTenants(searchOptions)
+  }
+
+  async patchById(tenantId: string, tenant: PatchTenantDto): Promise<void> {
     return TenantsDao.updateTenantById(tenantId, tenant)
   }
 
-  async putById(id: string, tenant: PutTenantDto): Promise<any> {
+  async putById(id: string, tenant: PutTenantDto): Promise<void> {
     return TenantsDao.updateTenantById(id, tenant)
   }
 

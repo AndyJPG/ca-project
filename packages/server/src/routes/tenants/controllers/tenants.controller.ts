@@ -15,6 +15,16 @@ class TenantsController {
     }
   }
 
+  async searchTenants(req: express.Request, res: express.Response, next: express.NextFunction) {
+    // try {
+    //   const searchOptions = req.body && req.body.searchOtions
+    //   const tenants = await tenantsService.search(searchOptions)
+    // } catch (e) {
+    //   log(e)
+    //   next(createHttpError(500, JSON.stringify(e)))
+    // }
+  }
+
   async getTenantById(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
       const tenant = await tenantsService.readById(req.body.id)
@@ -42,15 +52,17 @@ class TenantsController {
       log(await tenantsService.patchById(req.body.id, req.body))
       res.status(204).send()
     } catch (e) {
+      log(e)
       next(createHttpError(500))
     }
   }
 
   async put(req: express.Request, res: express.Response, next: express.NextFunction) {
     try {
-      log(await tenantsService.putById(req.body.id, req.body))
+      await tenantsService.putById(req.body.id, req.body)
       res.status(204).send()
     } catch (e) {
+      log(e)
       next(createHttpError(500))
     }
   }

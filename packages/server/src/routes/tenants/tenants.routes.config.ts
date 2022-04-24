@@ -18,19 +18,24 @@ export default class TenantsRoutes extends CommonRoutesConfig {
         TenantsController.createTenant
       )
 
-    this.app.param(`tenantId`, TenantsMiddleware.extractTenantId)
+    this.app.route("/tenants/search")
+      .get(TenantsController.listTenants)
+
+    // this.app.param(`tenantId`, TenantsMiddleware.extractTenantId)
     this.app.route("/tenants/:tenantId")
-      .all(TenantsMiddleware.validateTenantExists)
+      .all(TenantsMiddleware.validateTenantExists, TenantsMiddleware.extractTenantId)
       .get(TenantsController.getTenantById)
       .delete(TenantsController.removeTenant)
 
     this.app.put("/tenants/:tenantId", [
+      // TenantsMiddleware.extractTenantId,
       TenantsController.put
     ])
 
     this.app.patch("/tenants/:tenantId", [
       TenantsController.patch
     ])
+
 
     return this.app
   }
